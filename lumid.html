@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lumid Interiors | Luxury Interior & Exterior Design Lagos</title>
+<meta name="description" content="Lumid Interiors — Lagos-based luxury interior and exterior design studio. We transform spaces into experiences. Book a free consultation today."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="lumid.css"/>
+</head>
+<body>
+
+<!-- ========================================================
+     NAV
+     ======================================================== -->
+<nav id="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="Lumid INEX home">
+        <!-- MY LOGO FILE -->
+        <img src="lumid-logo.png" alt="Lumid INEX — Interior & Exterior Finishes" class="nav-logo-img"/>
+      </a>
+      <div class="nav-links">
+       <a href="#about" class="nav-cta-1">About</a>
+        <a href="#services" class="nav-cta-1">Services</a>
+        <a href="#portfolio" class="nav-cta-1">Portfolio</a>
+        <a href="#testimonials" class="nav-cta-1">Reviews</a>
+        <a href="#investors" class="nav-cta-1">Investors</a>
+        <a href="#contact" class="nav-cta">Book Consultation</a>
+      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Side panel overlay backdrop -->
+<div class="nav-backdrop" id="navBackdrop" onclick="toggleMenu()"></div>
+
+<!-- Side panel -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation">
+  <div class="mobile-menu-header">
+    <!--<img src="lumid_logo_nobg.png" alt="Lumid" class="mobile-menu-logo"/> -->
+    <button class="mobile-menu-close" onclick="toggleMenu()" aria-label="Close menu">✕</button>
+  </div>
+
+  <nav class="mobile-menu-links">
+    <a href="#about"        onclick="toggleMenu()"><span class="link-num">01</span>About</a>
+    <a href="#services"     onclick="toggleMenu()"><span class="link-num">02</span>Services</a>
+    <a href="#portfolio"    onclick="toggleMenu()"><span class="link-num">03</span>Portfolio</a>
+    <a href="#testimonials" onclick="toggleMenu()"><span class="link-num">04</span>Reviews</a>
+    <a href="#invest"       onclick="toggleMenu()"><span class="link-num">05</span>Investors</a>
+    <a href="#contact"      onclick="toggleMenu()"><span class="link-num">06</span>Contact</a>
+  </nav>
+
+  <div class="mobile-menu-footer">
+    <p class="mobile-menu-tagline">
+      The bridge between<br/>
+      <em>luxury</em>, comfort and purpose.
+    </p>
+    <div class="mobile-menu-contact">
+      <a href="tel:09038807214">📞 09038807214</a>
+      <a href="https://wa.me/2349038807214" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================
+     HERO
+     ======================================================== -->
+<section id="hero">
+
+  <div class="hero-slideshow" id="heroBg">
+
+    <!-- SLIDE 1 — VIDEO (starts active) -->
+    <div class="hero-slide active" data-type="video">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        class="hero-video"
+        id="heroVideo1">
+        <source src="VID-20260607-WA0003_2.mp4" type="video/mp4"/>
+      </video>
+    </div>
+
+    <!-- SLIDE 2 — IMAGE -->
+    <div class="hero-slide" data-type="image">
+      <img src="lumid-logo-bg.png" alt="Lumid Interiors project"/>
+    </div>
+
+    <!-- SLIDE 3 — VIDEO -->
+    <div class="hero-slide" data-type="video">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        class="hero-video"
+        id="heroVideo2">
+        <source src="VID-20260607-WA0003_1.mp4" type="video/mp4"/>
+      </video>
+    </div>
+
+    <!-- SLIDE 4 — IMAGE -->
+    <div class="hero-slide" data-type="image">
+      <img src="final-pel-aus.png" alt="Lumid Interiors project"/>
+    </div>
+
+    <!-- SLIDE 5 — IMAGE -->
+    <div class="hero-slide" data-type="image">
+      <img src="lumid-logo-bg.png" alt="Lumid Interiors project"/>
+    </div>
+
+    <!-- SLIDE 6 — IMAGE -->
+    <div class="hero-slide" data-type="image">
+      <img src="file_0000000043c071f49e71612868924efe.png" alt="Lumid Interiors project"/>
+    </div>
+
+  </div>
+
+  <div class="hero-monogram" aria-hidden="true">LMD INEX</div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Lagos — Lumid Interiors &amp; Exterior Finishes</p>
+
+    <h1 class="hero-title display">
+      The Bridge between<br/>
+      <em>Luxury,</em><br/>
+      <em>Comfort</em> and<br/>
+      Purpose.
+    </h1>
+
+    <p class="hero-sub">
+      We design interiors and exterior finishes that balance beauty with
+      precision — for homes, Airbnbs, offices and investment properties
+      across Lagos and beyond. Every client gets more than great design: they get value.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn btn-gold">View Projects</a>
+      <a href="#contact" class="btn btn-ghost-light">Free Consultation</a>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">30+</div>
+          <div class="hero-stat-label">Projects Completed</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">3+</div>
+          <div class="hero-stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- ========================================================
+     MARQUEE
+     ======================================================== -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Interior Design</span><span class="dot">✦</span>
+    <span>Exterior Finishes</span><span class="dot">✦</span>
+    <span>Space Planning</span><span class="dot">✦</span>
+    <span>Residential</span><span class="dot">✦</span>
+    <span>Commercial</span><span class="dot">✦</span>
+    <span>Airbnb Ready</span><span class="dot">✦</span>
+    <span>Lagos &amp; Beyond</span><span class="dot">✦</span>
+    <span>Interior Design</span><span class="dot">✦</span>
+    <span>Exterior Finishes</span><span class="dot">✦</span>
+    <span>Space Planning</span><span class="dot">✦</span>
+    <span>Residential</span><span class="dot">✦</span>
+    <span>Commercial</span><span class="dot">✦</span>
+    <span>Airbnb Ready</span><span class="dot">✦</span>
+    <span>Lagos &amp; Beyond</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ========================================================
+     ABOUT
+     ======================================================== -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+
+      <div class="about-images reveal">
+        <div class="about-img-stack">
+
+          <!-- ▼▼▼  PHOTO 1 — wide banner . -->
+          <div class="about-img-a img-slot">
+            <img
+              src="final-pel-aus.png"
+              alt="Lumid Interiors project"
+              style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+
+          <!-- ▼▼▼ ABOUT PHOTO 2 — . -->
+          <div class="about-img-b img-slot">
+            <img
+              src="file_0000000043c071f49e71612868924efe.png"
+              alt="Lumid Interiors detail"
+              style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+
+          <!-- ▼▼▼ ABOUT PHOTO 3 — at work. -->
+          <div class="about-img-c img-slot">
+            <img
+              src="367f8ee747859087fd8a9abf3342840afbe5ae8f3d3b0e23f082bd7b2f743192.png"
+              alt="Lumid Interiors detail"
+              style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+
+        </div>
+        <div class="about-accent-tag">
+          <strong>3+</strong>
+          <span>Years in Lagos</span>
+        </div>
+      </div>
+
+      <div class="about-content reveal">
+        <span class="eyebrow">Our Story</span>
+        <h2 class="display" style="font-size:clamp(2rem,3.5vw,2.8rem);color:var(--charcoal);margin:0.8rem 0 1.5rem">
+          More than decoration —<br/><em>transformation</em>
+        </h2>
+        <p>Lumid Interiors was founded by Olumide Ogunloye Elijah, a first-class civil engineer who discovered that building structures deserve a purpose-driven ,design — crafted and constructed so that interiors reflect and resonate with the people who use them. What began as a personal passion became a studio trusted by Lagos homeowners, Airbnb hosts, and property developers.</p>
+        <p>We bring a rare combination to every project: depth in architectural and structural understanding, design intuition, project management discipline and skilled specialist technicians. When Lumid touches a space, we don't just decorate , we rethink how it feels, functions, and performs as an asset.</p>
+        <div class="about-signature">Olumide Ogunloye Elijah</div>
+        <div class="credentials">
+          <span class="credential-tag">Civil Engineer </span>
+          <span class="credential-tag">Mobile and Web Developer </span>
+          <span class="credential-tag">Yabatech</span>
+          <span class="credential-tag">CEO, Lumid Interiors</span>
+          <span class="credential-tag">Lagos, Nigeria</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================
+     SERVICES
+     ======================================================== -->
+<section id="services">
+  <div class="wrap">
+    <div class="services-header reveal">
+      <div>
+        <span class="eyebrow" style="color:var(--gold)">What We Offer</span>
+        <h2 class="display" style="font-size:clamp(2rem,3.5vw,2.8rem);color:var(--off-white);margin-top:0.8rem">
+          Services &amp; <em>Pricing</em>
+        </h2>
+      </div>
+      <p class="services-intro">
+        Every engagement starts with understanding your vision, budget, and timeline.
+        Three clear service tiers, with custom packages available for investors and developers.
+      </p>
+    </div>
+
+    <div class="services-grid reveal">
+      <div class="svc-card">
+        <div class="svc-num">01 / Essential</div>
+        <div class="svc-name">Lumid Essential</div>
+        <p class="svc-desc">Perfect for single rooms, rental units, or clients with a defined vision who need expert execution.</p>
+        <div class="svc-price">From ₦350,000 <small>/ room</small></div>
+        <ul class="svc-features">
+          <li>1 room redesign or styling</li>
+          <li>Furniture sourcing &amp; layout</li>
+          <li>Colour &amp; material selection</li>
+          <li>2 revision rounds</li>
+          <li>Installation supervision</li>
+        </ul>
+        <div class="svc-cta">
+          <a href="#contact" class="btn btn-ghost-light" style="font-size:0.72rem;padding:0.7rem 1.6rem">Book This Package</a>
+        </div>
+      </div>
+
+      <div class="svc-card featured">
+        <span class="svc-badge">Most Popular</span>
+        <div class="svc-name">Lumid Signature</div>
+        <p class="svc-desc">Our most requested package full-apartment or multi-room transformation with curated sourcing and end-to-end management.</p>
+        <div class="svc-price">₦800,000 – ₦2,500,000 <small>/ project</small></div>
+        <ul class="svc-features">
+          <li>Full apartment or office fit-out</li>
+          <li>Concept boards &amp; 3D moodboards</li>
+          <li>Furniture, art &amp; décor sourcing</li>
+          <li>Exterior finishing options</li>
+          <li>Full project management</li>
+          <li>Post-installation support (30 days)</li>
+        </ul>
+        <div class="svc-cta">
+          <a href="#contact" class="btn btn-gold" style="font-size:0.72rem;padding:0.7rem 1.6rem">Book This Package</a>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">03 / Developer</div>
+        <div class="svc-name">Lumid Develop</div>
+        <p class="svc-desc">For real estate developers and investors who need a design partner across multiple units or entire buildings.</p>
+        <div class="svc-price">Custom <small>— contact for quote</small></div>
+        <ul class="svc-features">
+          <li>Multiple units / full building</li>
+          <li>Investor-grade finish specification</li>
+          <li>Structural + design integration</li>
+          <li>Airbnb-ready fit-out option</li>
+          <li>ROI-focused material selection</li>
+          <li>Ongoing partnership available</li>
+        </ul>
+        <div class="svc-cta">
+          <a href="#contact" class="btn btn-ghost-light" style="font-size:0.72rem;padding:0.7rem 1.6rem">Discuss Your Project</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="pricing-note" style="color:var(--mid-grey)">
+      Need something in between? <a href="#contact">Let's talk</a> we tailor every engagement to your needs and budget.
+    </p>
+  </div>
+</section>
+
+<!-- ========================================================
+     PORTFOLIO
+     ======================================================== -->
+<section id="portfolio">
+  <div class="wrap">
+    <div class="portfolio-header reveal">
+      <div>
+        <span class="eyebrow">Our Work</span>
+        <h2 class="display" style="font-size:clamp(2rem,3.5vw,2.8rem);color:var(--charcoal);margin-top:0.8rem">
+          Project <em>Gallery</em>
+        </h2>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterPortfolio('all',this)">All</button>
+        <button class="filter-tab" onclick="filterPortfolio('residential',this)">Residential</button>
+        <button class="filter-tab" onclick="filterPortfolio('commercial',this)">Commercial</button>
+        <button class="filter-tab" onclick="filterPortfolio('airbnb',this)">Airbnb</button>
+        <button class="filter-tab" onclick="filterPortfolio('exterior',this)">Exterior</button>
+      </div>
+    </div>
+
+    <div class="portfolio-grid reveal" id="portfolioGrid">
+
+      <!-- ▼▼▼ PROJECT 1 — TALL card (spans 2 rows, left column)
+           Category: residential
+           Use your most dramatic interior full-room shot.
+           Recommended: portrait orientation works best in tall slot. -->
+      <div class="portfolio-item tall" data-cat="residential">
+        <div class="portfolio-thumb-wrap">
+          <div class="p-img-slot">
+            <img src="file_0000000043c071f49e71612868924efe.png" alt="Lagos Mainland Apartment" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="p-cat">Residential</div>
+          <div class="p-title">Lagos Mainland Apartment</div>
+          <div class="p-loc">Full Interior Redesign</div>
+        </div>
+      </div>
+
+      <!-- ▼▼▼ PROJECT 2 — standard card
+           Category: airbnb
+           Use a styled bedroom or living area shot from a short-let unit. -->
+      <div class="portfolio-item" data-cat="airbnb">
+        <div class="portfolio-thumb-wrap">
+          <div class="p-img-slot">
+            <img src="FrntPage-lumi.jpg" alt="Lekki Short-Let Unit" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="p-cat">Airbnb Ready</div>
+          <div class="p-title">Lekki Short-Let Unit</div>
+          <div class="p-loc">Bedroom &amp; Living Area</div>
+        </div>
+      </div>
+
+      <!-- ▼▼▼ PROJECT 3 — standard card
+           Category: commercial
+           Use an office or commercial space photo. -->
+      <div class="portfolio-item" data-cat="commercial">
+        <div class="portfolio-thumb-wrap">
+          <div class="p-img-slot">
+            <img src="file_0000000075dc71f497a4de74ac3fa4c9.png" alt="Office Fit-Out Lagos Island" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="p-cat">Commercial</div>
+          <div class="p-title">Office Fit-Out</div>
+          <div class="p-loc">Lagos Island</div>
+        </div>
+      </div>
+
+      <!-- ▼▼▼ PROJECT 4 — WIDE card (spans 2 columns)
+           Category: exterior
+           Use a wide exterior shot — facade, compound, or driveway finish.
+           Landscape orientation is ideal here. -->
+      <div class="portfolio-item wide" data-cat="exterior">
+        <div class="portfolio-thumb-wrap">
+          <div class="p-img-slot">
+            <img src="IMG-20260608-WA0008.jpg" alt="Compound and Facade Finish Ipaja" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="p-cat">Exterior</div>
+          <div class="p-title">Compound &amp; Facade Finish</div>
+          <div class="p-loc">Ipaja, Lagos</div>
+        </div>
+      </div>
+
+      <!-- ▼▼▼ PROJECT 5 — standard card
+           Category: residential
+           Use a bedroom, master suite, or wardrobe area shot. -->
+      <div class="portfolio-item" data-cat="residential">
+        <div class="portfolio-thumb-wrap">
+          <div class="p-img-slot">
+            <img src="IMG-20260611-WA0057.jpg" alt="Elegant sitting room Suite Surulere" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="p-cat">Residential</div>
+          <div class="p-title">Master Bedroom Suite</div>
+          <div class="p-loc">Surulere, Lagos</div>
+        </div>
+      </div>
+
+      <!-- ▼▼▼ PROJECT 6 — standard card
+           Category: commercial
+           Use a restaurant, salon, or retail space photo. -->
+      <div class="portfolio-item" data-cat="commercial">
+        <div class="portfolio-thumb-wrap">
+          <div class="p-img-slot">
+            <img src="367f8ee747859087fd8a9abf3342840afbe5ae8f3d3b0e23f082bd7b2f743192.png" alt="Boutique Makorgi Residence" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="p-cat">Commercial</div>
+          <div class="p-title">Restaurant Interior</div>
+          <div class="p-loc">Victoria Island</div>
+        </div>
+      </div>
+
+      <!-- ▼▼▼ PROJECT 7 — standard card
+           Category: airbnb
+           Use a cosy studio or compact apartment shot. -->
+      <div class="portfolio-item" data-cat="airbnb">
+        <div class="portfolio-thumb-wrap">
+          <div class="p-img-slot">
+            <img src="IMG-20260618-WA0008.jpg" alt="Studio Apartment Yaba" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="p-cat">Airbnb</div>
+          <div class="p-title">Studio Apartment</div>
+          <div class="p-loc">Yaba, Lagos</div>
+        </div>
+      </div>
+
+      <!-- ▼▼▼ PROJECT 8 — standard card
+           Category: exterior
+           Use a duplex, building facade, or gate/perimeter wall finish. -->
+      <div class="portfolio-item" data-cat="residential">
+        <div class="portfolio-thumb-wrap">
+          <div class="p-img-slot">
+            <img src="frontpage2.jpg" alt="Minimalistic Bedroom finish" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="p-cat">Exterior</div>
+          <div class="p-title">Minimalistic Bedroom finish</div>
+          <div class="p-loc">Ikorodu, Lagos</div>
+        </div>
+      </div>
+
+      <!-- ▼▼▼ PROJECT 9 — standard card
+           Category: residential
+           Use a living room, open-plan, or dining area shot. -->
+      <div class="portfolio-item" data-cat="residential">
+        <div class="portfolio-thumb-wrap">
+          <div class="p-img-slot">
+            <img src="IMG-20260608-WA0015.jpg" alt="Living and Dining Area Ipaja" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="p-cat">Residential</div>
+          <div class="p-title">Living &amp; Dining Area</div>
+          <div class="p-loc">Command, Ipaja</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lb-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLightbox()">✕ Close</button>
+    <img src="" alt="" class="lb-img" id="lbImg"/>
+    <div class="lb-caption" id="lbCaption"></div>
+  </div>
+</div>
+
+<!-- ========================================================
+     TESTIMONIALS
+     ======================================================== -->
+<section id="testimonials">
+  <div class="testi-bg-quote" aria-hidden="true">"</div>
+  <div class="wrap">
+    <div class="testi-header reveal">
+      <span class="eyebrow" style="color:var(--gold)">Client Voices</span>
+      <h2 class="display" style="font-size:clamp(2rem,3.5vw,2.8rem);color:var(--off-white);margin-top:0.8rem">
+        What our clients <em style="color:var(--gold)">say</em>
+      </h2>
+    </div>
+
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="testi-source">WhatsApp</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Lumid transformed our apartment completely. I showed Olumide a rough idea and he delivered something ten times better than I imagined. Every single detail was thought through."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">W</div>
+          <div>
+            <div class="testi-name">Miss Wura</div>
+            <div class="testi-role">Business Owner · Magboro</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-source">WhatsApp</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I love the prowess that he was able to deliver in a short period of time after contacting him, not leaving quality behind. His touch is impeccable."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">K</div>
+          <div>
+            <div class="testi-name">Kiwi Visuals</div>
+            <div class="testi-role">Airbnb Host · Banana Island</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-source">WhatsApp</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Working with Lumid was seamless from start to finish. The engineering background really shows nothing was overlooked, and the project was delivered on time and on budget."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">E</div>
+          <div>
+            <div class="testi-name">Miss Ester</div>
+            <div class="testi-role">Real Estate Developer · Yaba</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-source">WhatsApp</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I gave Lumid a ₦1.6m budget and my studio just got lit up. The material sourcing and colour choices were impeccable. My office has never felt better to work in."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">M</div>
+          <div>
+            <div class="testi-name">Miss Moninuade</div>
+            <div class="testi-role">Business Owner · Lagos Mainland</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-source">WhatsApp</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Honest, creative and detail-oriented. Olumide understands that interior design isn't just about beauty, it's about how a space makes you feel every single day."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">E</div>
+          <div>
+            <div class="testi-name">Esq Chuks</div>
+            <div class="testi-role">Homeowner · Ebute-Metta</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-source">WhatsApp</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"He took the project up from scratch and the final result was beyond my expectations, just a wow. The team is professional, punctual and incredibly talented. I've already referred three friends."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">J</div>
+          <div>
+            <div class="testi-name">Mr Jide Oyetoro</div>
+            <div class="testi-role">Church Director · Egbeda</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================
+     INVESTORS
+     ======================================================== -->
+<section id="invest">
+  <div class="wrap">
+    <div class="invest-header reveal">
+      <span class="eyebrow">For Investors &amp; Developers</span>
+      <h2 class="display" style="font-size:clamp(2rem,3.5vw,2.8rem);color:var(--charcoal);margin-top:0.8rem">
+        Design that <em>performs</em> as an asset
+      </h2>
+      <p>Lagos real estate is competitive. The properties that command premium rents and fast occupancy are the ones that look the part. Lumid helps you design for ROI, not just aesthetics.</p>
+    </div>
+
+    <div class="invest-cards reveal">
+      <div class="invest-card">
+        <div class="invest-icon">🏗️</div>
+        <h3>Development Fit-Out</h3>
+        <p>We work with developers from shell stage to handover specifying finishes, coordinating installation, and ensuring every unit is <br> market-ready.</p>
+        <ul>
+          <li>Multi-unit pricing available</li>
+          <li>Consistent quality across units</li>
+          <li>Fast-track timeline options</li>
+          <li>Structural design coordination</li>
+        </ul>
+      </div>
+      <div class="invest-card">
+        <div class="invest-icon">🏠</div>
+        <h3>Airbnb &amp; Short-Let Optimisation</h3>
+        <p>Purpose-built for short-let success. we design spaces that photograph beautifully, review well, and hold up under heavy usage.</p>
+        <ul>
+          <li>Photography-optimised layouts</li>
+          <li>Durable, attractive materials</li>
+          <li>Styled for 5-star guest experience</li>
+          <li>Turnkey handover available</li>
+        </ul>
+      </div>
+      <div class="invest-card">
+        <div class="invest-icon">📈</div>
+        <h3>Value-Add Renovation</h3>
+        <p>Buying a property to flip or refinance? We identify the highest ROI design interventions and execute them on budget.</p>
+        <ul>
+          <li>ROI-focused scope of work</li>
+          <li>Cost-optimised material selection</li>
+          <li>Before &amp; after documentation</li>
+          <li>Appraisal-ready finish standard</li>
+        </ul>
+      </div>
+      <div class="invest-card">
+        <div class="invest-icon">🤝</div>
+        <h3>Ongoing Design Partnership</h3>
+        <p>For investors with multiple properties, retain Lumid as your design partner for consistent quality across your portfolio.</p>
+        <ul>
+          <li>Priority scheduling</li>
+          <li>Portfolio-wide design consistency</li>
+          <li>Preferred pricing on repeat projects</li>
+          <li>Dedicated project manager</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="invest-stats reveal">
+      <div>
+        <div class="invest-stat-num">30+</div>
+        <div class="invest-stat-label">Projects Delivered</div>
+      </div>
+      <div>
+        <div class="invest-stat-num">30%</div>
+        <div class="invest-stat-label">Avg. Rent Premium</div>
+      </div>
+      <div>
+        <div class="invest-stat-num">100%</div>
+        <div class="invest-stat-label">On-Time Delivery</div>
+      </div>
+    </div>
+
+    <div class="invest-cta reveal">
+      <div>
+        <h3>Ready to maximise your property's value?</h3>
+        <p>Book a free 20-minute strategy call, no commitment required.</p>
+      </div>
+      <a href="#contact" class="btn btn-dark">Book a Strategy Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================
+     PROCESS
+     ======================================================== -->
+<section id="process">
+  <div class="wrap">
+    <div class="process-header reveal">
+      <span class="eyebrow">How We Work</span>
+      <h2 class="display" style="font-size:clamp(2rem,3.5vw,2.8rem);color:var(--charcoal);margin-top:0.8rem">
+        From conversation to <em>completion</em>
+      </h2>
+    </div>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h4>Discovery Call</h4>
+        <p>We listen. You share your vision, budget, timeline and must-haves. No commitment required.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h4>Concept &amp; Quote</h4>
+        <p>We develop mood boards, a space plan, and a transparent itemised quote within 48–72 hours.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h4>Execution</h4>
+        <p>We source, procure and manage installation. Weekly updates, zero site-visit stress.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <h4>Handover</h4>
+        <p>We walk through the finished space with you, address any punch-list items, and hand over all documentation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================
+     CONTACT
+     ======================================================== -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="eyebrow">Get In Touch</span>
+        <h2 class="display" style="font-size:clamp(1.8rem,3vw,2.5rem);color:var(--charcoal);margin:0.8rem 0 1.2rem">
+          Let's start your <em>project</em>
+        </h2>
+        <p>Whether you have a fully-formed brief or just an idea scribbled on paper, reach out. The first conversation is always free.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="contact-icon">📞</div>
+            <div>
+              <strong>Phone / WhatsApp</strong>
+              <span><a href="tel:09038807214">09038807214</a></span>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-icon">📍</div>
+            <div>
+              <strong>Studio</strong>
+              <span>No 1 Nurat Soetan, Command, Ipaja, Lagos</span>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <strong>Response Time</strong>
+              <span>Within 2 hours on business days</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-socials">
+          <!-- ▼ ADD YOUR INSTAGRAM LINK inside href="" -->
+          <a href="https://www.instagram.com/interior_designer_in_lagos_1?igsh=MTFjazU2dW9ybGdsZQ==" class="social-pill" target="_blank" rel="noopener">Instagram</a>
+          <!-- ▼ ADD YOUR LINKEDIN LINK inside href="" -->
+          <a href="https://www.linkedin.com/in/lumid-inex-95bba02b6" class="social-pill" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://wa.me/2349038807214" class="social-pill" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="contact-form-box reveal">
+        <span class="eyebrow">Book a Free Consultation</span>
+        <h3 class="form-title">Tell us about your project</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="your first name" autocomplete="given-name"/>
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="your last name" autocomplete="family-name"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone / WhatsApp</label>
+            <input type="tel" id="phone" placeholder="08012345678" autocomplete="tel"/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email (optional)</label>
+            <input type="email" id="email" placeholder="you@email.com" autocomplete="email"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="service">Service You're Interested In</label>
+          <select id="service">
+            <option value="">Select a service...</option>
+            <option>Lumid Essential — Single Room</option>
+            <option>Lumid Signature — Full Apartment</option>
+            <option>Lumid Develop — Developer / Investor Package</option>
+            <option>Exterior Finishes</option>
+            <option>Airbnb-Ready Fit-Out</option>
+            <option>Just exploring — need advice</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="budget">Approximate Budget</label>
+          <select id="budget">
+            <option value="">Select a range...</option>
+            <option>Under ₦200,000</option>
+            <option>₦200,000 – ₦500,000</option>
+            <option>₦500,000 – ₦1,000,000</option>
+            <option>₦1,000,000 – ₦3,000,000</option>
+            <option>₦3,000,000+</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Tell us about your space</label>
+          <textarea id="message" placeholder="e.g. 2-bedroom apartment in Lekki, currently bare. Want it Airbnb-ready within 6 weeks..."></textarea>
+        </div>
+        <button class="form-btn" onclick="submitForm()">
+          Send Message &amp; Book Consultation →
+        </button>
+        <div class="form-success" id="formSuccess">
+          ✅ Message sent! We'll reach out via WhatsApp within 2 hours.
+        </div>
+        <div class="wa-alt">
+          Or message directly on
+          <a href="https://wa.me/2349038807214?text=Hi%20Lumid!%20I'm%20interested%20in%20your%20interior%20design%20services." target="_blank" rel="noopener">WhatsApp →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="wrap">
+      <div class="footer-grid">
+
+        <!-- Brand column -->
+        <div class="footer-brand">
+          <img src="lumid-logo.png" alt="Lumid Interiors" class="footer-logo-img"/>
+          <p class="footer-bio">
+            Lagos-based interior &amp; exterior design studio. We transform spaces into high-performing assets — for homeowners, Airbnb hosts, and property developers.
+          </p>
+          <div class="footer-contact-list">
+            <span>📞 <a href="tel:09038807214">09038807214</a></span>
+            <span>📍 Command, Ipaja, Lagos</span>
+            <span>💬 <a href="https://wa.me/2349038807214" target="_blank">WhatsApp us</a></span>
+          </div>
+        </div>
+
+        <!-- Quick links column -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Navigate</h4>
+          <ul class="footer-col-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services &amp; Pricing</a></li>
+            <li><a href="#portfolio">Project Gallery</a></li>
+            <li><a href="#testimonials">Client Reviews</a></li>
+            <li><a href="#invest">Investor Pitch</a></li>
+            <li><a href="#process">How We Work</a></li>
+            <li><a href="#contact">Book Consultation</a></li>
+          </ul>
+        </div>
+
+        <!-- Services column -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Services</h4>
+          <ul class="footer-col-links">
+            <li><a href="#services">Lumid Essential — from ₦350k</a></li>
+            <li><a href="#services">Lumid Signature — ₦800k–₦2.5m</a></li>
+            <li><a href="#services">Lumid Develop — Custom</a></li>
+            <li><a href="#invest">Airbnb Fit-Out</a></li>
+            <li><a href="#invest">Developer Partnerships</a></li>
+            <li><a href="#invest">Value-Add Renovation</a></li>
+          </ul>
+        </div>
+
+        <!-- Mini overview / stats column -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">At a Glance</h4>
+          <div class="footer-stats">
+            <div class="footer-stat">
+              <span class="footer-stat-num">30+</span>
+              <span class="footer-stat-label">Projects Completed</span>
+            </div>
+            <div class="footer-stat">
+              <span class="footer-stat-num">3+</span>
+              <span class="footer-stat-label">Years in Lagos</span>
+            </div>
+            <div class="footer-stat">
+              <span class="footer-stat-num">100%</span>
+              <span class="footer-stat-label">Client Satisfaction</span>
+            </div>
+            <div class="footer-stat">
+              <span class="footer-stat-num">20+</span>
+              <span class="footer-stat-label">Client Testimonials</span>
+            </div>
+          </div>
+          <a href="#contact" class="footer-cta-btn">Book Free Consultation →</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="wrap">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">
+          © 2025 Lumid Interiors &amp; Exterior Finishes. All rights reserved. Lagos, Nigeria.
+        </p>
+        <p class="footer-credit">
+          Founded by <strong>Olumide Ogunloye Elijah</strong> — Civil Engineer · Interior Designer · Developer
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating social buttons -->
+<div class="social-floats">
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/2349038807214?text=Hi%20Lumid!%20I'm%20interested%20in%20your%20services."
+     class="float-btn float-wa"
+     target="_blank" rel="noopener"
+     aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2.003 6.474 2.003 12s4.474 10 10.001 10c5.528 0 10.002-4.474 10.002-10S17.532 2 12.004 2zm0 18.24c-1.71 0-3.312-.456-4.697-1.254l-3.36.879.897-3.27A8.185 8.185 0 013.76 12c0-4.541 3.697-8.24 8.244-8.24S20.248 7.459 20.248 12s-3.697 8.24-8.244 8.24z"/></svg>
+    <span class="float-label">WhatsApp</span>
+  </a>
+
+  <!-- Instagram — replace # with your Instagram URL -->
+  <a href="https://www.instagram.com/interior_designer_in_lagos_1?igsh=MTFjazU2dW9ybGdsZQ=="
+     class="float-btn float-ig"
+     target="_blank" rel="noopener"
+     aria-label="Follow on Instagram">
+    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    <span class="float-label">Instagram</span>
+  </a>
+
+  <!-- TikTok — replace # with your TikTok URL -->
+  <a href="https://tiktok.com/@lumid_interiors"
+     class="float-btn float-tt"
+     target="_blank" rel="noopener"
+     aria-label="Follow on TikTok">
+    <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+    <span class="float-label">TikTok</span>
+  </a>
+
+  <!-- LinkedIn — replace # with your LinkedIn URL -->
+  <a href="https://www.linkedin.com/in/lumid-inex-95bba02b6"
+     class="float-btn float-li"
+     target="_blank" rel="noopener"
+     aria-label="Connect on LinkedIn">
+    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    <span class="float-label">LinkedIn</span>
+  </a>
+
+</div>
+
+
+<script src="lumid.js"></script>
+</body>
+<div id="scroll-progress"></div>
+</html>
