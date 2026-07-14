@@ -3,33 +3,34 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Lumid Interiors | Luxury Interior & Exterior Design Lagos</title>
-<meta name="description" content="Lumid Interiors — Lagos-based luxury interior and exterior design studio. We transform spaces into experiences. Book a free consultation today."/>
+<title>Lumid INEX | Interior & Exterior Finishes Lagos</title>
+<meta name="description" content="Lumid Interior and exterior finishes, Lagos-based luxury interior and exterior finishes studio. We transform spaces into experiences. Book a free consultation today."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="lumid.css"/>
 </head>
 <body>
-
+<div id="scroll-progress"></div>
 <!-- ========================================================
      NAV
      ======================================================== -->
 <nav id="nav">
   <div class="wrap">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo" aria-label="Lumid INEX home">
+      <a href="/" class="nav-logo" aria-label="Lumid INEX home">
         <!-- MY LOGO FILE -->
-        <img src="lumid-logo.png" alt="Lumid INEX — Interior & Exterior Finishes" class="nav-logo-img"/>
+        <img src="lumid-logo.png" alt="Lumid Interior & Exterior Finishes" class="nav-logo-img"/>
       </a>
-      <div class="nav-links">
-       <a href="#about" class="nav-cta-1">About</a>
-        <a href="#services" class="nav-cta-1">Services</a>
-        <a href="#portfolio" class="nav-cta-1">Portfolio</a>
-        <a href="#testimonials" class="nav-cta-1">Reviews</a>
-        <a href="#investors" class="nav-cta-1">Investors</a>
-        <a href="#contact" class="nav-cta">Book Consultation</a>
-      </div>
+     <div class="nav-links">
+  <a href="#about" class="nav-cta-1">About</a>
+  <a href="#services" class="nav-cta-1">Services</a>
+  <a href="#portfolio" class="nav-cta-1">Portfolio</a>
+  <a href="#testimonials" class="nav-cta-1">Reviews</a>
+  <a href="team/index.html" class="nav-cta-1">Team</a>
+  <a href="#invest" class="nav-cta-1">Investors</a>
+  <a href="#contact" class="nav-cta">Book Consultation</a>
+</div>
       <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -51,6 +52,7 @@
     <a href="#about"        onclick="toggleMenu()"><span class="link-num">01</span>About</a>
     <a href="#services"     onclick="toggleMenu()"><span class="link-num">02</span>Services</a>
     <a href="#portfolio"    onclick="toggleMenu()"><span class="link-num">03</span>Portfolio</a>
+    <a href="team/index.html"  onclick="toggleMenu()"><span class="link-num">05</span>Team</a> 
     <a href="#testimonials" onclick="toggleMenu()"><span class="link-num">04</span>Reviews</a>
     <a href="#invest"       onclick="toggleMenu()"><span class="link-num">05</span>Investors</a>
     <a href="#contact"      onclick="toggleMenu()"><span class="link-num">06</span>Contact</a>
@@ -128,7 +130,7 @@
   <div class="hero-monogram" aria-hidden="true">LMD INEX</div>
 
   <div class="hero-content">
-    <p class="hero-eyebrow">Lagos — Lumid Interiors &amp; Exterior Finishes</p>
+    <p class="hero-eyebrow">Lumid Interiors &amp; Exterior Finishes</p>
 
     <h1 class="hero-title display">
       The Bridge between<br/>
@@ -139,15 +141,17 @@
 
     <p class="hero-sub">
       We design interiors and exterior finishes that balance beauty with
-      precision — for homes, Airbnbs, offices and investment properties
+      precision for homes, Airbnbs, offices and investment properties
       across Lagos and beyond. Every client gets more than great design: they get value.
     </p>
 
-    <div class="hero-actions">
-      <a href="#portfolio" class="btn btn-gold">View Projects</a>
-      <a href="#contact" class="btn btn-ghost-light">Free Consultation</a>
-    </div>
-
+<div class="hero-actions">
+  <a href="#portfolio" class="btn btn-gold">View Projects</a>
+  <a href="#contact" class="btn btn-ghost-light">Free Consultation</a>
+  <a href="track/" class="btn btn-ghost-light" style="border-color:rgba(200,151,60,0.6);color:var(--gold-lt)">
+    Track Your Project
+  </a>
+</div>
     <div class="hero-bottom">
       <div class="hero-stats">
         <div>
@@ -231,21 +235,26 @@
       </div>
 
       <div class="about-content reveal">
-        <span class="eyebrow">Our Story</span>
-        <h2 class="display" style="font-size:clamp(2rem,3.5vw,2.8rem);color:var(--charcoal);margin:0.8rem 0 1.5rem">
-          More than decoration —<br/><em>transformation</em>
-        </h2>
-        <p>Lumid Interiors was founded by Olumide Ogunloye Elijah, a first-class civil engineer who discovered that building structures deserve a purpose-driven ,design — crafted and constructed so that interiors reflect and resonate with the people who use them. What began as a personal passion became a studio trusted by Lagos homeowners, Airbnb hosts, and property developers.</p>
-        <p>We bring a rare combination to every project: depth in architectural and structural understanding, design intuition, project management discipline and skilled specialist technicians. When Lumid touches a space, we don't just decorate , we rethink how it feels, functions, and performs as an asset.</p>
-        <div class="about-signature">Olumide Ogunloye Elijah</div>
-        <div class="credentials">
-          <span class="credential-tag">Civil Engineer </span>
-          <span class="credential-tag">Mobile and Web Developer </span>
-          <span class="credential-tag">Yabatech</span>
-          <span class="credential-tag">CEO, Lumid Interiors</span>
-          <span class="credential-tag">Lagos, Nigeria</span>
-        </div>
-      </div>
+  <span class="eyebrow">Our Story</span>
+  <h2 class="display" style="font-size:clamp(2rem,3.5vw,2.8rem);color:var(--charcoal);margin:0.8rem 0 1.5rem">
+    More than decoration <br/><em>transformation</em>
+  </h2>
+  <p>Lumid INEX is a Lagos-based interior and exterior finishing firm built on the rare combination of structural engineering expertise and design intuition. Founded in 2023, we deliver bespoke residential, commercial and investment-grade fit-outs across Lagos and beyond.</p>
+  <p>Our approach is precision-first every material, finish and layout decision is made with both aesthetic impact and long-term asset performance in mind. When Lumid touches a space, we don't just decorate, we rethink how it feels, functions, and performs as an asset.</p>
+  <p>Led by a first-class civil engineer with hands-on site experience across Lagos, our team brings structural understanding, design intuition and project management discipline to every engagement. Clients range from homeowners and Airbnb hosts to property developers and real estate investors.</p>
+  <div class="about-signature">Lumid Interior and Exterior finishes</div>
+  <p style="font-size:0.8rem;color:var(--dim-grey);margin-top:0.3rem;margin-bottom:1.2rem">
+    Olumide Ogunloye Elijah, Founder &amp; CEO
+  </p>
+  <div class="credentials">
+    <span class="credential-tag">Founded 2023</span>
+    <span class="credential-tag">Lagos, Nigeria</span>
+    <span class="credential-tag">Residential &amp; Commercial</span>
+    <span class="credential-tag">Airbnb Fit-Outs</span>
+    <span class="credential-tag">Investor-Grade Finishes</span>
+    <span class="credential-tag">Engineering-Led Design</span>
+  </div>
+</div>
 
     </div>
   </div>
@@ -278,6 +287,7 @@
         <ul class="svc-features">
           <li>1 room redesign or styling</li>
           <li>Furniture sourcing &amp; layout</li>
+          <li>Wall art installation</li>
           <li>Colour &amp; material selection</li>
           <li>2 revision rounds</li>
           <li>Installation supervision</li>
@@ -295,6 +305,7 @@
         <ul class="svc-features">
           <li>Full apartment or office fit-out</li>
           <li>Concept boards &amp; 3D moodboards</li>
+          <li>Wall art installation</li>
           <li>Furniture, art &amp; décor sourcing</li>
           <li>Exterior finishing options</li>
           <li>Full project management</li>
@@ -333,6 +344,7 @@
 <!-- ========================================================
      PORTFOLIO
      ======================================================== -->
+
 <section id="portfolio">
   <div class="wrap">
     <div class="portfolio-header reveal">
@@ -349,6 +361,11 @@
         <button class="filter-tab" onclick="filterPortfolio('airbnb',this)">Airbnb</button>
         <button class="filter-tab" onclick="filterPortfolio('exterior',this)">Exterior</button>
       </div>
+       <p style="font-size:0.92rem;color:var(--dim-grey);line-height:1.55;max-width:480px;margin-top:0.8rem">
+          30+ completed projects across residential, commercial, Airbnb and exterior finishing. Browse the full gallery to see the depth of our work.
+      </p>
+      </div>
+    </div>
     </div>
 
     <div class="portfolio-grid reveal" id="portfolioGrid">
@@ -497,9 +514,13 @@
           <div class="p-title">Living &amp; Dining Area</div>
           <div class="p-loc">Command, Ipaja</div>
         </div>
+        
       </div>
 
     </div>
+      <a href="portfolio/" class="btn btn-dark" style="flex-shrink:0">
+          View Full Gallery →
+      </a>
   </div>
 </section>
 

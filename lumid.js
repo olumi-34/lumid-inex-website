@@ -1,20 +1,23 @@
 // my javascript for lumid inex
 
 // ── NAV SCROLL ─────────────────────────────────────────────
-window.addEventListener('scroll', () => {
+/*window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
-});
+}); */
 
 // ── MOBILE MENU ────────────────────────────────────────────
+// ── MOBILE MENU ────────────────────────────────────────────
 function toggleMenu() {
-  const menu = document.getElementById('mobileMenu');
-  const btn  = document.getElementById('hamburger');
-  const isOpen = menu.classList.toggle('open');
+  const menu     = document.getElementById('mobileMenu');
+  const btn      = document.getElementById('hamburger');
+  const backdrop = document.getElementById('navBackdrop');
+  const isOpen   = menu.classList.toggle('open');
+
   btn.classList.toggle('open', isOpen);
   btn.setAttribute('aria-expanded', isOpen);
+  if (backdrop) backdrop.classList.toggle('open', isOpen);
   document.body.style.overflow = isOpen ? 'hidden' : '';
 }
-
 // ── HERO BACKGROUND UPLOAD ─────────────────────────────────
 function loadHeroBg(input) {
   if (!input.files || !input.files[0]) return;
@@ -29,7 +32,7 @@ function loadHeroBg(input) {
 }
 
 // ── NAV SCROLL + PROGRESS BAR ──────────────────────────────
-window.addEventListener('scroll', () => {
+/*window.addEventListener('scroll', () => {
   const scrollY   = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const progress  = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
@@ -40,7 +43,22 @@ window.addEventListener('scroll', () => {
   // nav background — switches when user scrolls past full viewport height
   const heroHeight = window.innerHeight;
   document.getElementById('nav').classList.toggle('scrolled', scrollY >= heroHeight);
-});
+}); */
+
+
+// ── NAV SCROLL + PROGRESS BAR ──────────────────────────────
+window.addEventListener('scroll', () => {
+  const scrollY    = window.scrollY;
+  const docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+  const progress   = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+  const bar        = document.getElementById('scroll-progress');
+  const nav        = document.getElementById('nav');
+
+  if (bar) bar.style.width = progress + '%';
+  if (nav) nav.classList.toggle('scrolled', scrollY >= window.innerHeight);
+}, { passive: true });
+
+
 // ── HERO SLIDESHOW (videos + images) ───────────────────────
 (function () {
   const slides = document.querySelectorAll('.hero-slide');
