@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Checkout | Lumid Store</title>
+<meta name="robots" content="noindex"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../lumid.css"/>
+<link rel="stylesheet" href="shop.css"/>
+<link rel="stylesheet" href="checkout.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<!-- NAV (simplified — no need for full menu mid-checkout) -->
+<nav id="nav" class="scrolled">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="Lumid INEX home">
+        <img src="../lumid-logo.png" alt="Lumid INEX" class="nav-logo-img"/>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-cta-1">← Back to Shop</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- CHECKOUT HERO -->
+<section class="checkout-hero">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold)">Lumid Store</span>
+    <h1 style="margin-top:0.8rem">Complete your <em>order</em></h1>
+  </div>
+</section>
+
+<!-- CHECKOUT -->
+<section id="checkout-section">
+  <div class="wrap">
+    <div class="checkout-grid">
+
+      <div class="checkout-form-box">
+        <h2>Delivery Details</h2>
+        <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
+          <div class="checkout-form-row">
+            <div class="checkout-form-group">
+              <label for="co-name">Full Name</label>
+              <input type="text" id="co-name" placeholder="Your full name" required/>
+            </div>
+            <div class="checkout-form-group">
+              <label for="co-phone">Phone Number</label>
+              <input type="tel" id="co-phone" placeholder="08012345678" required/>
+            </div>
+          </div>
+          <div class="checkout-form-group">
+            <label for="co-email">Email (for your payment receipt)</label>
+            <input type="email" id="co-email" placeholder="you@email.com"/>
+          </div>
+          <div class="checkout-form-group">
+            <label for="co-address">Delivery Address</label>
+            <textarea id="co-address" placeholder="Full address including area and landmark" required></textarea>
+          </div>
+
+          <div class="checkout-form-msg" id="checkoutMsg"></div>
+
+          <button type="submit" class="checkout-pay-btn" id="payBtn">Pay Now →</button>
+        </form>
+      </div>
+
+      <div class="order-summary-box">
+        <h2>Order Summary</h2>
+        <div id="summaryItems"></div>
+        <div class="summary-subtotal-row">
+          <span>Total</span>
+          <strong id="summarySubtotal">₦0</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="supabase-config.js"></script>
+<script src="paystack-config.js"></script>
+<script src="checkout.js"></script>
+</body>
+</html>

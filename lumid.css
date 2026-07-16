@@ -1674,7 +1674,9 @@ footer { background: var(--charcoal); }
     height: 42px;
   }
   .float-btn svg { width: 19px; height: 19px; }
+  footer .footer-bottom { padding-bottom: 6.5rem; } /* clears space for floating icons */
 }
+
 
 /* ── SCROLL REVEAL ───────────────────────────────────────── */
 .reveal {

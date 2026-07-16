@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin | Lumid Store</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../lumid.css"/>
+<link rel="stylesheet" href="admin.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<!-- ══════════════════ LOGIN SCREEN ══════════════════ -->
+<div class="admin-login-wrap" id="loginScreen">
+  <div class="admin-login-box">
+    <img src="../lumid-logo.png" alt="Lumid INEX"/>
+    <h1>Admin Sign In</h1>
+    <p class="sub">Manage Lumid Store products and orders.</p>
+    <div class="admin-login-error" id="loginError"></div>
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required autocomplete="username"/>
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required autocomplete="current-password"/>
+      </div>
+      <button type="submit" class="admin-login-btn">Sign In</button>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════════ ADMIN SHELL ══════════════════ -->
+<div class="admin-shell" id="adminShell">
+
+  <div class="admin-topbar">
+    <div class="wrap">
+      <img src="../lumid-logo.png" alt="Lumid INEX" class="admin-topbar-logo"/>
+      <div class="admin-topbar-right">
+        <span class="admin-email" id="adminEmail"></span>
+        <button class="admin-logout-btn" onclick="handleLogout()">Sign Out</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchTab('products', this)">Products</button>
+      <button class="admin-tab" onclick="switchTab('orders', this)">Orders</button>
+    </div>
+  </div>
+
+  <!-- ── PRODUCTS PANEL ── -->
+  <div class="wrap">
+    <div class="admin-panel active" id="panel-products">
+
+      <div class="admin-card">
+        <h2 id="pf-heading">Add a Product</h2>
+        <form id="productForm" onsubmit="handleProductSubmit(event)">
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label for="pf-name">Product Name</label>
+              <input type="text" id="pf-name" placeholder="e.g. Velvet Emerald Sofa" required/>
+            </div>
+            <div class="admin-form-group">
+              <label for="pf-slug">Slug (auto-filled, edit if needed)</label>
+              <input type="text" id="pf-slug" placeholder="velvet-emerald-sofa" required/>
+            </div>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="pf-description">Description</label>
+            <textarea id="pf-description" placeholder="Short description of the piece…"></textarea>
+          </div>
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label for="pf-price">Price (₦)</label>
+              <input type="number" id="pf-price" placeholder="450000" required/>
+            </div>
+            <div class="admin-form-group">
+              <label for="pf-category">Category</label>
+              <select id="pf-category" required>
+                <option value="">Select category…</option>
+                <option value="sofas">Sofas</option>
+                <option value="tables">Tables</option>
+                <option value="lighting">Lighting</option>
+                <option value="decor">Decor</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label for="pf-dimensions">Dimensions</label>
+              <input type="text" id="pf-dimensions" placeholder="220cm x 95cm x 80cm"/>
+            </div>
+            <div class="admin-form-group">
+              <label for="pf-stock">Stock Status</label>
+              <select id="pf-stock" required>
+                <option value="in_stock">In Stock</option>
+                <option value="made_to_order">Made to Order</option>
+                <option value="sold_out">Sold Out</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="pf-images">Product Images</label>
+            <input type="file" id="pf-images" accept="image/*" multiple onchange="handleImageUpload(this)"/>
+            <div class="admin-image-uploading" id="pf-image-status" style="display:none"></div>
+            <div class="admin-image-preview" id="pf-image-preview"></div>
+          </div>
+
+          <div class="admin-checkbox-row">
+            <input type="checkbox" id="pf-active" checked/>
+            <label for="pf-active">Active (visible in the shop)</label>
+          </div>
+
+          <button type="submit" class="admin-btn" id="pf-submit-btn">Add Product</button>
+          <button type="button" class="admin-btn admin-btn-secondary" id="pf-cancel-edit-btn" style="display:none" onclick="cancelEdit()">Cancel Edit</button>
+
+          <div class="admin-form-msg" id="pf-msg"></div>
+        </form>
+      </div>
+
+      <div class="admin-card">
+        <h2>All Products</h2>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody">
+            <tr><td colspan="6" class="admin-empty">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- ── ORDERS PANEL ── -->
+    <div class="admin-panel" id="panel-orders">
+      <div class="admin-card">
+        <h2>Orders</h2>
+        <div id="ordersContainer">
+          <p class="admin-empty">Loading…</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="supabase-config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

@@ -23,12 +23,24 @@
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 1.2rem;
+  
 }
+/* Push hero content up so it clears the floating social icons on this shorter hero */
+#hero {
+  padding-bottom: 9rem;
+}
+@media (max-width: 768px) {
+  #hero {
+    padding-bottom: 7rem;
+  }
+}
+
 .page-hero-eyebrow::before {
   content: '';
   display: block;
   width: 28px; height: 1px;
   background: var(--gold);
+  
 }
 .page-hero h1 {
   font-family: var(--serif);

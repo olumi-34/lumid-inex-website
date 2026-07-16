@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lumid Store | Ready-Made Furniture — Lumid Interior & Exterior Finishes</title>
+<meta name="description" content="Shop ready-made luxury furniture and decor from Lumid Interior & Exterior Finishes, Lagos. Sofas, tables, lighting and more — delivered across Lagos and beyond."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../lumid.css"/>
+<link rel="stylesheet" href="shop.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="Lumid INEX home">
+        <img src="../lumid-logo.png" alt="Lumid INEX" class="nav-logo-img"/>
+      </a>
+      <div class="nav-links">
+        <a href="/#about" class="nav-cta-1">About</a>
+        <a href="/#services" class="nav-cta-1">Services</a>
+        <a href="/portfolio/" class="nav-cta-1">Portfolio</a>
+        <a href="/shop/" class="nav-cta-1" style="color:var(--gold)">Shop</a>
+        <a href="/#testimonials" class="nav-cta-1">Reviews</a>
+        <a href="/team/" class="nav-cta-1">Team</a>
+        <a href="/#contact" class="nav-cta">Book Consultation</a>
+      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav-backdrop" id="navBackdrop" onclick="toggleMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
+  </div>
+  <nav class="mobile-menu-links">
+    <a href="/#about"        onclick="toggleMenu()"><span class="link-num">01</span>About</a>
+    <a href="/#services"     onclick="toggleMenu()"><span class="link-num">02</span>Services</a>
+    <a href="/portfolio/"    onclick="toggleMenu()"><span class="link-num">03</span>Portfolio</a>
+    <a href="/shop/"         onclick="toggleMenu()"><span class="link-num">04</span>Shop</a>
+    <a href="/#testimonials" onclick="toggleMenu()"><span class="link-num">05</span>Reviews</a>
+    <a href="/team/"         onclick="toggleMenu()"><span class="link-num">06</span>Team</a>
+    <a href="/#contact"      onclick="toggleMenu()"><span class="link-num">07</span>Contact</a>
+  </nav>
+  <div class="mobile-menu-footer">
+    <p class="mobile-menu-tagline">The bridge between <em>luxury</em>, comfort and purpose.</p>
+    <div class="mobile-menu-contact">
+      <a href="tel:09038807214">📞 09038807214</a>
+      <a href="https://wa.me/2349038807214" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- SHOP HERO -->
+<section class="shop-hero">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold)">Lumid Store</span>
+    <h1>Ready-made pieces,<br/><em>ready to ship.</em></h1>
+    <p>Curated sofas, tables, lighting and decor — the same sourcing standard behind every Lumid project, now available without a full design engagement.</p>
+  </div>
+</section>
+
+<!-- TOOLBAR -->
+<div class="shop-toolbar">
+  <div class="wrap shop-toolbar-inner">
+    <div class="shop-filters">
+      <button class="filter-tab active" onclick="filterShop('all', this)">All</button>
+      <button class="filter-tab" onclick="filterShop('sofas', this)">Sofas</button>
+      <button class="filter-tab" onclick="filterShop('tables', this)">Tables</button>
+      <button class="filter-tab" onclick="filterShop('lighting', this)">Lighting</button>
+      <button class="filter-tab" onclick="filterShop('decor', this)">Decor</button>
+    </div>
+    <button class="cart-toggle" onclick="openCart()">
+      🛍 Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</div>
+
+<!-- PRODUCT GRID -->
+<section id="shop-grid-section">
+  <div class="wrap">
+    <div class="product-grid" id="productGrid">
+      <p class="shop-state-msg">Loading pieces…</p>
+    </div>
+  </div>
+</section>
+
+<!-- CART DRAWER -->
+<div class="cart-backdrop" id="cartBackdrop" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty-msg">Your cart is empty.</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <strong id="cartSubtotalAmount">₦0</strong>
+    </div>
+    <button class="cart-checkout-btn" id="cartCheckoutBtn" onclick="goToCheckout()" disabled>
+      Proceed to Checkout →
+    </button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../lumid-logo.png" alt="Lumid Interiors" class="footer-logo-img"/>
+          <p class="footer-bio">Lagos-based interior &amp; exterior design studio. Now shop ready-made furniture from the Lumid Store.</p>
+          <div class="footer-contact-list">
+            <span>📞 <a href="tel:09038807214">09038807214</a></span>
+            <span>📍 Command, Ipaja, Lagos</span>
+            <span>💬 <a href="https://wa.me/2349038807214" target="_blank">WhatsApp us</a></span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Navigate</h4>
+          <ul class="footer-col-links">
+            <li><a href="/#about">About Us</a></li>
+            <li><a href="/#services">Services &amp; Pricing</a></li>
+            <li><a href="/portfolio/">Project Gallery</a></li>
+            <li><a href="/shop/">Lumid Store</a></li>
+            <li><a href="/team/">Our Team</a></li>
+            <li><a href="/#contact">Book Consultation</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">© 2025 Lumid Interiors &amp; Exterior Finishes. All rights reserved. Lagos, Nigeria.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../lumid.js"></script>
+<script src="supabase-config.js"></script>
+<script src="shop.js"></script>
+</body>
+</html>
