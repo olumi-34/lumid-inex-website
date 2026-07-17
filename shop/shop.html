@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shop Custom Furniture | Lumid INEX Lagos</title>
+<meta name="description" content="Shop Lumid INEX custom furniture — handcrafted sofas, beds, dining sets, office furniture and lighting. Delivered across Lagos. Pay with card, transfer or USSD."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../lumid.css"/>
+<style>
+/* ══════════════════════════════════════════════
+   SHOP PAGE — additional styles
+══════════════════════════════════════════════ */
+
+/* PAGE HERO */
+.shop-hero {
+  background: var(--charcoal);
+  padding: 10rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.shop-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle at top right,
+    rgba(200,151,60,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.shop-hero::after {
+  content: 'SHOP';
+  position: absolute;
+  right: -2rem; bottom: -3rem;
+  font-family: var(--serif);
+  font-size: 16rem;
+  font-weight: 700;
+  color: rgba(200,151,60,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.shop-hero-inner {
+  position: relative;
+  z-index: 2;
+}
+.shop-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.shop-hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 28px; height: 1px;
+  background: var(--gold);
+}
+.shop-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 400;
+  color: var(--off-white);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  max-width: 14ch;
+}
+.shop-hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.shop-hero-sub {
+  font-size: 0.95rem;
+  color: var(--mid-grey);
+  line-height: 1.75;
+  max-width: 480px;
+  margin-bottom: 2rem;
+}
+.shop-hero-badges {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.shop-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(200,151,60,0.3);
+  border-radius: 99px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--mid-grey);
+}
+.shop-badge span { color: var(--gold); }
+
+/* FILTER BAR */
+.filter-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--warm-grey);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 0;
+}
+.filter-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.9rem 0;
+}
+.category-tabs {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+.cat-tab {
+  padding: 0.45rem 1.1rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--warm-grey);
+  color: var(--dim-grey);
+  border-radius: 99px;
+  background: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.cat-tab:hover,
+.cat-tab.active {
+  background: var(--charcoal);
+  color: var(--white);
+  border-color: var(--charcoal);
+}
+.sort-select {
+  padding: 0.45rem 1rem;
+  font-size: 0.75rem;
+  font-family: var(--sans);
+  border: 1.5px solid var(--warm-grey);
+  border-radius: 99px;
+  color: var(--dim-grey);
+  background: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 1.8rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236E6A64' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+}
+
+/* PRODUCT COUNT */
+.product-count {
+  font-size: 0.78rem;
+  color: var(--dim-grey);
+  white-space: nowrap;
+}
+.product-count strong {
+  color: var(--charcoal);
+  font-weight: 600;
+}
+
+/* SHOP GRID */
+.shop-section {
+  padding: 4rem 0 6rem;
+  background: var(--off-white);
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* PRODUCT CARD */
+.product-card {
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--warm-grey);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease,
+              transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.product-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+}
+
+/* badge top-left */
+.product-badge {
+  position: absolute;
+  top: 1rem; left: 1rem;
+  z-index: 2;
+  padding: 0.2rem 0.7rem;
+  border-radius: 99px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.badge-new    { background: var(--charcoal); color: var(--white); }
+.badge-popular{ background: var(--gold);     color: var(--white); }
+.badge-custom { background: var(--sage);     color: var(--white); }
+
+/* product image */
+.product-img-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--warm-grey);
+  cursor: pointer;
+}
+.product-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.product-card:hover .product-img-wrap img {
+  transform: scale(1.05);
+}
+
+/* quick view overlay */
+.product-quick-view {
+  position: absolute;
+  inset: 0;
+  background: rgba(20,20,20,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.product-card:hover .product-quick-view { opacity: 1; }
+.quick-view-btn {
+  padding: 0.6rem 1.4rem;
+  background: var(--white);
+  color: var(--charcoal);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 99px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.quick-view-btn:hover {
+  background: var(--gold);
+  color: var(--white);
+}
+
+/* product body */
+.product-body {
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.product-cat {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+.product-name {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 0.4rem;
+  line-height: 1.25;
+}
+.product-desc {
+  font-size: 0.78rem;
+  color: var(--dim-grey);
+  line-height: 1.65;
+  margin-bottom: 0.8rem;
+  flex: 1;
+}
+.product-meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+.product-meta-tag {
+  font-size: 0.62rem;
+  font-weight: 500;
+  padding: 0.18rem 0.6rem;
+  border-radius: 99px;
+  background: var(--warm-grey);
+  color: var(--dim-grey);
+}
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--warm-grey);
+}
+.product-price {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  line-height: 1;
+}
+.product-price small {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim-grey);
+  margin-top: 0.15rem;
+}
+.product-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+.btn-buy {
+  padding: 0.55rem 1.1rem;
+  background: var(--charcoal);
+  color: var(--white);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+}
+.btn-buy:hover {
+  background: var(--gold);
+  transform: translateY(-1px);
+}
+.btn-wa {
+  width: 34px; height: 34px;
+  border-radius: 4px;
+  background: #25D366;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  flex-shrink: 0;
+}
+.btn-wa:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(37,211,102,0.4);
+}
+.btn-wa svg {
+  width: 16px; height: 16px;
+  fill: white;
+}
+
+/* PRODUCT MODAL */
+.product-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(14,14,14,0.88);
+  z-index: 400;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.product-modal.open { display: flex; }
+.modal-inner {
+  background: var(--white);
+  border-radius: 8px;
+  width: min(900px, 95vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--warm-grey);
+  background: var(--white);
+  color: var(--dim-grey);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: border-color 0.2s, color 0.2s;
+}
+.modal-close:hover { border-color: var(--gold); color: var(--gold); }
+.modal-img {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px 0 0 8px;
+  background: var(--warm-grey);
+}
+.modal-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.modal-body {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.modal-cat {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.modal-name {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 0.8rem;
+  line-height: 1.2;
+}
+.modal-price {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 1rem;
+}
+.modal-desc {
+  font-size: 0.88rem;
+  color: var(--dim-grey);
+  line-height: 1.75;
+  margin-bottom: 1.2rem;
+  flex: 1;
+}
+.modal-specs {
+  margin-bottom: 1.5rem;
+}
+.modal-specs-title {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--warm-grey);
+}
+.modal-spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--warm-grey);
+}
+.modal-spec-row:last-child { border-bottom: none; }
+.modal-spec-label { color: var(--dim-grey); }
+.modal-spec-value { color: var(--charcoal); font-weight: 500; }
+.modal-delivery {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  background: var(--warm-grey);
+  border-radius: 4px;
+  font-size: 0.78rem;
+  color: var(--dim-grey);
+  margin-bottom: 1.2rem;
+}
+.modal-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+.modal-btn-pay {
+  flex: 1;
+  padding: 0.9rem;
+  background: var(--charcoal);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+.modal-btn-pay:hover { background: var(--gold); }
+.modal-btn-wa {
+  padding: 0.9rem 1.2rem;
+  background: #25D366;
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: opacity 0.25s ease;
+  white-space: nowrap;
+}
+.modal-btn-wa:hover { opacity: 0.88; }
+.modal-btn-wa svg { width: 16px; height: 16px; fill: white; }
+
+/* PAYSTACK OVERLAY */
+.pay-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(14,14,14,0.6);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+}
+.pay-overlay.open { display: flex; }
+.pay-box {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 2.5rem;
+  width: min(460px, 92vw);
+  position: relative;
+}
+.pay-box-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: var(--dim-grey);
+  cursor: pointer;
+}
+.pay-box h3 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 0.4rem;
+}
+.pay-box-product {
+  font-size: 0.82rem;
+  color: var(--dim-grey);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--warm-grey);
+}
+.pay-box-product strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--charcoal);
+  margin-top: 0.3rem;
+}
+.pay-field { margin-bottom: 1rem; }
+.pay-field label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim-grey);
+  margin-bottom: 0.35rem;
+}
+.pay-field input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--off-white);
+  border: 1.5px solid var(--warm-grey);
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.25s ease;
+}
+.pay-field input:focus { border-color: var(--gold); }
+.pay-amount-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1rem;
+  background: var(--gold-pale);
+  border: 1.5px solid rgba(200,151,60,0.3);
+  border-radius: 4px;
+  margin-bottom: 1.2rem;
+}
+.pay-amount-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim-grey);
+}
+.pay-amount-value {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--charcoal);
+  font-weight: 400;
+}
+.pay-btn-submit {
+  width: 100%;
+  padding: 1rem;
+  background: var(--charcoal);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.pay-btn-submit:hover { background: var(--gold); }
+.pay-secure-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+  font-size: 0.68rem;
+  color: var(--dim-grey);
+}
+.pay-secure-note svg {
+  width: 12px; height: 12px;
+  fill: var(--sage);
+}
+
+/* CUSTOM ORDER STRIP */
+.custom-strip {
+  background: var(--charcoal);
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.custom-strip::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    linear-gradient(rgba(200,151,60,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,151,60,0.06) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+.custom-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.custom-left h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.custom-left h2 em { font-style: italic; color: var(--gold); }
+.custom-left p {
+  font-size: 0.92rem;
+  color: var(--mid-grey);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+.custom-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.custom-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  font-size: 0.85rem;
+  color: var(--mid-grey);
+}
+.custom-point::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+.custom-right {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 2.5rem;
+}
+.custom-right h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--off-white);
+  margin-bottom: 1.5rem;
+}
+.custom-form-field { margin-bottom: 1rem; }
+.custom-form-field label {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim-grey);
+  margin-bottom: 0.35rem;
+}
+.custom-form-field input,
+.custom-form-field select,
+.custom-form-field textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--off-white);
+  outline: none;
+  transition: border-color 0.25s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.custom-form-field input::placeholder,
+.custom-form-field textarea::placeholder {
+  color: var(--dim-grey);
+}
+.custom-form-field input:focus,
+.custom-form-field select:focus,
+.custom-form-field textarea:focus {
+  border-color: var(--gold);
+}
+.custom-form-field select option { background: var(--charcoal-2); }
+.custom-form-field textarea { min-height: 90px; resize: vertical; }
+.custom-submit {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--gold);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+.custom-submit:hover { background: var(--off-white); color: var(--charcoal); }
+
+/* DELIVERY INFO */
+.delivery-section {
+  padding: 4rem 0;
+  background: var(--warm-grey);
+}
+.delivery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+.delivery-item {
+  text-align: center;
+}
+.delivery-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.delivery-title {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 0.4rem;
+}
+.delivery-desc {
+  font-size: 0.78rem;
+  color: var(--dim-grey);
+  line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .product-grid { grid-template-columns: 1fr 1fr; }
+  .modal-inner { grid-template-columns: 1fr; }
+  .modal-img { border-radius: 8px 8px 0 0; aspect-ratio: 16/9; }
+  .custom-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .delivery-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 600px) {
+  .product-grid { grid-template-columns: 1fr; }
+  .filter-bar-inner { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+  .category-tabs { gap: 0.4rem; }
+  .cat-tab { padding: 0.4rem 0.9rem; font-size: 0.68rem; }
+  .delivery-grid { grid-template-columns: 1fr 1fr; }
+  .modal-actions { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="Lumid INEX">
+        <img src="../lumid-logo.png" alt="Lumid INEX" class="nav-logo-img"/>
+      </a>
+      <div class="nav-links">
+        <a href="/#about"        class="nav-cta-1">About</a>
+        <a href="/#services"     class="nav-cta-1">Services</a>
+        <a href="/portfolio/index.html" class="nav-cta-1">Portfolio</a>
+        <a href="/#testimonials" class="nav-cta-1">Reviews</a>
+        <a href="/team/index.html" class="nav-cta-1">Team</a>
+        <a href="/shop/index.html" class="nav-cta-1" style="color:var(--gold)">Shop</a>
+        <a href="/#invest"       class="nav-cta-1">Investors</a>
+        <a href="/#contact"      class="nav-cta">Book Consultation</a>
+      </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav-backdrop" id="navBackdrop" onclick="toggleMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <button class="mobile-menu-close" onclick="toggleMenu()">✕</button>
+  </div>
+  <nav class="mobile-menu-links">
+    <a href="/#about"              onclick="toggleMenu()"><span class="link-num">01</span>About</a>
+    <a href="/#services"           onclick="toggleMenu()"><span class="link-num">02</span>Services</a>
+    <a href="/portfolio/index.html"onclick="toggleMenu()"><span class="link-num">03</span>Portfolio</a>
+    <a href="/#testimonials"       onclick="toggleMenu()"><span class="link-num">04</span>Reviews</a>
+    <a href="/team/index.html"     onclick="toggleMenu()"><span class="link-num">05</span>Team</a>
+    <a href="/shop/index.html"     onclick="toggleMenu()"><span class="link-num">06</span>Shop</a>
+    <a href="/#invest"             onclick="toggleMenu()"><span class="link-num">07</span>Investors</a>
+    <a href="/#contact"            onclick="toggleMenu()"><span class="link-num">08</span>Contact</a>
+  </nav>
+  <div class="mobile-menu-footer">
+    <p class="mobile-menu-tagline">The bridge between <em>luxury</em>, comfort and purpose.</p>
+    <div class="mobile-menu-contact">
+      <a href="tel:09038807214">📞 09038807214</a>
+      <a href="https://wa.me/2349038807214" target="_blank">💬 WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- SHOP HERO -->
+<section class="shop-hero">
+  <div class="wrap shop-hero-inner">
+    <p class="shop-hero-eyebrow">Lumid INEX — Custom Furniture</p>
+    <h1>Furniture crafted for <em>spaces that perform.</em></h1>
+    <p class="shop-hero-sub">
+      Every piece in our collection is designed to the same standard
+      as our interior fit-outs — built to last, proportioned for Lagos
+      living, and finished to investment-grade quality.
+    </p>
+    <div class="shop-hero-badges">
+      <span class="shop-badge"><span>✓</span> Made to Order</span>
+      <span class="shop-badge"><span>✓</span> Lagos Delivery</span>
+      <span class="shop-badge"><span>✓</span> Pay with Card / Transfer / USSD</span>
+      <span class="shop-badge"><span>✓</span> Custom Dimensions Available</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Sofas & Sectionals</span><span class="dot">✦</span>
+    <span>Beds & Bedroom</span><span class="dot">✦</span>
+    <span>Dining Sets</span><span class="dot">✦</span>
+    <span>Office Furniture</span><span class="dot">✦</span>
+    <span>Cabinets & Storage</span><span class="dot">✦</span>
+    <span>Lighting & Decor</span><span class="dot">✦</span>
+    <span>Custom Orders</span><span class="dot">✦</span>
+    <span>Lagos Delivery</span><span class="dot">✦</span>
+    <span>Sofas & Sectionals</span><span class="dot">✦</span>
+    <span>Beds & Bedroom</span><span class="dot">✦</span>
+    <span>Dining Sets</span><span class="dot">✦</span>
+    <span>Office Furniture</span><span class="dot">✦</span>
+    <span>Cabinets & Storage</span><span class="dot">✦</span>
+    <span>Lighting & Decor</span><span class="dot">✦</span>
+    <span>Custom Orders</span><span class="dot">✦</span>
+    <span>Lagos Delivery</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filterBar">
+  <div class="wrap">
+    <div class="filter-bar-inner">
+      <div class="category-tabs">
+        <button class="cat-tab active" onclick="filterProducts('all',this)">All</button>
+        <button class="cat-tab" onclick="filterProducts('sofas',this)">Sofas</button>
+        <button class="cat-tab" onclick="filterProducts('beds',this)">Beds</button>
+        <button class="cat-tab" onclick="filterProducts('dining',this)">Dining</button>
+        <button class="cat-tab" onclick="filterProducts('office',this)">Office</button>
+        <button class="cat-tab" onclick="filterProducts('storage',this)">Storage</button>
+        <button class="cat-tab" onclick="filterProducts('lighting',this)">Lighting</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <select class="sort-select" onchange="sortProducts(this.value)">
+          <option value="default">Sort: Default</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name">Name A–Z</option>
+        </select>
+        <span class="product-count" id="productCount">
+          Showing <strong>18</strong> products
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT GRID -->
+<section class="shop-section">
+  <div class="wrap">
+    <div class="product-grid" id="productGrid">
+      <!-- Products injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOM ORDER STRIP -->
+<section class="custom-strip">
+  <div class="wrap">
+    <div class="custom-inner">
+      <div class="custom-left reveal">
+        <span class="eyebrow" style="color:var(--gold)">Bespoke Orders</span>
+        <h2>Can't find exactly<br/>what you need? <em>We'll build it.</em></h2>
+        <p>Every space is different. If our standard catalogue doesn't match your dimensions, material preference or aesthetic vision — tell us what you need and we'll craft it from scratch.</p>
+        <div class="custom-points">
+          <span class="custom-point">Any dimension — we build to your exact measurements</span>
+          <span class="custom-point">Full material choice — fabric, leather, wood, metal</span>
+          <span class="custom-point">Colour matching to your existing interior</span>
+          <span class="custom-point">3–6 week delivery from order confirmation</span>
+          <span class="custom-point">Site visit available for large orders</span>
+        </div>
+      </div>
+      <div class="custom-right reveal">
+        <h3>Request a Custom Quote</h3>
+        <div class="custom-form-field">
+          <label>Your Name</label>
+          <input type="text" id="c-name" placeholder="Adaeze Okonkwo"/>
+        </div>
+        <div class="custom-form-field">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" id="c-phone" placeholder="08012345678"/>
+        </div>
+        <div class="custom-form-field">
+          <label>Furniture Type</label>
+          <select id="c-type">
+            <option value="">Select category...</option>
+            <option>Sofa / Sectional</option>
+            <option>Bed Frame / Bedroom Set</option>
+            <option>Dining Table / Chairs</option>
+            <option>Office / Workspace Furniture</option>
+            <option>Cabinet / Storage Unit</option>
+            <option>Lighting Fixture</option>
+            <option>Other / Mixed</option>
+          </select>
+        </div>
+        <div class="custom-form-field">
+          <label>Describe What You Need</label>
+          <textarea id="c-desc" placeholder="e.g. L-shaped sofa, 3.2m × 2.1m, dark grey velvet, with chaise..."></textarea>
+        </div>
+        <button class="custom-submit" onclick="submitCustomOrder()">
+          Send Quote Request via WhatsApp →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY INFO -->
+<section class="delivery-section">
+  <div class="wrap">
+    <div class="delivery-grid reveal">
+      <div class="delivery-item">
+        <span class="delivery-icon">🚚</span>
+        <div class="delivery-title">Lagos Delivery</div>
+        <p class="delivery-desc">We deliver to all Lagos zones. Delivery fee calculated at checkout based on your location.</p>
+      </div>
+      <div class="delivery-item">
+        <span class="delivery-icon">🔒</span>
+        <div class="delivery-title">Secure Payment</div>
+        <p class="delivery-desc">Pay safely with Paystack — card, bank transfer, USSD or mobile money. SSL encrypted.</p>
+      </div>
+      <div class="delivery-item">
+        <span class="delivery-icon">📐</span>
+        <div class="delivery-title">Made to Order</div>
+        <p class="delivery-desc">All pieces are crafted after your order. Standard lead time is 3–6 weeks depending on complexity.</p>
+      </div>
+      <div class="delivery-item">
+        <span class="delivery-icon">🛠️</span>
+        <div class="delivery-title">Assembly Included</div>
+        <p class="delivery-desc">Our team delivers and assembles all furniture in your space. No extra charge within Lagos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../lumid-logo.png" alt="Lumid Interiors" class="footer-logo-img"/>
+          <p class="footer-bio">Lagos-based interior &amp; exterior design studio. Engineering-led. Aesthetics-driven.</p>
+          <div class="footer-contact-list">
+            <span>📞 <a href="tel:09038807214">09038807214</a></span>
+            <span>📍 Command, Ipaja, Lagos</span>
+            <span>💬 <a href="https://wa.me/2349038807214" target="_blank">WhatsApp us</a></span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Navigate</h4>
+          <ul class="footer-col-links">
+            <li><a href="/#about">About Us</a></li>
+            <li><a href="/#services">Services &amp; Pricing</a></li>
+            <li><a href="/portfolio/index.html">Project Gallery</a></li>
+            <li><a href="/team/index.html">Our Team</a></li>
+            <li><a href="/shop/index.html">Furniture Shop</a></li>
+            <li><a href="/#invest">Investor Pitch</a></li>
+            <li><a href="/#contact">Book Consultation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">Shop Categories</h4>
+          <ul class="footer-col-links">
+            <li><a href="#" onclick="filterProducts('sofas',document.querySelector('[onclick*=sofas]'));return false">Sofas &amp; Sectionals</a></li>
+            <li><a href="#" onclick="filterProducts('beds',document.querySelector('[onclick*=beds]'));return false">Beds &amp; Bedroom</a></li>
+            <li><a href="#" onclick="filterProducts('dining',document.querySelector('[onclick*=dining]'));return false">Dining Sets</a></li>
+            <li><a href="#" onclick="filterProducts('office',document.querySelector('[onclick*=office]'));return false">Office Furniture</a></li>
+            <li><a href="#" onclick="filterProducts('storage',document.querySelector('[onclick*=storage]'));return false">Cabinets &amp; Storage</a></li>
+            <li><a href="#" onclick="filterProducts('lighting',document.querySelector('[onclick*=lighting]'));return false">Lighting &amp; Decor</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-col-title">At a Glance</h4>
+          <div class="footer-stats">
+            <div class="footer-stat">
+              <span class="footer-stat-num">30+</span>
+              <span class="footer-stat-label">Projects Completed</span>
+            </div>
+            <div class="footer-stat">
+              <span class="footer-stat-num">3+</span>
+              <span class="footer-stat-label">Years in Lagos</span>
+            </div>
+            <div class="footer-stat">
+              <span class="footer-stat-num">18+</span>
+              <span class="footer-stat-label">Furniture Pieces</span>
+            </div>
+            <div class="footer-stat">
+              <span class="footer-stat-num">100%</span>
+              <span class="footer-stat-label">Client Satisfaction</span>
+            </div>
+          </div>
+          <a href="/#contact" class="footer-cta-btn">Book Free Consultation →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">© 2025 Lumid Interiors &amp; Exterior Finishes. All rights reserved. Lagos, Nigeria.</p>
+        <p class="footer-credit">Founded by <strong>Olumide Ogunloye Elijah</strong></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING SOCIALS -->
+<div class="social-floats">
+  <a href="https://wa.me/2349038807214?text=Hi%20Lumid!%20I'm%20interested%20in%20your%20furniture%20shop."
+     class="float-btn float-wa" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2.003 6.474 2.003 12s4.474 10 10.001 10c5.528 0 10.002-4.474 10.002-10S17.532 2 12.004 2zm0 18.24c-1.71 0-3.312-.456-4.697-1.254l-3.36.879.897-3.27A8.185 8.185 0 013.76 12c0-4.541 3.697-8.24 8.244-8.24S20.248 7.459 20.248 12s-3.697 8.24-8.244 8.24z"/></svg>
+    <span class="float-label">WhatsApp</span>
+  </a>
+  <a href="https://www.instagram.com/interior_designer_in_lagos_1" class="float-btn float-ig" target="_blank" aria-label="Instagram">
+    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    <span class="float-label">Instagram</span>
+  </a>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="product-modal" id="productModal" onclick="closeModal(event)">
+  <div class="modal-inner" id="modalInner">
+    <button class="modal-close" onclick="closeProductModal()">✕</button>
+    <div class="modal-img">
+      <img src="" alt="" id="modalImg"/>
+    </div>
+    <div class="modal-body">
+      <div class="modal-cat" id="modalCat"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-specs" id="modalSpecs"></div>
+      <div class="modal-delivery">
+        🚚 Delivered &amp; assembled within Lagos — 3 to 6 weeks lead time
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn-pay" id="modalBtnPay">
+          Pay with Paystack
+        </button>
+        <button class="modal-btn-wa" id="modalBtnWa">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2.003 6.474 2.003 12s4.474 10 10.001 10c5.528 0 10.002-4.474 10.002-10S17.532 2 12.004 2zm0 18.24c-1.71 0-3.312-.456-4.697-1.254l-3.36.879.897-3.27A8.185 8.185 0 013.76 12c0-4.541 3.697-8.24 8.244-8.24S20.248 7.459 20.248 12s-3.697 8.24-8.244 8.24z"/></svg>
+          Order via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYSTACK CHECKOUT OVERLAY -->
+<div class="pay-overlay" id="payOverlay">
+  <div class="pay-box">
+    <button class="pay-box-close" onclick="closePayOverlay()">✕</button>
+    <h3>Complete Your Order</h3>
+    <div class="pay-box-product">
+      Paying for:
+      <strong id="payProductName"></strong>
+    </div>
+    <div class="pay-field">
+      <label>Full Name</label>
+      <input type="text" id="payName" placeholder="Adaeze Okonkwo"/>
+    </div>
+    <div class="pay-field">
+      <label>Email Address</label>
+      <input type="email" id="payEmail" placeholder="adaeze@email.com"/>
+    </div>
+    <div class="pay-field">
+      <label>Phone Number</label>
+      <input type="tel" id="payPhone" placeholder="08012345678"/>
+    </div>
+    <div class="pay-field">
+      <label>Delivery Address (Lagos)</label>
+      <input type="text" id="payAddress" placeholder="14 Admiralty Way, Lekki Phase 1"/>
+    </div>
+    <div class="pay-amount-display">
+      <span class="pay-amount-label">Total Amount</span>
+      <span class="pay-amount-value" id="payAmountDisplay">₦0</span>
+    </div>
+    <button class="pay-btn-submit" onclick="initiatePaystack()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+      </svg>
+      Pay Now — Secured by Paystack
+    </button>
+    <div class="pay-secure-note">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      256-bit SSL encryption · Card · Transfer · USSD
+    </div>
+  </div>
+</div>
+
+<!-- Paystack SDK -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="supabase-config.js"></script>
+
+<script>
+// ══════════════════════════════════════════════
+// PRODUCT DATA — replace dummy images with
+// your actual furniture photos when ready
+// ══════════════════════════════════════════════
+const PRODUCTS = [
+  {
+    id: 1, cat: 'sofas',
+    badge: 'popular',
+    name: 'Lagos Lounge Sectional',
+    desc: 'Generously sized L-shaped sectional with deep seating and removable cushion covers. Available in charcoal, cream and terracotta.',
+    price: 485000,
+    img: '../file_0000000043c071f49e71612868924efe.png',
+    specs: { Material: 'High-density foam, woven fabric', Dimensions: '3.2m × 2.1m', Seats: '6–7 persons', Legs: 'Solid walnut', Delivery: '4–5 weeks' }
+  },
+  {
+    id: 2, cat: 'sofas',
+    badge: 'new',
+    name: 'Lekki 3-Seater Sofa',
+    desc: 'Clean-lined three-seater with knife-edge cushions and tapered legs. Perfect for open-plan living areas and Airbnb units.',
+    price: 285000,
+    img: '../FrntPage-lumi.jpg',
+    specs: { Material: 'Performance velvet, solid oak legs', Dimensions: '2.1m × 0.9m', Seats: '3 persons', Legs: 'Solid oak', Delivery: '3–4 weeks' }
+  },
+  {
+    id: 3, cat: 'beds',
+    badge: 'popular',
+    name: 'Signature King Bed Frame',
+    desc: 'Upholstered king-size bed frame with padded headboard, USB charging ports integrated into the side tables.',
+    price: 395000,
+    img: '../IMG-20260611-WA0057.jpg',
+    specs: { Size: 'King (180 × 200cm)', Material: 'Linen upholstery, MDF frame', Headboard: 'Padded, 120cm height', Base: 'Slatted wood', Delivery: '4–6 weeks' }
+  },
+  {
+    id: 4, cat: 'beds',
+    badge: null,
+    name: 'Minimalist Queen Platform Bed',
+    desc: 'Low-profile platform bed in a dark walnut finish. No box spring required. Pairs perfectly with our Lumid bedside tables.',
+    price: 265000,
+    img: '../frontpage2.jpg',
+    specs: { Size: 'Queen (150 × 200cm)', Material: 'Solid walnut veneer', Profile: 'Low platform, 25cm', Base: 'Solid platform', Delivery: '3–5 weeks' }
+  },
+  {
+    id: 5, cat: 'dining',
+    badge: 'new',
+    name: 'Ibadan Oval Dining Table',
+    desc: 'Oval marble-topped dining table on a brushed brass pedestal base. Seats 6 comfortably. A statement piece for any dining room.',
+    price: 520000,
+    img: '../IMG-20260608-WA0015.jpg',
+    specs: { Top: 'Carrara marble (engineered)', Dimensions: '2.0m × 1.0m', Base: 'Brushed brass steel', Seats: '6 persons', Delivery: '5–6 weeks' }
+  },
+  {
+    id: 6, cat: 'dining',
+    badge: null,
+    name: 'Lumid Dining Chair Set (×4)',
+    desc: 'Upholstered dining chairs with boucle fabric seats and solid black legs. Sold as a set of 4. Mix-and-match fabric options available.',
+    price: 195000,
+    img: '../367f8ee747859087fd8a9abf3342840afbe5ae8f3d3b0e23f082bd7b2f743192.png',
+    specs: { Material: 'Boucle fabric, solid steel legs', Seat Height: '46cm', Weight Capacity: '130kg per chair', Set: '4 chairs', Delivery: '3–4 weeks' }
+  },
+  {
+    id: 7, cat: 'office',
+    badge: 'popular',
+    name: 'Executive Corner Desk',
+    desc: 'L-shaped executive desk in walnut finish with built-in cable management, monitor riser and 3 drawers. Built for productivity.',
+    price: 340000,
+    img: '../file_0000000075dc71f497a4de74ac3fa4c9.png',
+    specs: { Material: 'Walnut veneer, powder-coated steel', Dimensions: '1.8m × 1.5m', Drawers: '3 with soft-close', Cable Mgmt: 'Built-in tray', Delivery: '4–5 weeks' }
+  },
+  {
+    id: 8, cat: 'office',
+    badge: null,
+    name: 'Ergonomic Task Chair',
+    desc: 'Fully adjustable mesh-back task chair with lumbar support, 4D armrests and breathable seat. Certified for 8-hour use.',
+    price: 145000,
+    img: '../IMG-20260608-WA0008.jpg',
+    specs: { Back: 'Breathable mesh', Seat: 'Memory foam', Armrests: '4D adjustable', Base: 'Aluminium 5-star', Delivery: '2–3 weeks' }
+  },
+  {
+    id: 9, cat: 'storage',
+    badge: 'new',
+    name: 'Floating Wall Shelving Unit',
+    desc: 'Modular floating shelves in natural ash wood. Configure to your space — sold in sets of 3. Ideal for living rooms and studies.',
+    price: 125000,
+    img: '../final-pel-aus.png',
+    specs: { Material: 'Solid ash wood', Per Shelf: '80cm × 25cm', Set: '3 shelves + brackets', Finish: 'Natural oil', Delivery: '2–3 weeks' }
+  },
+  {
+    id: 10, cat: 'storage',
+    badge: null,
+    name: 'Lumid 6-Door Wardrobe',
+    desc: 'Full-height 6-door wardrobe with hanging rail, shelving and integrated mirror panel. Available in white, grey or walnut.',
+    price: 450000,
+    img: '../IMG-20260618-WA0008.jpg',
+    specs: { Dimensions: '2.4m W × 2.2m H × 0.6m D', Doors: '6 (soft-close hinges)', Interior: 'Rails + shelves', Mirror: 'Full-length panel', Delivery: '5–6 weeks' }
+  },
+  {
+    id: 11, cat: 'lighting',
+    badge: 'popular',
+    name: 'Lumid Pendant Cluster Light',
+    desc: 'Cluster of 5 hand-blown glass pendants on a brass canopy. Creates a warm focal point above dining tables and kitchen islands.',
+    price: 185000,
+    img: '../lumid-logo-bg.png',
+    specs: { Bulbs: '5 × E27 (LED compatible)', Canopy: 'Solid brass', Cord: 'Adjustable braided', Voltage: '220V', Delivery: '3–4 weeks' }
+  },
+  {
+    id: 12, cat: 'lighting',
+    badge: null,
+    name: 'Arc Floor Lamp',
+    desc: 'Architectural arc floor lamp with a marble base and articulated arm. Provides directional reading light or ambient accent glow.',
+    price: 98000,
+    img: '../file_0000000043c071f49e71612868924efe.png',
+    specs: { Base: 'Natural marble', Arm: 'Brushed gold steel', Height: '180cm', Bulb: 'E27 LED (included)', Delivery: '2–3 weeks' }
+  },
+  {
+    id: 13, cat: 'sofas',
+    badge: 'custom',
+    name: 'Bespoke 2-Seater Loveseat',
+    desc: 'Compact two-seater in Italian leather with solid oak feet. Ideal for bedrooms, reading nooks and boutique spaces.',
+    price: 220000,
+    img: '../FrntPage-lumi.jpg',
+    specs: { Material: 'Italian leather (genuine)', Dimensions: '1.5m × 0.8m', Seats: '2 persons', Legs: 'Solid oak', Delivery: '4–5 weeks' }
+  },
+  {
+    id: 14, cat: 'beds',
+    badge: 'custom',
+    name: 'Bunk Bed with Study Desk',
+    desc: 'Space-efficient solid pine bunk bed with integrated study desk on the lower level and safety rails on the upper bunk.',
+    price: 310000,
+    img: '../frontpage2.jpg',
+    specs: { Material: 'Solid pine, powder-coat steel', Size: 'Single upper + single lower', Desk: '1.2m × 0.6m integrated', Rails: 'Full safety rails', Delivery: '5–6 weeks' }
+  },
+  {
+    id: 15, cat: 'dining',
+    badge: null,
+    name: 'Bar Stool Set (×2)',
+    desc: 'Counter-height bar stools with swivel seat, footrest ring and padded seat. Pairs with kitchen islands and breakfast bars.',
+    price: 115000,
+    img: '../IMG-20260608-WA0015.jpg',
+    specs: { Height: 'Counter (65cm seat)', Material: 'Velvet seat, matte black legs', Swivel: '360° with return', Set: '2 stools', Delivery: '2–3 weeks' }
+  },
+  {
+    id: 16, cat: 'office',
+    badge: null,
+    name: 'Bookcase with Cabinet',
+    desc: 'Tall bookcase with open shelving above and enclosed cabinet below. In walnut or white finish. Perfect for home offices and living rooms.',
+    price: 175000,
+    img: '../file_0000000075dc71f497a4de74ac3fa4c9.png',
+    specs: { Dimensions: '90cm W × 200cm H × 35cm D', Shelves: '4 open + 2 enclosed', Material: 'Engineered wood', Finish: 'Walnut or White', Delivery: '3–4 weeks' }
+  },
+  {
+    id: 17, cat: 'storage',
+    badge: 'new',
+    name: 'Entryway Console + Shoe Rack',
+    desc: 'Slim entryway console with a shoe rack below and marble top. Designed for Lagos apartments where entrance space is tight.',
+    price: 145000,
+    img: '../final-pel-aus.png',
+    specs: { Dimensions: '1.0m W × 90cm H × 30cm D', Top: 'Engineered marble', Shoe Rack: '3 tiers (up to 9 pairs)', Material: 'MDF + steel', Delivery: '2–3 weeks' }
+  },
+  {
+    id: 18, cat: 'lighting',
+    badge: null,
+    name: 'LED Cove Lighting Kit',
+    desc: 'Complete LED cove lighting system — strip lights, dimmer, controller and installation kit. Creates the warm ambient glow seen in Lumid projects.',
+    price: 65000,
+    img: '../lumid-logo-bg.png',
+    specs: { Length: '5m strip (extendable)', Colour: 'Warm white 3000K', Dimmer: 'Remote + app control', Power: '24V DC', Delivery: '1–2 weeks' }
+  }
+];
+
+// ── PAYSTACK PUBLIC KEY ─────────────────────────────────────
+// ▼ REPLACE with your actual Paystack public key
+// Get it from: dashboard.paystack.com → Settings → API Keys
+const PAYSTACK_PUBLIC_KEY = 'pk_test_YOUR_PAYSTACK_PUBLIC_KEY_HERE';
+
+// ── STATE ───────────────────────────────────────────────────
+let currentProducts = [...PRODUCTS];
+let selectedProduct = null;
+
+// ── FORMAT PRICE ────────────────────────────────────────────
+function formatPrice(n) {
+  return '₦' + n.toLocaleString('en-NG');
+}
+
+// ── RENDER PRODUCTS ─────────────────────────────────────────
+function renderProducts(list) {
+  const grid = document.getElementById('productGrid');
+  const count = document.getElementById('productCount');
+  count.innerHTML = `Showing <strong>${list.length}</strong> products`;
+
+  if (list.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:4rem;color:var(--dim-grey)">
+        <p style="font-size:1.5rem;margin-bottom:0.5rem">No products found</p>
+        <p style="font-size:0.88rem">Try a different category or <a href="#custom-order" style="color:var(--gold)">request a custom order</a></p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(p => `
+    <div class="product-card reveal" data-cat="${p.cat}" data-price="${p.price}" data-name="${p.name}">
+      ${p.badge ? `<span class="product-badge badge-${p.badge}">${p.badge === 'popular' ? '⭐ Popular' : p.badge === 'new' ? '✦ New' : '✂ Custom'}</span>` : ''}
+      <div class="product-img-wrap" onclick="openProductModal(${p.id})">
+        <img src="${p.img}" alt="${p.name}" loading="lazy"
+             onerror="this.src='../lumid-logo-bg.png'"/>
+        <div class="product-quick-view">
+          <button class="quick-view-btn">Quick View</button>
+        </div>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${p.cat.charAt(0).toUpperCase() + p.cat.slice(1)}</div>
+        <div class="product-name">${p.name}</div>
+        <p class="product-desc">${p.desc.substring(0, 90)}...</p>
+        <div class="product-meta">
+          ${Object.entries(p.specs).slice(0,2).map(([k,v]) => `<span class="product-meta-tag">${k}: ${v}</span>`).join('')}
+        </div>
+        <div class="product-footer">
+          <div class="product-price">
+            ${formatPrice(p.price)}
+            <small>incl. delivery</small>
+          </div>
+          <div class="product-actions">
+            <button class="btn-buy" onclick="openPayOverlay(${p.id})">Buy Now</button>
+            <button class="btn-wa" onclick="orderViaWhatsApp(${p.id})" aria-label="Order via WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2.003 6.474 2.003 12s4.474 10 10.001 10c5.528 0 10.002-4.474 10.002-10S17.532 2 12.004 2zm0 18.24c-1.71 0-3.312-.456-4.697-1.254l-3.36.879.897-3.27A8.185 8.185 0 013.76 12c0-4.541 3.697-8.24 8.244-8.24S20.248 7.459 20.248 12s-3.697 8.24-8.244 8.24z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // re-observe newly rendered cards for scroll reveal
+  document.querySelectorAll('.product-card.reveal').forEach(el => {
+    revealObserver.observe(el);
+  });
+}
+
+// ── FILTER ──────────────────────────────────────────────────
+function filterProducts(cat, btn) {
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  currentProducts = cat === 'all'
+    ? [...PRODUCTS]
+    : PRODUCTS.filter(p => p.cat === cat);
+  sortProducts(document.querySelector('.sort-select')?.value || 'default');
+}
+
+// ── SORT ────────────────────────────────────────────────────
+function sortProducts(val) {
+  const list = [...currentProducts];
+  if (val === 'price-asc')  list.sort((a,b) => a.price - b.price);
+  if (val === 'price-desc') list.sort((a,b) => b.price - a.price);
+  if (val === 'name')       list.sort((a,b) => a.name.localeCompare(b.name));
+  renderProducts(list);
+}
+
+// ── PRODUCT MODAL ────────────────────────────────────────────
+function openProductModal(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  selectedProduct = p;
+
+  document.getElementById('modalImg').src    = p.img;
+  document.getElementById('modalCat').textContent   = p.cat.charAt(0).toUpperCase() + p.cat.slice(1);
+  document.getElementById('modalName').textContent  = p.name;
+  document.getElementById('modalPrice').textContent = formatPrice(p.price);
+  document.getElementById('modalDesc').textContent  = p.desc;
+
+  // specs table
+  const specsHtml = `
+    <div class="modal-specs-title">Specifications</div>
+    ${Object.entries(p.specs).map(([k,v]) => `
+      <div class="modal-spec-row">
+        <span class="modal-spec-label">${k}</span>
+        <span class="modal-spec-value">${v}</span>
+      </div>`).join('')}`;
+  document.getElementById('modalSpecs').innerHTML = specsHtml;
+
+  document.getElementById('modalBtnPay').onclick = () => {
+    closeProductModal();
+    openPayOverlay(p.id);
+  };
+  document.getElementById('modalBtnWa').onclick = () => orderViaWhatsApp(p.id);
+
+  document.getElementById('productModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProductModal() {
+  document.getElementById('productModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('productModal')) closeProductModal();
+}
+
+// ── WHATSAPP ORDER ───────────────────────────────────────────
+function orderViaWhatsApp(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const text = encodeURIComponent(
+    `Hi Lumid! I'd like to order the following furniture:\n\n` +
+    `Product: ${p.name}\n` +
+    `Price: ${formatPrice(p.price)}\n\n` +
+    `Please confirm availability and delivery timeline. Thank you!`
+  );
+  window.open(`https://wa.me/2349038807214?text=${text}`, '_blank');
+}
+
+// ── PAYSTACK CHECKOUT ────────────────────────────────────────
+function openPayOverlay(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  selectedProduct = p;
+
+  document.getElementById('payProductName').textContent = p.name;
+  document.getElementById('payAmountDisplay').textContent = formatPrice(p.price);
+
+  document.getElementById('payOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePayOverlay() {
+  document.getElementById('payOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  // clear fields
+  ['payName','payEmail','payPhone','payAddress'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+}
+
+function initiatePaystack() {
+  const name    = document.getElementById('payName').value.trim();
+  const email   = document.getElementById('payEmail').value.trim();
+  const phone   = document.getElementById('payPhone').value.trim();
+  const address = document.getElementById('payAddress').value.trim();
+
+  if (!name)    { alert('Please enter your full name.');     document.getElementById('payName').focus();    return; }
+  if (!email)   { alert('Please enter your email address.'); document.getElementById('payEmail').focus();   return; }
+  if (!phone)   { alert('Please enter your phone number.');  document.getElementById('payPhone').focus();   return; }
+  if (!address) { alert('Please enter your delivery address.'); document.getElementById('payAddress').focus(); return; }
+
+  const p = selectedProduct;
+  if (!p) return;
+
+  // ── PAYSTACK POPUP ──────────────────────────────────────
+  // Amount must be in kobo (multiply Naira × 100)
+  const handler = PaystackPop.setup({
+    key:    PAYSTACK_PUBLIC_KEY,
+    email:  email,
+    amount: p.price * 100,       // kobo
+    currency: 'NGN',
+    ref:    'LUMID-' + Date.now(),
+    metadata: {
+      custom_fields: [
+        { display_name: 'Customer Name',     variable_name: 'customer_name',    value: name },
+        { display_name: 'Phone Number',      variable_name: 'phone_number',     value: phone },
+        { display_name: 'Delivery Address',  variable_name: 'delivery_address', value: address },
+        { display_name: 'Product Ordered',   variable_name: 'product',          value: p.name }
+      ]
+    },
+    callback: function(response) {
+      // Payment successful
+      closePayOverlay();
+      closeProductModal();
+      showPaymentSuccess(p, name, response.reference);
+    },
+    onClose: function() {
+      // User closed the Paystack popup without paying
+      // Do nothing — leave overlay open so they can try again
+    }
+  });
+  handler.openIframe();
+}
+
+function showPaymentSuccess(p, name, ref) {
+  // Send WhatsApp confirmation to Lumid
+  const waText = encodeURIComponent(
+    `🎉 NEW ORDER RECEIVED!\n\n` +
+    `Product: ${p.name}\n` +
+    `Amount: ${formatPrice(p.price)}\n` +
+    `Customer: ${document.getElementById('payName').value}\n` +
+    `Phone: ${document.getElementById('payPhone').value}\n` +
+    `Address: ${document.getElementById('payAddress').value}\n` +
+    `Reference: ${ref}\n\n` +
+    `Please confirm order and delivery timeline.`
+  );
+
+  // Show success message to customer
+  document.body.insertAdjacentHTML('beforeend', `
+    <div id="successOverlay" style="
+      position:fixed;inset:0;background:rgba(14,14,14,0.88);
+      z-index:600;display:flex;align-items:center;justify-content:center;
+    ">
+      <div style="
+        background:var(--white);border-radius:8px;padding:3rem 2.5rem;
+        max-width:440px;width:90vw;text-align:center;
+      ">
+        <div style="font-size:3rem;margin-bottom:1rem">🎉</div>
+        <h3 style="font-family:var(--serif);font-size:1.6rem;color:var(--charcoal);margin-bottom:0.6rem">
+          Order Confirmed!
+        </h3>
+        <p style="font-size:0.88rem;color:var(--dim-grey);line-height:1.75;margin-bottom:0.4rem">
+          Thank you, ${name}. Your payment for <strong>${p.name}</strong> has been received successfully.
+        </p>
+        <p style="font-size:0.78rem;color:var(--dim-grey);margin-bottom:1.5rem">
+          Reference: <strong style="color:var(--charcoal)">${ref}</strong>
+        </p>
+        <p style="font-size:0.85rem;color:var(--dim-grey);margin-bottom:1.5rem">
+          Our team will contact you within 2 hours on WhatsApp to confirm your order details and delivery timeline.
+        </p>
+        <a href="https://wa.me/2349038807214?text=${waText}"
+           target="_blank"
+           style="
+             display:inline-block;padding:0.85rem 2rem;
+             background:#25D366;color:white;border-radius:4px;
+             font-size:0.8rem;font-weight:600;letter-spacing:0.08em;
+             text-transform:uppercase;text-decoration:none;margin-bottom:0.8rem;
+           ">
+          Message Us on WhatsApp
+        </a>
+        <br/>
+        <button onclick="document.getElementById('successOverlay').remove()"
+          style="
+            margin-top:0.8rem;padding:0.6rem 1.4rem;background:none;
+            border:1.5px solid var(--warm-grey);border-radius:4px;
+            font-size:0.78rem;color:var(--dim-grey);cursor:pointer;
+          ">
+          Continue Shopping
+        </button>
+      </div>
+    </div>
+  `);
+}
+
+// ── CUSTOM ORDER FORM ────────────────────────────────────────
+function submitCustomOrder() {
+  const name  = document.getElementById('c-name').value.trim();
+  const phone = document.getElementById('c-phone').value.trim();
+  const type  = document.getElementById('c-type').value;
+  const desc  = document.getElementById('c-desc').value.trim();
+
+  if (!name)  { alert('Please enter your name.');  return; }
+  if (!phone) { alert('Please enter your phone number.'); return; }
+
+  const text = encodeURIComponent(
+    `Hi Lumid! I'd like to request a custom furniture quote.\n\n` +
+    `Name: ${name}\n` +
+    `Phone: ${phone}\n` +
+    `Type: ${type || 'Not specified'}\n` +
+    `Description: ${desc || 'No description provided'}\n\n` +
+    `Please get back to me with a quote. Thank you!`
+  );
+  window.open(`https://wa.me/2349038807214?text=${text}`, '_blank');
+}
+
+// ── NAV + SCROLL ─────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const scrollY   = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress  = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+  const bar = document.getElementById('scroll-progress');
+  const nav = document.getElementById('nav');
+  if (bar) bar.style.width = progress + '%';
+  if (nav) nav.classList.toggle('scrolled', scrollY > 80);
+}, { passive: true });
+
+// ── MOBILE MENU ──────────────────────────────────────────────
+function toggleMenu() {
+  const menu     = document.getElementById('mobileMenu');
+  const btn      = document.getElementById('hamburger');
+  const backdrop = document.getElementById('navBackdrop');
+  const isOpen   = menu.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.setAttribute('aria-expanded', isOpen);
+  if (backdrop) backdrop.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+// ── SCROLL REVEAL ─────────────────────────────────────────────
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── ESCAPE KEY ────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeProductModal();
+    closePayOverlay();
+  }
+});
+
+// ── INIT ──────────────────────────────────────────────────────
+renderProducts(PRODUCTS);
+</script>
+</body>
+</html>

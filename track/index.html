@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Track Your Project | Lumid Interior & Exterior Finishes</title>
+<meta name="description" content="Track the progress of your Lumid Interior & Exterior Finishes project. Enter your Project ID to see current status, milestones and photos."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../lumid.css"/>
+<link rel="stylesheet" href="track.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav id="nav" class="scrolled">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="Lumid INEX home">
+        <img src="../lumid-logo.png" alt="Lumid INEX" class="nav-logo-img"/>
+      </a>
+      <div class="nav-links">
+        <a href="/#about" class="nav-cta-1">About</a>
+        <a href="/shop/" class="nav-cta-1">Shop</a>
+        <a href="/#contact" class="nav-cta">Book Consultation</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="track-hero">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--gold)">Client Portal</span>
+    <h1 style="margin-top:0.8rem">Track your <em>project</em></h1>
+    <p>Enter the Project ID we shared with you via WhatsApp to see live progress, milestones and photos.</p>
+  </div>
+</section>
+
+<!-- TRACK -->
+<section id="track-section">
+  <div class="wrap">
+
+    <div class="track-lookup-box">
+      <label for="trackIdInput">Project ID</label>
+      <form class="track-lookup-row" onsubmit="lookupProject(event)">
+        <input type="text" id="trackIdInput" placeholder="LMD-2025-0001" required/>
+        <button type="submit" class="track-lookup-btn" id="trackLookupBtn">Track Project</button>
+      </form>
+      <p class="track-msg" id="trackMsg"></p>
+    </div>
+
+    <div class="track-result" id="trackResult">
+
+      <div class="track-summary-card">
+        <div class="track-summary-top">
+          <div>
+            <div class="track-project-id" id="trackProjectId">—</div>
+            <div class="track-client-name" id="trackClientName">—</div>
+          </div>
+          <div class="track-project-meta" id="trackProjectMeta"></div>
+        </div>
+
+        <div class="track-progress-wrap">
+          <div class="track-progress-labels">
+            <span>Overall Progress</span>
+            <strong id="trackProgressPct">0%</strong>
+          </div>
+          <div class="track-progress-bar">
+            <div class="track-progress-fill" id="trackProgressFill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="track-current-stage" id="trackCurrentStage" style="display:none"></div>
+        <p class="track-notes" id="trackNotes" style="display:none"></p>
+      </div>
+
+      <div class="track-milestones-card" id="trackMilestonesCard" style="display:none">
+        <h3>Milestones</h3>
+        <div id="trackMilestonesList"></div>
+      </div>
+
+      <div class="track-photos-card" id="trackPhotosCard" style="display:none">
+        <h3>Progress Photos</h3>
+        <div class="track-photos-grid" id="trackPhotosGrid"></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <div class="wrap">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">© 2025 Lumid Interiors &amp; Exterior Finishes. All rights reserved. Lagos, Nigeria.</p>
+        <p class="footer-credit">Questions? <a href="https://wa.me/2349038807214" target="_blank" style="color:var(--gold-lt)">Message us on WhatsApp</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../shop/supabase-config.js"></script>
+<script src="track.js"></script>
+</body>
+</html>

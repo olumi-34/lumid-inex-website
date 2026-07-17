@@ -2,6 +2,7 @@
 // Requires: supabase-config.js loaded before this file.
 
 let editingProductId = null;
+let productsCache = [];
 
 // ── AUTH ─────────────────────────────────────────────────────
 async function checkSession() {
@@ -24,6 +25,7 @@ function showAdminShell(email) {
   document.getElementById('adminEmail').textContent = email;
   loadProductsList();
   loadOrdersList();
+  loadProjectsList();
 }
 
 async function handleLogin(e) {
@@ -187,12 +189,14 @@ async function loadProductsList() {
     return;
   }
 
-  if (!data.length) {
+  productsCache = data || [];
+
+  if (!productsCache.length) {
     tbody.innerHTML = `<tr><td colspan="6" class="admin-empty">No products yet. Add your first one above.</td></tr>`;
     return;
   }
 
-  tbody.innerHTML = data.map(p => `
+  tbody.innerHTML = productsCache.map(p => `
     <tr>
       <td>${p.images && p.images[0] ? `<img src="${p.images[0]}" alt="${p.name}"/>` : '—'}</td>
       <td>${p.name}</td>
@@ -201,12 +205,18 @@ async function loadProductsList() {
       <td><span class="admin-status-badge ${p.stock_status}">${p.stock_status.replace('_',' ')}</span></td>
       <td>
         <div class="admin-row-actions">
-          <button class="admin-link-btn" onclick='editProduct(${JSON.stringify(p)})'>Edit</button>
+          <button class="admin-link-btn" onclick="editProductById('${p.id}')">Edit</button>
           <button class="admin-link-btn danger" onclick="deleteProduct('${p.id}')">Delete</button>
         </div>
       </td>
     </tr>
   `).join('');
+}
+
+function editProductById(id) {
+  const product = productsCache.find(p => p.id === id);
+  if (!product) return;
+  editProduct(product);
 }
 
 function editProduct(product) {
@@ -283,6 +293,182 @@ async function loadOrdersList() {
 async function updateOrderStatus(orderId, status) {
   const { error } = await supabaseClient.from('orders').update({ status }).eq('id', orderId);
   if (error) alert('Error updating order status: ' + error.message);
+}
+
+// ══════════════════════════════════════════════
+// PROJECTS ADMIN
+// ══════════════════════════════════════════════
+let editingProjectId  = null;
+let projectPhotosUrls = [];
+
+// auto-generate project ID
+function generateProjectId() {
+  const year = new Date().getFullYear();
+  const rand = String(Math.floor(Math.random() * 9000) + 1000);
+  return `LMD-${year}-${rand}`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // pre-fill project ID field
+  const projIdInput = document.getElementById('proj-id');
+  if (projIdInput && !projIdInput.value) {
+    projIdInput.value = generateProjectId();
+  }
+});
+
+async function handleProjectPhotoUpload(input) {
+  const files = Array.from(input.files || []);
+  if (!files.length) return;
+  const statusEl  = document.getElementById('proj-photo-status');
+  const previewEl = document.getElementById('proj-photo-preview');
+  statusEl.style.display = 'block';
+  statusEl.textContent   = `Uploading ${files.length} photo(s)…`;
+
+  for (const file of files) {
+    const fileName = `projects/${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+    const { error } = await supabaseClient.storage.from('product-images').upload(fileName, file);
+    if (error) { statusEl.textContent = 'Upload error: ' + error.message; continue; }
+    const { data: urlData } = supabaseClient.storage.from('product-images').getPublicUrl(fileName);
+    projectPhotosUrls.push(urlData.publicUrl);
+  }
+
+  statusEl.style.display = 'none';
+  previewEl.innerHTML = projectPhotosUrls.map(url =>
+    `<img src="${url}" style="width:60px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--warm-grey)"/>`
+  ).join('');
+}
+
+async function handleProjectSubmit(e) {
+  e.preventDefault();
+  const msgEl = document.getElementById('proj-msg');
+  msgEl.style.display = 'none';
+
+  let milestones = [];
+  const rawMs = document.getElementById('proj-milestones').value.trim();
+  if (rawMs) {
+    try { milestones = JSON.parse(rawMs); }
+    catch { msgEl.textContent = 'Milestones JSON is invalid. Please check the format.'; msgEl.className = 'admin-form-msg error'; msgEl.style.display = 'block'; return; }
+  }
+
+  const payload = {
+    project_id:     document.getElementById('proj-id').value.trim().toUpperCase(),
+    client_name:    document.getElementById('proj-client').value.trim(),
+    project_type:   document.getElementById('proj-type').value,
+    location:       document.getElementById('proj-location').value.trim(),
+    start_date:     document.getElementById('proj-start').value || null,
+    estimated_end:  document.getElementById('proj-end').value   || null,
+    completion_pct: parseInt(document.getElementById('proj-pct').value) || 0,
+    current_stage:  document.getElementById('proj-stage').value.trim(),
+    notes:          document.getElementById('proj-notes').value.trim(),
+    is_visible:     document.getElementById('proj-visible').checked,
+    milestones:     milestones,
+    photos:         projectPhotosUrls
+  };
+
+  let result;
+  if (editingProjectId) {
+    result = await supabaseClient.from('projects').update(payload).eq('id', editingProjectId);
+  } else {
+    result = await supabaseClient.from('projects').insert(payload);
+  }
+
+  if (result.error) {
+    msgEl.textContent = 'Error: ' + result.error.message;
+    msgEl.className = 'admin-form-msg error';
+    msgEl.style.display = 'block';
+    return;
+  }
+
+  msgEl.textContent = editingProjectId ? 'Project updated.' : 'Project created. Share the Project ID with your client via WhatsApp.';
+  msgEl.className = 'admin-form-msg success';
+  msgEl.style.display = 'block';
+  resetProjectForm();
+  loadProjectsList();
+}
+
+function resetProjectForm() {
+  document.getElementById('projectForm').reset();
+  document.getElementById('proj-id').value = generateProjectId();
+  editingProjectId  = null;
+  projectPhotosUrls = [];
+  document.getElementById('proj-photo-preview').innerHTML = '';
+  document.getElementById('proj-submit-btn').textContent   = 'Create Project';
+  document.getElementById('proj-cancel-btn').style.display = 'none';
+}
+
+function cancelProjectEdit() { resetProjectForm(); }
+
+async function loadProjectsList() {
+  const tbody = document.getElementById('projectsTableBody');
+  if (!tbody) return;
+  const { data, error } = await supabaseClient
+    .from('projects')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) { tbody.innerHTML = `<tr><td colspan="6" class="admin-empty">Error: ${error.message}</td></tr>`; return; }
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="6" class="admin-empty">No projects yet.</td></tr>`; return; }
+
+  tbody.innerHTML = data.map(p => `
+    <tr>
+      <td><strong>${p.project_id}</strong></td>
+      <td>${p.client_name}</td>
+      <td>${p.project_type || '—'}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:0.5rem">
+          <div style="flex:1;height:6px;background:var(--warm-grey);border-radius:99px;overflow:hidden">
+            <div style="height:100%;width:${p.completion_pct}%;background:var(--gold);border-radius:99px"></div>
+          </div>
+          <span style="font-size:0.75rem;font-weight:600;color:var(--charcoal)">${p.completion_pct}%</span>
+        </div>
+      </td>
+      <td style="font-size:0.8rem">${p.current_stage || '—'}</td>
+      <td>
+        <div class="admin-row-actions">
+          <button class="admin-link-btn" onclick="editProjectById('${p.id}')">Edit</button>
+          <a class="admin-link-btn" href="/track/index.html?id=${p.project_id}" target="_blank">Preview</a>
+          <button class="admin-link-btn danger" onclick="deleteProject('${p.id}')">Delete</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+async function editProjectById(id) {
+  // reload fresh from DB to avoid stale cache issues
+  const { data, error } = await supabaseClient.from('projects').select('*').eq('id', id).single();
+  if (error || !data) return;
+  editingProjectId = data.id;
+
+  document.getElementById('proj-client').value    = data.client_name || '';
+  document.getElementById('proj-id').value        = data.project_id  || '';
+  document.getElementById('proj-type').value      = data.project_type|| '';
+  document.getElementById('proj-location').value  = data.location    || '';
+  document.getElementById('proj-start').value     = data.start_date  || '';
+  document.getElementById('proj-end').value       = data.estimated_end || '';
+  document.getElementById('proj-pct').value       = data.completion_pct || 0;
+  document.getElementById('proj-stage').value     = data.current_stage || '';
+  document.getElementById('proj-notes').value     = data.notes || '';
+  document.getElementById('proj-visible').checked = data.is_visible !== false;
+  document.getElementById('proj-milestones').value = data.milestones
+    ? JSON.stringify(data.milestones, null, 2)
+    : '';
+
+  projectPhotosUrls = data.photos || [];
+  document.getElementById('proj-photo-preview').innerHTML = projectPhotosUrls.map(url =>
+    `<img src="${url}" style="width:60px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--warm-grey)"/>`
+  ).join('');
+
+  document.getElementById('proj-submit-btn').textContent   = 'Save Changes';
+  document.getElementById('proj-cancel-btn').style.display = 'inline-block';
+  document.getElementById('panel-projects').scrollIntoView({ behavior: 'smooth' });
+}
+
+async function deleteProject(id) {
+  if (!confirm('Delete this project? The client will no longer be able to track it.')) return;
+  const { error } = await supabaseClient.from('projects').delete().eq('id', id);
+  if (error) { alert('Error: ' + error.message); return; }
+  loadProjectsList();
 }
 
 // ── INIT ─────────────────────────────────────────────────────

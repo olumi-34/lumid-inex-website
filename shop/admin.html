@@ -52,6 +52,7 @@
     <div class="admin-tabs">
       <button class="admin-tab active" onclick="switchTab('products', this)">Products</button>
       <button class="admin-tab" onclick="switchTab('orders', this)">Orders</button>
+      <button class="admin-tab" onclick="switchTab('projects', this)">Projects</button>
     </div>
   </div>
 
@@ -158,6 +159,114 @@
         <div id="ordersContainer">
           <p class="admin-empty">Loading…</p>
         </div>
+      </div>
+    </div>
+
+    <!-- ── PROJECTS PANEL ── -->
+    <div class="admin-panel" id="panel-projects">
+
+      <div class="admin-card">
+        <h2 id="proj-heading">Create a Project</h2>
+        <form id="projectForm" onsubmit="handleProjectSubmit(event)">
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>Client Name</label>
+              <input type="text" id="proj-client" placeholder="Adaeze Okonkwo" required/>
+            </div>
+            <div class="admin-form-group">
+              <label>Project ID (auto-suggested, edit if needed)</label>
+              <input type="text" id="proj-id" placeholder="LMD-2025-0001" required/>
+            </div>
+          </div>
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>Project Type</label>
+              <select id="proj-type">
+                <option value="">Select type…</option>
+                <option>Residential Interior</option>
+                <option>Commercial Interior</option>
+                <option>Airbnb Fit-Out</option>
+                <option>Exterior Finishes</option>
+                <option>Full Apartment Redesign</option>
+                <option>Developer Multi-Unit</option>
+              </select>
+            </div>
+            <div class="admin-form-group">
+              <label>Location</label>
+              <input type="text" id="proj-location" placeholder="Lekki Phase 1, Lagos"/>
+            </div>
+          </div>
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>Start Date</label>
+              <input type="date" id="proj-start"/>
+            </div>
+            <div class="admin-form-group">
+              <label>Estimated Completion</label>
+              <input type="date" id="proj-end"/>
+            </div>
+          </div>
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label>Completion % (0–100)</label>
+              <input type="number" id="proj-pct" min="0" max="100" value="0"/>
+            </div>
+            <div class="admin-form-group">
+              <label>Current Stage</label>
+              <input type="text" id="proj-stage" placeholder="e.g. Tiling in progress"/>
+            </div>
+          </div>
+
+          <div class="admin-form-group">
+            <label>Notes / Update for Client</label>
+            <textarea id="proj-notes" placeholder="What has been done this week? What's next?"></textarea>
+          </div>
+
+          <div class="admin-form-group">
+            <label>Milestones (JSON — leave blank to skip)</label>
+            <textarea id="proj-milestones" placeholder='[{"name":"Site Survey","status":"done","date":"2025-07-01"},{"name":"Tiling","status":"active","date":"2025-07-14"},{"name":"Painting","status":"pending","date":"2025-07-21"}]'></textarea>
+          </div>
+
+          <div class="admin-form-group">
+            <label>Progress Photos</label>
+            <input type="file" id="proj-photo-upload" accept="image/*" multiple onchange="handleProjectPhotoUpload(this)"/>
+            <div id="proj-photo-status" style="font-size:0.78rem;color:var(--dim-grey);margin-top:0.4rem;display:none"></div>
+            <div id="proj-photo-preview" style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.6rem"></div>
+          </div>
+
+          <div class="admin-checkbox-row">
+            <input type="checkbox" id="proj-visible" checked/>
+            <label for="proj-visible">Visible to client (they can see this when they enter the Project ID)</label>
+          </div>
+
+          <button type="submit" class="admin-btn" id="proj-submit-btn">Create Project</button>
+          <button type="button" class="admin-btn admin-btn-secondary" id="proj-cancel-btn" style="display:none" onclick="cancelProjectEdit()">Cancel</button>
+          <div class="admin-form-msg" id="proj-msg"></div>
+
+        </form>
+      </div>
+
+      <div class="admin-card">
+        <h2>All Projects</h2>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Project ID</th>
+              <th>Client</th>
+              <th>Type</th>
+              <th>Progress</th>
+              <th>Stage</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="projectsTableBody">
+            <tr><td colspan="6" class="admin-empty">Loading…</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 

@@ -1,0 +1,215 @@
+/* ══════════════════════════════════════════════════════════
+   TRACK — client-facing project tracker
+   Relies on CSS variables from ../lumid.css
+══════════════════════════════════════════════════════════ */
+
+.track-hero {
+  background: var(--charcoal);
+  padding: 9rem 0 3.5rem;
+}
+.track-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+  font-weight: 400;
+  color: var(--off-white);
+}
+.track-hero h1 em { font-style: italic; color: var(--gold); }
+.track-hero p { font-size: 0.9rem; color: var(--mid-grey); margin-top: 0.8rem; max-width: 460px; }
+
+#track-section { padding: 3rem 0 7rem; background: var(--off-white); }
+
+/* ── LOOKUP FORM ── */
+.track-lookup-box {
+  background: var(--white);
+  border: 1px solid var(--warm-grey);
+  border-radius: var(--r-md);
+  padding: 2rem;
+  max-width: 460px;
+  margin: 0 auto 2.5rem;
+}
+.track-lookup-box label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim-grey);
+  margin-bottom: 0.5rem;
+}
+.track-lookup-row { display: flex; gap: 0.7rem; }
+.track-lookup-row input {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  background: var(--off-white);
+  border: 1.5px solid var(--warm-grey);
+  border-radius: var(--r-sm);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  outline: none;
+}
+.track-lookup-row input:focus { border-color: var(--gold); }
+.track-lookup-btn {
+  padding: 0.85rem 1.6rem;
+  background: var(--charcoal);
+  color: var(--white);
+  border: none;
+  border-radius: var(--r-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.track-lookup-btn:hover:not(:disabled) { background: var(--gold); }
+.track-lookup-btn:disabled { background: var(--warm-grey); color: var(--mid-grey); cursor: not-allowed; }
+
+.track-msg {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--dim-grey);
+  margin-top: 1rem;
+  display: none;
+}
+.track-msg.error { color: #b22222; display: block; }
+
+/* ── RESULT CARD ── */
+.track-result { display: none; max-width: 720px; margin: 0 auto; }
+.track-result.visible { display: block; }
+
+.track-summary-card {
+  background: var(--white);
+  border: 1px solid var(--warm-grey);
+  border-radius: var(--r-md);
+  padding: 2.2rem;
+  margin-bottom: 2rem;
+}
+.track-summary-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.track-project-id {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.track-client-name {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-top: 0.3rem;
+}
+.track-project-meta { font-size: 0.82rem; color: var(--dim-grey); text-align: right; }
+
+.track-progress-wrap { margin-bottom: 1.5rem; }
+.track-progress-labels { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--dim-grey); margin-bottom: 0.5rem; }
+.track-progress-labels strong { color: var(--gold); font-family: var(--serif); font-size: 1rem; }
+.track-progress-bar { height: 8px; background: var(--warm-grey); border-radius: 99px; overflow: hidden; }
+.track-progress-fill { height: 100%; background: var(--gold); border-radius: 99px; transition: width 0.6s ease; }
+
+.track-current-stage {
+  background: var(--gold-pale);
+  border: 1px solid rgba(200,151,60,0.3);
+  border-radius: var(--r-sm);
+  padding: 1rem 1.2rem;
+  font-size: 0.88rem;
+  color: var(--charcoal);
+}
+.track-current-stage strong { color: var(--gold); }
+
+.track-notes {
+  margin-top: 1.5rem;
+  font-size: 0.88rem;
+  color: var(--dim-grey);
+  line-height: 1.75;
+}
+
+/* ── MILESTONES ── */
+.track-milestones-card {
+  background: var(--white);
+  border: 1px solid var(--warm-grey);
+  border-radius: var(--r-md);
+  padding: 2.2rem;
+  margin-bottom: 2rem;
+}
+.track-milestones-card h3 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 1.3rem;
+}
+.milestone-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--warm-grey);
+}
+.milestone-row:last-child { border-bottom: none; }
+.milestone-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid var(--warm-grey);
+}
+.milestone-dot.done { background: var(--sage); border-color: var(--sage); }
+.milestone-dot.active { background: var(--gold); border-color: var(--gold); }
+.milestone-info { flex: 1; }
+.milestone-name { font-size: 0.9rem; color: var(--charcoal); font-weight: 500; }
+.milestone-date { font-size: 0.75rem; color: var(--dim-grey); }
+.milestone-status-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.7rem;
+  border-radius: 99px;
+}
+.milestone-status-label.done { background: var(--sage-lt); color: #2f4a31; }
+.milestone-status-label.active { background: var(--gold-pale); color: var(--gold); }
+.milestone-status-label.pending { background: var(--warm-grey); color: var(--dim-grey); }
+
+/* ── PHOTOS ── */
+.track-photos-card {
+  background: var(--white);
+  border: 1px solid var(--warm-grey);
+  border-radius: var(--r-md);
+  padding: 2.2rem;
+}
+.track-photos-card h3 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: 1.3rem;
+}
+.track-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+}
+.track-photos-grid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.track-photos-grid img:hover { opacity: 0.85; }
+
+@media (max-width: 600px) {
+  .track-lookup-row { flex-direction: column; }
+  .track-summary-top { flex-direction: column; }
+  .track-project-meta { text-align: left; }
+  .track-photos-grid { grid-template-columns: repeat(2, 1fr); }
+}
