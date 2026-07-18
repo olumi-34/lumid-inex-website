@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /shop/admin.html
+
+Sitemap: https://lumid-inex-website.vercel.app/sitemap.xml

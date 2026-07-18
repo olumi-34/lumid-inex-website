@@ -81,11 +81,11 @@
     <a href="#about"        onclick="toggleMenu()"><span class="link-num">01</span>About</a>
     <a href="#services"     onclick="toggleMenu()"><span class="link-num">02</span>Services</a>
     <a href="#portfolio"    onclick="toggleMenu()"><span class="link-num">03</span>Portfolio</a>
-    <a href="team/index.html"  onclick="toggleMenu()"><span class="link-num">05</span>Team</a> 
-    <a href="#testimonials" onclick="toggleMenu()"><span class="link-num">04</span>Reviews</a>
-    <a href="shop/index.html" onclick="toggleMenu()"><span class="link-num">04</span>Shop</a>
-    <a href="#invest"       onclick="toggleMenu()"><span class="link-num">05</span>Investors</a>
-    <a href="#contact"      onclick="toggleMenu()"><span class="link-num">06</span>Contact</a>
+    <a href="team/index.html"  onclick="toggleMenu()"><span class="link-num">04</span>Team</a> 
+    <a href="#testimonials" onclick="toggleMenu()"><span class="link-num">05</span>Reviews</a>
+    <a href="shop/index.html" onclick="toggleMenu()"><span class="link-num">06</span>Shop</a>
+    <a href="#invest"       onclick="toggleMenu()"><span class="link-num">07</span>Investors</a>
+    <a href="#contact"      onclick="toggleMenu()"><span class="link-num">08</span>Contact</a>
   </nav>
 
   <div class="mobile-menu-footer">
@@ -874,6 +874,12 @@
           <label for="message">Tell us about your space</label>
           <textarea id="message" placeholder="e.g. 2-bedroom apartment in Lekki, currently bare. Want it Airbnb-ready within 6 weeks..."></textarea>
         </div>
+        <div class="admin-checkbox-row" style="margin-bottom:1rem">
+  <input type="checkbox" id="consent" required/>
+  <label for="consent" style="font-size:0.8rem;text-transform:none;letter-spacing:normal;color:var(--dim-grey)">
+    I agree to Lumid storing my details to respond to this enquiry, per the <a href="privacy/" style="color:var(--gold)">Privacy Policy</a>.
+  </label>
+</div>
         <button class="form-btn" onclick="submitForm()">
           Send Message &amp; Book Consultation →
         </button>
@@ -912,8 +918,8 @@
           <h4 class="footer-col-title">Navigate</h4>
           <ul class="footer-col-links">
             <li><a href="#about">About Us</a></li>
-            <li><a href="#services">Services &amp; Pricing</a></li>
             <li><a href="#portfolio">Project Gallery</a></li>
+            <li><a href="shop/">Lumid Store</a></li>
             <li><a href="#testimonials">Client Reviews</a></li>
             <li><a href="#invest">Investor Pitch</a></li>
             <li><a href="#process">How We Work</a></li>

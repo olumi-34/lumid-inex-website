@@ -105,20 +105,27 @@ function handleCheckoutSubmit(e) {
 async function finalizeOrder({ name, phone, email, address, subtotal, cart, reference }) {
   const orderItems = cart.map(i => ({ product_id: i.id, name: i.name, price: i.price, qty: i.qty }));
 
-  const { error } = await supabaseClient.from('orders').insert({
-    customer_name: name,
-    customer_phone: phone,
-    customer_email: email || null,
-    delivery_address: address,
-    items: orderItems,
-    subtotal: subtotal,
-    status: 'paid',
-    paystack_reference: reference
+  const response = await fetch(`${SUPABASE_URL}/functions/v1/verify-payment`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+    },
+    body: JSON.stringify({
+      reference,
+      orderDetails: {
+        name, phone, email, address,
+        items: orderItems,
+        subtotal
+      }
+    })
   });
 
-  if (error) {
+  const result = await response.json();
+
+  if (!response.ok || result.error) {
     const msgEl = document.getElementById('checkoutMsg');
-    msgEl.textContent = 'Payment succeeded but we had trouble saving your order. Please screenshot this and WhatsApp us your payment reference: ' + reference;
+    msgEl.textContent = 'Payment succeeded but we had trouble confirming your order. Please screenshot this and WhatsApp us your payment reference: ' + reference;
     msgEl.className = 'checkout-form-msg error';
     return;
   }
