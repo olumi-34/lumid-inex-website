@@ -1,0 +1,1013 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --font-sans-fallback: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+
+  /* ---- "Sky" theme (default): sky blue leads, pink rides along as the accent ---- */
+  --fl-paper: #EAF4FB;
+  --fl-panel: #FFFFFF;
+  --fl-panel-hover:#F5FAFE;
+  --fl-ink: #16324F;
+  --fl-ink-soft: #4C7085;
+  --fl-ink-faint: #93ACBC;
+  --fl-border: #D3E6F1;
+  --fl-border-strong: #A9CBE0;
+  --fl-brass: #C2568C;       /* secondary accent — course tags, topic pills */
+  --fl-brass-fill: #B84C82;
+  --fl-brass-tint: #F8DEEA;
+  --fl-green-deep: #2E86AB;  /* primary accent — progress, done state, books */
+  --fl-green-tint: #DCEEF7;
+  --fl-danger: #B3432E;
+}
+
+/* ---- "Bloom" theme: pink leads, sky blue rides along as the accent ---- */
+.hub[data-theme="bloom"]{
+  --fl-paper: #FBEFF4;
+  --fl-panel: #FFFFFF;
+  --fl-panel-hover:#FEF7FA;
+  --fl-ink: #3B1F2B;
+  --fl-ink-soft: #7A5568;
+  --fl-ink-faint: #B48A9B;
+  --fl-border: #F0D6E1;
+  --fl-border-strong: #E3B7CB;
+  --fl-brass: #3D82A6;
+  --fl-brass-fill: #2F6E8F;
+  --fl-brass-tint: #DCEEF7;
+  --fl-green-deep: #C24875;
+  --fl-green-tint: #F7DCE7;
+  --fl-danger: #B3432E;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)}
+
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+/* ---- Shell: the whole widget reads as one bound ledger page ---- */
+.hub{
+  background:var(--fl-paper);border:1px solid var(--fl-border-strong);
+  border-radius:16px;padding:2rem 2rem 2.25rem;
+  box-shadow:0 1px 2px color-mix(in srgb, var(--fl-ink) 4%, transparent), 0 12px 28px -18px color-mix(in srgb, var(--fl-ink) 25%, transparent);
+  transition:background .2s ease, border-color .2s ease;
+}
+
+.hub-header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+.theme-toggle{display:flex;gap:4px;background:var(--fl-panel);border:1px solid var(--fl-border-strong);border-radius:99px;padding:3px;flex-shrink:0}
+.theme-btn{
+  display:flex;align-items:center;gap:5px;border:none;background:none;border-radius:99px;
+  padding:5px 12px;font-size:12px;font-family:inherit;color:var(--fl-ink-soft);cursor:pointer;transition:all .15s;
+}
+.theme-btn:hover{color:var(--fl-ink)}
+.theme-btn:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
+.theme-btn.active{background:var(--fl-ink);color:var(--fl-paper)}
+.theme-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.theme-dot.sky{background:#2E86AB}
+.theme-dot.bloom{background:#C24875}
+
+.hub-header{margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--fl-border)}
+.hub-eyebrow{
+  font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fl-brass);margin-bottom:8px;display:block;
+}
+.hub-title{font-family:var(--font-serif);font-size:29px;font-weight:600;color:var(--fl-ink);margin-bottom:6px;letter-spacing:-.01em}
+.hub-sub{font-size:13.5px;color:var(--fl-ink-soft);line-height:1.55;max-width:56ch}
+
+.section-eyebrow{
+  font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--fl-ink-faint);margin:1.5rem 0 .6rem;
+  display:flex;align-items:center;gap:8px;
+}
+.section-eyebrow::after{content:'';flex:1;height:1px;background:var(--fl-border)}
+.section-eyebrow:first-of-type{margin-top:0}
+
+/* ---- Progress + topic breakdown ---- */
+.progress-card{
+  background:var(--fl-panel);border:1px solid var(--fl-border);
+  border-radius:12px;padding:16px 18px;margin-bottom:.5rem;
+  display:flex;flex-direction:column;gap:13px;
+}
+.progress-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.progress-title{font-size:12.5px;font-weight:600;color:var(--fl-ink);text-transform:uppercase;letter-spacing:.04em}
+.progress-count{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--fl-ink-soft)}
+
+.progress-track{
+  height:9px;border-radius:99px;background:var(--fl-border);overflow:hidden;position:relative;
+  background-image:repeating-linear-gradient(90deg, transparent 0, transparent calc(25% - 1px), color-mix(in srgb, var(--fl-ink) 14%, transparent) calc(25% - 1px), color-mix(in srgb, var(--fl-ink) 14%, transparent) 25%);
+}
+.progress-fill{height:100%;border-radius:99px;background:var(--fl-green-deep);transition:width .4s ease;width:0%}
+.time-left{font-family:var(--font-mono);font-size:11px;color:var(--fl-ink-soft)}
+
+.progress-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:2px}
+.progress-status{font-size:11px;color:var(--fl-ink-faint)}
+.action-links{display:flex;gap:16px;flex-wrap:wrap}
+.text-btn{background:none;border:none;font-size:12px;color:var(--fl-ink-soft);cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-family:inherit;padding:2px 4px}
+.text-btn:hover{color:var(--fl-ink)}
+.text-btn:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px;border-radius:4px}
+.confirm-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--fl-danger);flex-wrap:wrap}
+
+.topic-breakdown{display:flex;flex-direction:column;gap:8px;padding-top:6px;border-top:1px solid var(--fl-border)}
+.topic-row{display:grid;grid-template-columns:120px 1fr auto;align-items:center;gap:10px}
+.topic-name{font-size:11.5px;color:var(--fl-ink-soft)}
+.topic-track{height:6px;border-radius:99px;background:var(--fl-border);overflow:hidden}
+.topic-fill{height:100%;border-radius:99px;background:var(--fl-brass-fill);transition:width .4s ease}
+.topic-meta{font-family:var(--font-mono);font-size:10.5px;color:var(--fl-ink-faint);white-space:nowrap;text-align:right}
+
+/* ---- Controls ---- */
+.controls{display:flex;flex-direction:column;gap:12px;margin-bottom:.75rem}
+.search-row{position:relative;max-width:340px}
+.search-input{
+  width:100%;padding:9px 12px 9px 34px;border-radius:9px;
+  border:1px solid var(--fl-border-strong);background:var(--fl-panel);
+  color:var(--fl-ink);font-size:13px;font-family:inherit;
+  transition:border-color .15s,background .15s;
+}
+.search-input::placeholder{color:var(--fl-ink-faint)}
+.search-input:focus{outline:none;border-color:var(--fl-brass);background:var(--fl-panel-hover)}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--fl-ink-faint);pointer-events:none}
+
+.filter-group{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.filter-group-label{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fl-ink-faint);margin-right:2px}
+.filter-btn{
+  padding:5px 13px;border-radius:99px;border:1px solid var(--fl-border-strong);
+  background:var(--fl-panel);font-size:12.5px;color:var(--fl-ink-soft);cursor:pointer;
+  transition:all .15s;font-family:inherit;
+}
+.filter-btn:hover{border-color:var(--fl-brass);color:var(--fl-ink)}
+.filter-btn:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
+.filter-btn.active{background:var(--fl-ink);color:var(--fl-paper);border-color:var(--fl-ink)}
+.count{font-family:var(--font-mono);font-size:11.5px;color:var(--fl-ink-faint)}
+
+.sort-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:space-between}
+.sort-select{
+  padding:6px 10px;border-radius:8px;border:1px solid var(--fl-border-strong);
+  background:var(--fl-panel);color:var(--fl-ink);
+  font-size:12.5px;font-family:inherit;cursor:pointer;
+}
+.sort-select:focus{outline:none;border-color:var(--fl-brass)}
+
+/* ---- Add-a-resource ---- */
+.add-resource{margin-bottom:.5rem}
+.add-resource-toggle{
+  display:flex;align-items:center;gap:6px;background:none;border:1px dashed var(--fl-border-strong);
+  border-radius:10px;padding:9px 14px;font-size:13px;color:var(--fl-brass);
+  cursor:pointer;font-family:inherit;width:100%;justify-content:center;transition:border-color .15s,background .15s;
+}
+.add-resource-toggle:hover{background:var(--fl-panel);border-color:var(--fl-brass)}
+.add-resource-toggle:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
+
+.add-resource-panel{
+  margin-top:8px;background:var(--fl-panel);border:1px solid var(--fl-border);
+  border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:11px;
+}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--fl-ink-faint);text-transform:uppercase;letter-spacing:.06em}
+.field input, .field select{
+  padding:8px 10px;border-radius:8px;border:1px solid var(--fl-border-strong);
+  background:var(--fl-panel-hover);color:var(--fl-ink);font-size:13px;font-family:inherit;
+}
+.field input:focus, .field select:focus{outline:none;border-color:var(--fl-brass)}
+.topic-checks{display:flex;flex-wrap:wrap;gap:6px}
+.topic-check-label{
+  display:flex;align-items:center;gap:5px;font-size:12px;color:var(--fl-ink-soft);
+  border:1px solid var(--fl-border-strong);border-radius:99px;padding:4px 10px;cursor:pointer;
+}
+.topic-check-label input{accent-color:var(--fl-brass-fill);cursor:pointer}
+.add-resource-actions{display:flex;gap:10px;justify-content:flex-end}
+.btn-primary{
+  background:var(--fl-brass-fill);color:#FBFBF6;border:none;border-radius:8px;
+  padding:9px 18px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;
+}
+.btn-primary:hover{background:#755a1c}
+.btn-primary:focus-visible{outline:2px solid var(--fl-ink);outline-offset:2px}
+.form-error{font-size:12px;color:var(--fl-danger)}
+
+/* ---- Toast ---- */
+.toast{
+  display:flex;align-items:center;gap:10px;background:var(--fl-panel);
+  border:1px solid var(--fl-border);border-radius:10px;padding:9px 14px;
+  font-size:12.5px;color:var(--fl-ink-soft);margin-bottom:.75rem;
+}
+
+/* ---- Cards ---- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.card{
+  background:var(--fl-panel);border:1px solid var(--fl-border);
+  border-radius:12px;padding:1rem 1rem 1.1rem;display:flex;flex-direction:column;gap:8px;
+  transition:border-color .15s,background .15s,transform .15s,box-shadow .15s;position:relative;
+}
+.card:hover{border-color:var(--fl-border-strong);background:var(--fl-panel-hover);transform:translateY(-1px);box-shadow:0 6px 16px -10px color-mix(in srgb, var(--fl-ink) 35%, transparent)}
+.card.is-done{background:var(--fl-green-tint)}
+
+/* Signature: a small rotated "logged" stamp on completed entries, like a librarian's date stamp */
+.card.is-done::after{
+  content:'✓ LOGGED';
+  position:absolute;top:10px;right:12px;
+  font-family:var(--font-mono);font-size:9px;font-weight:600;letter-spacing:.1em;
+  color:var(--fl-green-deep);border:1.5px solid var(--fl-green-deep);border-radius:99px;
+  padding:2px 8px;transform:rotate(-6deg);opacity:.85;pointer-events:none;
+}
+
+.card-top{display:flex;align-items:center;gap:8px}
+.card-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.icon-course{background:var(--fl-brass-tint)}
+.icon-book{background:var(--fl-green-tint)}
+.card-type{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
+.type-course{color:var(--fl-brass)}
+.type-book{color:var(--fl-green-deep)}
+.card-top-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.done-toggle{display:flex;align-items:center;gap:5px;cursor:pointer;font-size:11px;color:var(--fl-ink-faint);user-select:none}
+.done-toggle input{width:14px;height:14px;accent-color:var(--fl-green-deep);cursor:pointer}
+.remove-btn{background:none;border:none;cursor:pointer;font-size:13px;color:var(--fl-ink-faint);padding:0;line-height:1}
+.remove-btn:hover{color:var(--fl-danger)}
+.remove-btn:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
+
+.card-name-link{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--fl-ink);line-height:1.3;text-decoration:none}
+.card-name-link:hover{text-decoration:underline;text-underline-offset:3px}
+.card-name-link:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
+.card-external{font-size:11px;color:var(--fl-ink-faint);margin-left:4px;font-family:var(--font-sans)}
+.card-source{font-size:12px;color:var(--fl-ink-soft);font-style:italic}
+.card-hours-row{display:flex;align-items:center;gap:6px}
+.card-hours{font-family:var(--font-mono);font-size:11px;color:var(--fl-ink-faint)}
+.edit-hours-btn{
+  background:none;border:none;cursor:pointer;font-size:11px;padding:0;line-height:1;
+  opacity:.45;transition:opacity .15s;
+}
+.edit-hours-btn:hover{opacity:1}
+.edit-hours-btn:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px;opacity:1}
+.hours-edit-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.hours-input{
+  width:70px;padding:4px 8px;border-radius:6px;border:1px solid var(--fl-border-strong);
+  background:var(--fl-panel-hover);color:var(--fl-ink);font-size:12px;font-family:var(--font-mono);
+}
+.hours-input:focus{outline:none;border-color:var(--fl-brass)}
+.card-gap{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.gap-pill{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--fl-brass-tint);color:var(--fl-brass);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.custom-pill{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--fl-green-tint);color:var(--fl-green-deep);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+
+.notes-toggle{
+  align-self:flex-start;background:none;border:none;font-size:12px;color:var(--fl-brass);
+  cursor:pointer;padding:2px 0;font-family:inherit;display:flex;align-items:center;gap:4px;
+}
+.notes-toggle:hover{color:var(--fl-brass-fill)}
+.notes-toggle:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
+.notes-panel{display:flex;flex-direction:column;gap:6px}
+.notes-textarea{
+  width:100%;min-height:70px;resize:vertical;padding:9px 10px;border-radius:8px;
+  border:1px solid var(--fl-border-strong);background:var(--fl-panel-hover);
+  color:var(--fl-ink);font-size:12.5px;font-family:inherit;line-height:1.45;
+}
+.notes-textarea:focus{outline:none;border-color:var(--fl-brass)}
+.notes-meta{font-family:var(--font-mono);font-size:10px;color:var(--fl-ink-faint);min-height:13px}
+
+.empty-state{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:2.5rem 1rem;color:var(--fl-ink-faint);text-align:center}
+.empty-state-icon{font-size:28px}
+.empty-state-title{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--fl-ink-soft)}
+.empty-state-sub{font-size:13px}
+
+@media (prefers-reduced-motion: reduce){
+  .card{transition:none} .card:hover{transform:none}
+  .progress-fill,.topic-fill{transition:none}
+}
+@media (max-width:480px){
+  .hub{padding:1.5rem 1.25rem}
+  .search-row{max-width:100%}
+  .field-row{grid-template-columns:1fr}
+  .topic-row{grid-template-columns:90px 1fr auto}
+}
+</style>
+
+<h2 class="sr-only">Lumid INEX founder learning hub — courses, books, progress tracking, topic breakdown, and notes</h2>
+
+<div class="hub">
+  <div class="hub-header">
+    <div class="hub-header-top">
+      <div>
+        <span class="hub-eyebrow">Founder Development · Lumid INEX</span>
+        <div class="hub-title">Knowledge Hub</div>
+      </div>
+      <div class="theme-toggle" role="group" aria-label="Color theme">
+        <button type="button" class="theme-btn active" id="theme-sky-btn" data-theme="sky" aria-pressed="true">
+          <span class="theme-dot sky" aria-hidden="true"></span> Sky
+        </button>
+        <button type="button" class="theme-btn" id="theme-bloom-btn" data-theme="bloom" aria-pressed="false">
+          <span class="theme-dot bloom" aria-hidden="true"></span> Bloom
+        </button>
+      </div>
+    </div>
+    <div class="hub-sub">Courses and books drawn from 33 client lessons. Track what's done, see where the gaps really are, and add your own finds.</div>
+  </div>
+
+  <span class="section-eyebrow">Progress ledger</span>
+
+  <div class="progress-card">
+    <div class="progress-top">
+      <span class="progress-title">Overall progress</span>
+      <span class="progress-count" id="progress-count">0 of 24 completed</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="time-left" id="time-left">Calculating time remaining…</div>
+
+    <div class="topic-breakdown" id="topic-breakdown"></div>
+
+    <div class="progress-actions">
+      <span class="progress-status" id="progress-status" aria-live="polite">&nbsp;</span>
+      <div class="action-links">
+        <button class="text-btn" id="export-btn" type="button">Export notes (.md)</button>
+        <button class="text-btn" id="reset-btn" type="button">Reset all progress &amp; notes</button>
+      </div>
+    </div>
+    <div class="confirm-row" id="confirm-row" hidden>
+      <span>Clear all progress and notes? This can't be undone.</span>
+      <button class="text-btn" id="confirm-yes" type="button">Yes, clear it</button>
+      <button class="text-btn" id="confirm-no" type="button">Cancel</button>
+    </div>
+  </div>
+
+  <div id="toast-wrap"></div>
+
+  <span class="section-eyebrow">Search &amp; filter</span>
+  <div class="controls">
+    <div class="search-row">
+      <span class="search-icon" aria-hidden="true">🔎</span>
+      <input type="text" id="search" class="search-input" placeholder="Search by title or source…" aria-label="Search resources by title or source" />
+    </div>
+
+    <div class="filter-group" id="type-filters" role="group" aria-label="Filter by resource type">
+      <span class="filter-group-label">Type</span>
+      <button class="filter-btn active" data-type="all" aria-pressed="true">All</button>
+      <button class="filter-btn" data-type="course" aria-pressed="false">Courses</button>
+      <button class="filter-btn" data-type="book" aria-pressed="false">Books</button>
+    </div>
+
+    <div class="filter-group" id="topic-filters" role="group" aria-label="Filter by topic (select any number)">
+      <span class="filter-group-label">Topic</span>
+      <button class="filter-btn" data-topic="communication" aria-pressed="false">Communication</button>
+      <button class="filter-btn" data-topic="pricing" aria-pressed="false">Pricing</button>
+      <button class="filter-btn" data-topic="legal" aria-pressed="false">Legal &amp; contracts</button>
+      <button class="filter-btn" data-topic="marketing" aria-pressed="false">Marketing</button>
+      <button class="filter-btn" data-topic="team" aria-pressed="false">Team &amp; leadership</button>
+      <button class="filter-btn" id="hide-done-btn" aria-pressed="false">Hide completed</button>
+      <span class="count" id="count" aria-live="polite">24 resources</span>
+    </div>
+
+    <div class="sort-row">
+      <label class="filter-group-label" for="sort-select" style="margin:0">Sort by</label>
+      <select id="sort-select" class="sort-select">
+        <option value="default">Default order</option>
+        <option value="weak-topic">Weakest topic first</option>
+        <option value="time-asc">Shortest time first</option>
+        <option value="time-desc">Longest time first</option>
+        <option value="alpha">A–Z</option>
+        <option value="type">Type (courses, then books)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="add-resource">
+    <button class="add-resource-toggle" id="add-toggle" type="button" aria-expanded="false">+ Add a resource you found</button>
+    <div class="add-resource-panel" id="add-panel" hidden>
+      <div class="field-row">
+        <div class="field">
+          <label for="af-name">Title *</label>
+          <input id="af-name" type="text" placeholder="e.g. Atomic Habits" />
+        </div>
+        <div class="field">
+          <label for="af-type">Type</label>
+          <select id="af-type">
+            <option value="course">Course</option>
+            <option value="book">Book</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="af-source">Source / author</label>
+          <input id="af-source" type="text" placeholder="e.g. James Clear" />
+        </div>
+        <div class="field">
+          <label for="af-hours">Est. hours</label>
+          <input id="af-hours" type="number" min="0" step="0.5" placeholder="e.g. 6" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="af-url">Link *</label>
+        <input id="af-url" type="text" placeholder="https://…" />
+      </div>
+      <div class="field">
+        <label>Topics</label>
+        <div class="topic-checks">
+          <label class="topic-check-label"><input type="checkbox" value="communication"> Communication</label>
+          <label class="topic-check-label"><input type="checkbox" value="pricing"> Pricing</label>
+          <label class="topic-check-label"><input type="checkbox" value="legal"> Legal &amp; contracts</label>
+          <label class="topic-check-label"><input type="checkbox" value="marketing"> Marketing</label>
+          <label class="topic-check-label"><input type="checkbox" value="team"> Team &amp; leadership</label>
+        </div>
+      </div>
+      <div class="form-error" id="af-error" hidden></div>
+      <div class="add-resource-actions">
+        <button class="text-btn" id="af-cancel" type="button">Cancel</button>
+        <button class="btn-primary" id="af-submit" type="button">Add to hub</button>
+      </div>
+    </div>
+  </div>
+
+  <span class="section-eyebrow">Your library</span>
+  <div class="cards" id="grid"></div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  const BASE_DATA = [
+    {id:'google-pm-cert',type:'course',name:'Google Project Management Certificate',source:'Coursera — free to audit',url:'https://www.coursera.org/professional-certificates/google-project-management',gaps:['communication','team'],icon:'📋',hours:100},
+    {id:'comm-foundations',type:'course',name:'Communication Foundations',source:'LinkedIn Learning — free trial',url:'https://www.linkedin.com/learning/communication-foundations',gaps:['communication'],icon:'🗣️',hours:2},
+    {id:'pricing-strategy',type:'course',name:'Pricing Strategy',source:'Coursera — University of Virginia, free audit',url:'https://www.coursera.org/learn/uva-darden-bcg-pricing-strategy',gaps:['pricing'],icon:'💰',hours:15},
+    {id:'hubspot-sales',type:'course',name:'HubSpot Sales Training',source:'HubSpot Academy — completely free',url:'https://academy.hubspot.com/courses/inbound-sales',gaps:['pricing','communication'],icon:'📈',hours:5},
+    {id:'futur-pricing',type:'course',name:'The Futur — Pricing Design Work',source:'YouTube — free channel',url:'https://www.youtube.com/@thefutur',gaps:['pricing'],icon:'🎯',hours:10},
+    {id:'contracts-negotiations',type:'course',name:'Contracts and Negotiations',source:'Coursera — Yale Law, free audit',url:'https://www.coursera.org/learn/contracts',gaps:['legal'],icon:'📝',hours:15},
+    {id:'business-law-basics',type:'course',name:'Business Law Basics',source:'Alison — completely free, certified',url:'https://alison.com/course/business-law',gaps:['legal'],icon:'⚖️',hours:6},
+    {id:'wharton-entrepreneurship',type:'course',name:'Entrepreneurship Specialisation',source:'Coursera — Wharton School, free audit',url:'https://www.coursera.org/specializations/wharton-entrepreneurship',gaps:['legal','pricing'],icon:'🏛️',hours:80},
+    {id:'eq-at-work',type:'course',name:'Emotional Intelligence at Work',source:'Coursera — UC Davis, free audit',url:'https://www.coursera.org/learn/emotional-intelligence-at-work',gaps:['communication'],icon:'🧠',hours:10},
+    {id:'digital-marketing',type:'course',name:'Digital Marketing',source:'Google Digital Garage — free, certified',url:'https://learndigital.withgoogle.com/digitalgarage/course/digital-marketing',gaps:['marketing'],icon:'📱',hours:40},
+    {id:'brand-identity',type:'course',name:'Brand Identity Design',source:'Canva Design School — free',url:'https://www.canva.com/designschool/',gaps:['marketing'],icon:'🎨',hours:5},
+    {id:'content-marketing',type:'course',name:'Content Marketing Certification',source:'HubSpot Academy — completely free',url:'https://academy.hubspot.com/courses/content-marketing',gaps:['marketing'],icon:'✍️',hours:6},
+    {id:'e-myth-revisited',type:'book',name:'The E-Myth Revisited',source:'Michael Gerber',url:'https://www.amazon.com/E-Myth-Revisited-Small-Businesses-About/dp/0887307280',gaps:['legal','team'],icon:'📚',hours:7},
+    {id:'profit-first',type:'book',name:'Profit First',source:'Mike Michalowicz',url:'https://www.amazon.com/Profit-First-Transform-Cash-Eating-Money-Making/dp/073521414X',gaps:['pricing'],icon:'📚',hours:6},
+    {id:'built-to-sell',type:'book',name:'Built to Sell',source:'John Warrillow',url:'https://www.amazon.com/Built-Sell-Creating-Business-Without/dp/1591845823',gaps:['team','pricing'],icon:'📚',hours:4},
+    {id:'never-split-the-difference',type:'book',name:'Never Split the Difference',source:'Chris Voss',url:'https://www.amazon.com/Never-Split-Difference-Negotiating-Depended/dp/0062407805',gaps:['communication','pricing'],icon:'📚',hours:8},
+    {id:'trusted-advisor',type:'book',name:'The Trusted Advisor',source:'David Maister',url:'https://www.amazon.com/Trusted-Advisor-David-H-Maister/dp/0743212347',gaps:['communication'],icon:'📚',hours:7},
+    {id:'getting-to-yes',type:'book',name:'Getting to Yes',source:'Fisher and Ury',url:'https://www.amazon.com/Getting-Yes-Negotiating-Agreement-Without/dp/0143118757',gaps:['communication','pricing'],icon:'📚',hours:5},
+    {id:'checklist-manifesto',type:'book',name:'The Checklist Manifesto',source:'Atul Gawande',url:'https://www.amazon.com/Checklist-Manifesto-How-Things-Right/dp/0312430000',gaps:['team','communication'],icon:'📚',hours:4},
+    {id:'rework',type:'book',name:'Rework',source:'Jason Fried & David Heinemeier Hansson',url:'https://www.amazon.com/Rework-Jason-Fried/dp/0307463745',gaps:['team'],icon:'📚',hours:4},
+    {id:'storybrand',type:'book',name:'Building a StoryBrand',source:'Donald Miller',url:'https://www.amazon.com/Building-StoryBrand-Clarify-Message-Customers/dp/0718033329',gaps:['marketing'],icon:'📚',hours:5},
+    {id:'100m-offers',type:'book',name:'$100M Offers',source:'Alex Hormozi',url:'https://www.amazon.com/100M-Offers-People-Stupid-Saying/dp/B09V8W6V68',gaps:['pricing','marketing'],icon:'📚',hours:6},
+    {id:'five-dysfunctions',type:'book',name:'The Five Dysfunctions of a Team',source:'Patrick Lencioni',url:'https://www.amazon.com/Five-Dysfunctions-Team-Leadership-Fable/dp/0787960756',gaps:['team'],icon:'📚',hours:4},
+    {id:'leaders-eat-last',type:'book',name:'Leaders Eat Last',source:'Simon Sinek',url:'https://www.amazon.com/Leaders-Eat-Last-Together-Others/dp/1591845327',gaps:['team'],icon:'📚',hours:8},
+  ];
+
+  const TOPICS = ['communication','pricing','legal','marketing','team'];
+  const TOPIC_LABELS = {communication:'Communication',pricing:'Pricing',legal:'Legal & contracts',marketing:'Marketing',team:'Team & leadership'};
+
+  const PROGRESS_KEY = 'hub-progress';
+  const CUSTOM_KEY = 'hub-custom-resources';
+
+  const state = { type:'all', topics:new Set(), query:'', hideDone:false, sort:'default' };
+  let progress = {};        // { [id]: {done, notes} }
+  let customResources = []; // user-added items, same shape as BASE_DATA plus custom:true
+  let openNotesId = null;
+  let editingHoursId = null;
+  let lastRemoved = null;   // {item, timeoutId} for undo
+  let undoTimer = null;
+
+  const grid = document.getElementById('grid');
+  const countEl = document.getElementById('count');
+  const searchInput = document.getElementById('search');
+  const progressFill = document.getElementById('progress-fill');
+  const progressCount = document.getElementById('progress-count');
+  const progressStatus = document.getElementById('progress-status');
+  const timeLeftEl = document.getElementById('time-left');
+  const topicBreakdownEl = document.getElementById('topic-breakdown');
+  const resetBtn = document.getElementById('reset-btn');
+  const exportBtn = document.getElementById('export-btn');
+  const confirmRow = document.getElementById('confirm-row');
+  const hideDoneBtn = document.getElementById('hide-done-btn');
+  const sortSelect = document.getElementById('sort-select');
+  const addToggle = document.getElementById('add-toggle');
+  const addPanel = document.getElementById('add-panel');
+  const toastWrap = document.getElementById('toast-wrap');
+  const hubEl = document.querySelector('.hub');
+  const themeSkyBtn = document.getElementById('theme-sky-btn');
+  const themeBloomBtn = document.getElementById('theme-bloom-btn');
+  const THEME_KEY = 'hub-theme';
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  }
+  function allData(){ return BASE_DATA.concat(customResources); }
+  function getEntry(id){ return progress[id] || { done:false, notes:'' }; }
+
+  // Custom resources store their own hours directly on the object.
+  // Built-in resources are read-only in code, so an edited estimate is
+  // stored as an override inside the progress record for that id.
+  function effectiveHours(d){
+    if (d.custom) return d.hours || 0;
+    const entry = getEntry(d.id);
+    return (entry.hoursOverride != null && !isNaN(entry.hoursOverride)) ? entry.hoursOverride : (d.hours || 0);
+  }
+
+  async function setHoursOverride(id, hours){
+    const custom = customResources.find(r => r.id === id);
+    if (custom){
+      custom.hours = hours;
+      await saveCustom();
+    } else {
+      progress[id] = progress[id] || { done:false, notes:'' };
+      progress[id].hoursOverride = hours;
+      await saveProgress();
+    }
+  }
+
+  // ---------- storage ----------
+  async function loadAll(){
+    try{
+      const r = await window.storage.get(PROGRESS_KEY, false);
+      progress = r && r.value ? JSON.parse(r.value) : {};
+    }catch(err){ progress = {}; }
+    try{
+      const r2 = await window.storage.get(CUSTOM_KEY, false);
+      customResources = r2 && r2.value ? JSON.parse(r2.value) : [];
+    }catch(err){ customResources = []; }
+  }
+  async function saveProgress(){
+    try{
+      const result = await window.storage.set(PROGRESS_KEY, JSON.stringify(progress), false);
+      setStatus(result ? 'Saved just now' : 'Could not save — please retry.', !result);
+    }catch(err){ setStatus('Could not save — please retry.', true); }
+  }
+  async function saveCustom(){
+    try{
+      const result = await window.storage.set(CUSTOM_KEY, JSON.stringify(customResources), false);
+      if(!result) setStatus('Could not save — please retry.', true);
+      return !!result;
+    }catch(err){ setStatus('Could not save — please retry.', true); return false; }
+  }
+
+  let statusTimer;
+  function setStatus(msg, isError){
+    progressStatus.textContent = msg;
+    progressStatus.style.color = isError ? 'var(--text-warning,#a15c00)' : '';
+    clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => { progressStatus.textContent = '\u00A0'; }, 2500);
+  }
+
+  // ---------- computed stats ----------
+  function computeTopicStats(data){
+    const stats = {};
+    TOPICS.forEach(t => { stats[t] = { done:0, total:0, hoursTotal:0, hoursRemaining:0 }; });
+    data.forEach(item => {
+      const entry = getEntry(item.id);
+      const hrs = effectiveHours(item);
+      item.gaps.forEach(g => {
+        if(!stats[g]) return;
+        stats[g].total += 1;
+        stats[g].hoursTotal += hrs;
+        if(entry.done) stats[g].done += 1;
+        else stats[g].hoursRemaining += hrs;
+      });
+    });
+    return stats;
+  }
+
+  function updateProgressBar(data){
+    const total = data.length;
+    const done = data.filter(d => getEntry(d.id).done).length;
+    const pct = total ? Math.round((done/total)*100) : 0;
+    progressFill.style.width = pct + '%';
+    progressCount.textContent = `${done} of ${total} completed`;
+
+    const hoursRemaining = data.reduce((sum, d) => sum + (getEntry(d.id).done ? 0 : effectiveHours(d)), 0);
+    timeLeftEl.textContent = hoursRemaining > 0
+      ? `≈ ${Math.round(hoursRemaining)} hours of learning left`
+      : 'All caught up — nothing left on the clock 🎉';
+  }
+
+  function updateTopicBreakdown(data){
+    const stats = computeTopicStats(data);
+    topicBreakdownEl.innerHTML = TOPICS.map(t => {
+      const s = stats[t];
+      const pct = s.total ? Math.round((s.done/s.total)*100) : 0;
+      return `
+        <div class="topic-row">
+          <span class="topic-name">${TOPIC_LABELS[t]}</span>
+          <div class="topic-track"><div class="topic-fill" style="width:${pct}%"></div></div>
+          <span class="topic-meta">${s.done}/${s.total} · ~${Math.round(s.hoursRemaining)}h left</span>
+        </div>`;
+    }).join('');
+  }
+
+  // ---------- filter / sort ----------
+  function getFiltered(data){
+    const q = state.query.trim().toLowerCase();
+    return data.filter(item => {
+      if (state.type !== 'all' && item.type !== state.type) return false;
+      if (state.topics.size > 0 && !item.gaps.some(g => state.topics.has(g))) return false;
+      if (q && !(item.name.toLowerCase().includes(q) || item.source.toLowerCase().includes(q))) return false;
+      if (state.hideDone && getEntry(item.id).done) return false;
+      return true;
+    });
+  }
+
+  function getSorted(list, topicStats){
+    const arr = list.slice();
+    switch(state.sort){
+      case 'alpha':
+        arr.sort((a,b) => a.name.localeCompare(b.name)); break;
+      case 'type':
+        arr.sort((a,b) => a.type === b.type ? a.name.localeCompare(b.name) : (a.type === 'course' ? -1 : 1)); break;
+      case 'time-asc':
+        arr.sort((a,b) => effectiveHours(a) - effectiveHours(b)); break;
+      case 'time-desc':
+        arr.sort((a,b) => effectiveHours(b) - effectiveHours(a)); break;
+      case 'weak-topic':
+        arr.sort((a,b) => {
+          const pctFor = item => Math.min(...item.gaps.map(g => {
+            const s = topicStats[g]; return s && s.total ? (s.done/s.total)*100 : 100;
+          }));
+          return pctFor(a) - pctFor(b);
+        });
+        break;
+      default: break; // keep insertion order
+    }
+    return arr;
+  }
+
+  // ---------- render ----------
+  function render(){
+    const data = allData();
+    updateProgressBar(data);
+    updateTopicBreakdown(data);
+
+    const topicStats = computeTopicStats(data);
+    const filtered = getFiltered(data);
+    const list = getSorted(filtered, topicStats);
+    countEl.textContent = `${list.length} resource${list.length === 1 ? '' : 's'}`;
+
+    if (!list.length){
+      grid.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon">🗂️</div>
+          <div class="empty-state-title">No resources match these filters</div>
+          <div class="empty-state-sub">Try clearing the search, removing a topic filter, or turning off "Hide completed".</div>
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = list.map(d => {
+      const entry = getEntry(d.id);
+      const notesOpen = openNotesId === d.id;
+      return `
+      <div class="card ${entry.done ? 'is-done' : ''}" data-id="${escapeHtml(d.id)}">
+        <div class="card-top">
+          <div class="card-icon icon-${d.type}" aria-hidden="true">${d.icon || (d.type==='course'?'🎓':'📚')}</div>
+          <span class="card-type type-${d.type}">${d.type === 'course' ? 'Free course' : 'Book'}</span>
+          <div class="card-top-right">
+            <label class="done-toggle">
+              <input type="checkbox" class="done-checkbox" ${entry.done ? 'checked' : ''} aria-label="Mark ${escapeHtml(d.name)} as completed" />
+              Done
+            </label>
+            ${d.custom ? `<button type="button" class="remove-btn" title="Remove this resource" aria-label="Remove ${escapeHtml(d.name)}">🗑</button>` : ''}
+          </div>
+        </div>
+        <a class="card-name-link" href="${escapeHtml(d.url)}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(d.name)}">
+          ${escapeHtml(d.name)}<span class="card-external" aria-hidden="true">↗</span>
+        </a>
+        <div class="card-source">${escapeHtml(d.source || '')}</div>
+        ${editingHoursId === d.id ? `
+          <div class="hours-edit-row">
+            <input type="number" min="0" step="0.5" class="hours-input" value="${effectiveHours(d)}" aria-label="Estimated hours for ${escapeHtml(d.name)}" />
+            <button type="button" class="text-btn hours-save-btn">Save</button>
+            <button type="button" class="text-btn hours-cancel-btn">Cancel</button>
+          </div>
+        ` : `
+          <div class="card-hours-row">
+            <span class="card-hours">~${effectiveHours(d)}h</span>
+            <button type="button" class="edit-hours-btn" title="Edit time estimate" aria-label="Edit time estimate for ${escapeHtml(d.name)}">✏️</button>
+          </div>
+        `}
+        <div class="card-gap">
+          ${d.gaps.map(g => `<span class="gap-pill">${escapeHtml(TOPIC_LABELS[g] || g)}</span>`).join('')}
+          ${d.custom ? `<span class="custom-pill">Your pick</span>` : ''}
+        </div>
+        <button type="button" class="notes-toggle" aria-expanded="${notesOpen}">
+          📝 ${notesOpen ? 'Hide notes' : (entry.notes ? 'View/edit notes' : 'Add notes')}
+        </button>
+        <div class="notes-panel" ${notesOpen ? '' : 'hidden'}>
+          <textarea class="notes-textarea" placeholder="Your summary — key takeaways, quotes, how you'll apply this…" aria-label="Notes for ${escapeHtml(d.name)}">${escapeHtml(entry.notes)}</textarea>
+          <div class="notes-meta notes-status-inline"></div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ---------- filter/sort/search events ----------
+  document.getElementById('type-filters').addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    state.type = btn.dataset.type;
+    document.querySelectorAll('#type-filters .filter-btn').forEach(b => {
+      const active = b === btn;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', String(active));
+    });
+    render();
+  });
+
+  document.getElementById('topic-filters').addEventListener('click', (e) => {
+    if (e.target.closest('#hide-done-btn')){
+      state.hideDone = !state.hideDone;
+      hideDoneBtn.classList.toggle('active', state.hideDone);
+      hideDoneBtn.setAttribute('aria-pressed', String(state.hideDone));
+      render();
+      return;
+    }
+    const btn = e.target.closest('.filter-btn[data-topic]');
+    if (!btn) return;
+    const topic = btn.dataset.topic;
+    if (state.topics.has(topic)){
+      state.topics.delete(topic);
+      btn.classList.remove('active'); btn.setAttribute('aria-pressed', 'false');
+    } else {
+      state.topics.add(topic);
+      btn.classList.add('active'); btn.setAttribute('aria-pressed', 'true');
+    }
+    render();
+  });
+
+  sortSelect.addEventListener('change', () => { state.sort = sortSelect.value; render(); });
+
+  let searchDebounce;
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(searchDebounce);
+    const value = e.target.value;
+    searchDebounce = setTimeout(() => { state.query = value; render(); }, 120);
+  });
+
+  // ---------- card interactions ----------
+  let notesDebounce;
+  grid.addEventListener('change', (e) => {
+    const checkbox = e.target.closest('.done-checkbox');
+    if (!checkbox) return;
+    const id = checkbox.closest('.card').dataset.id;
+    progress[id] = progress[id] || { done:false, notes:'' };
+    progress[id].done = checkbox.checked;
+    render();
+    saveProgress();
+  });
+
+  grid.addEventListener('click', (e) => {
+    const notesBtn = e.target.closest('.notes-toggle');
+    if (notesBtn){
+      const id = notesBtn.closest('.card').dataset.id;
+      openNotesId = (openNotesId === id) ? null : id;
+      render();
+      const focusTarget = grid.querySelector(`.card[data-id="${CSS.escape(id)}"] .notes-toggle`);
+      if (focusTarget) focusTarget.focus();
+      return;
+    }
+    const removeBtn = e.target.closest('.remove-btn');
+    if (removeBtn){
+      const id = removeBtn.closest('.card').dataset.id;
+      removeCustomResource(id);
+      return;
+    }
+    const editHoursBtn = e.target.closest('.edit-hours-btn');
+    if (editHoursBtn){
+      editingHoursId = editHoursBtn.closest('.card').dataset.id;
+      render();
+      const input = grid.querySelector(`.card[data-id="${CSS.escape(editingHoursId)}"] .hours-input`);
+      if (input){ input.focus(); input.select(); }
+      return;
+    }
+    const saveHoursBtn = e.target.closest('.hours-save-btn');
+    if (saveHoursBtn){
+      commitHoursEdit(saveHoursBtn.closest('.card'));
+      return;
+    }
+    const cancelHoursBtn = e.target.closest('.hours-cancel-btn');
+    if (cancelHoursBtn){
+      editingHoursId = null;
+      render();
+      return;
+    }
+  });
+
+  grid.addEventListener('keydown', (e) => {
+    const input = e.target.closest('.hours-input');
+    if (!input) return;
+    if (e.key === 'Enter'){ e.preventDefault(); commitHoursEdit(input.closest('.card')); }
+    else if (e.key === 'Escape'){ e.preventDefault(); editingHoursId = null; render(); }
+  });
+
+  async function commitHoursEdit(card){
+    if (!card) return;
+    const id = card.dataset.id;
+    const input = card.querySelector('.hours-input');
+    const raw = input ? input.value : '';
+    const hours = raw === '' ? 0 : Math.max(0, Number(raw));
+    if (isNaN(hours)) return;
+    await setHoursOverride(id, hours);
+    editingHoursId = null;
+    render();
+    setStatus('Time estimate updated');
+  }
+
+  grid.addEventListener('input', (e) => {
+    const textarea = e.target.closest('.notes-textarea');
+    if (!textarea) return;
+    const card = textarea.closest('.card');
+    const id = card.dataset.id;
+    progress[id] = progress[id] || { done:false, notes:'' };
+    progress[id].notes = textarea.value;
+    const statusEl = card.querySelector('.notes-status-inline');
+    if (statusEl) statusEl.textContent = 'Saving…';
+    clearTimeout(notesDebounce);
+    notesDebounce = setTimeout(async () => {
+      await saveProgress();
+      if (statusEl) statusEl.textContent = 'Saved';
+    }, 500);
+  });
+
+  // ---------- add-a-resource ----------
+  addToggle.addEventListener('click', () => {
+    const willOpen = addPanel.hidden;
+    addPanel.hidden = !willOpen;
+    addToggle.setAttribute('aria-expanded', String(willOpen));
+    addToggle.textContent = willOpen ? '− Close' : '+ Add a resource you found';
+  });
+
+  document.getElementById('af-cancel').addEventListener('click', () => {
+    addPanel.hidden = true;
+    addToggle.setAttribute('aria-expanded', 'false');
+    addToggle.textContent = '+ Add a resource you found';
+    clearAddForm();
+  });
+
+  function clearAddForm(){
+    document.getElementById('af-name').value = '';
+    document.getElementById('af-source').value = '';
+    document.getElementById('af-hours').value = '';
+    document.getElementById('af-url').value = '';
+    document.getElementById('af-type').value = 'course';
+    document.querySelectorAll('.topic-check-label input').forEach(cb => cb.checked = false);
+    document.getElementById('af-error').hidden = true;
+  }
+
+  document.getElementById('af-submit').addEventListener('click', async () => {
+    const name = document.getElementById('af-name').value.trim();
+    const url = document.getElementById('af-url').value.trim();
+    const source = document.getElementById('af-source').value.trim();
+    const type = document.getElementById('af-type').value;
+    const hoursRaw = document.getElementById('af-hours').value;
+    const hours = hoursRaw ? Number(hoursRaw) : 0;
+    const gaps = Array.from(document.querySelectorAll('.topic-check-label input:checked')).map(cb => cb.value);
+    const errEl = document.getElementById('af-error');
+
+    if (!name || !url){
+      errEl.textContent = 'Title and link are required.';
+      errEl.hidden = false;
+      return;
+    }
+    if (!/^https?:\/\//i.test(url)){
+      errEl.textContent = 'Link should start with http:// or https://';
+      errEl.hidden = false;
+      return;
+    }
+    errEl.hidden = true;
+
+    const id = 'custom-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,6);
+    customResources.push({
+      id, type, name, source, url, hours,
+      gaps: gaps.length ? gaps : [],
+      icon: type === 'course' ? '🎓' : '📖',
+      custom: true,
+    });
+
+    await saveCustom();
+    clearAddForm();
+    addPanel.hidden = true;
+    addToggle.setAttribute('aria-expanded', 'false');
+    addToggle.textContent = '+ Add a resource you found';
+    render();
+  });
+
+  function removeCustomResource(id){
+    const idx = customResources.findIndex(r => r.id === id);
+    if (idx === -1) return;
+    lastRemoved = customResources[idx];
+    customResources.splice(idx, 1);
+    delete progress[id];
+    saveCustom();
+    saveProgress();
+    render();
+    showUndoToast(lastRemoved.name);
+  }
+
+  function showUndoToast(name){
+    clearTimeout(undoTimer);
+    toastWrap.innerHTML = `
+      <div class="toast">
+        <span>Removed "${escapeHtml(name)}".</span>
+        <button class="text-btn" id="undo-btn" type="button">Undo</button>
+      </div>`;
+    document.getElementById('undo-btn').addEventListener('click', async () => {
+      if (lastRemoved){
+        customResources.push(lastRemoved);
+        lastRemoved = null;
+        await saveCustom();
+        render();
+      }
+      toastWrap.innerHTML = '';
+      clearTimeout(undoTimer);
+    });
+    undoTimer = setTimeout(() => { toastWrap.innerHTML = ''; lastRemoved = null; }, 6000);
+  }
+
+  // ---------- export notes ----------
+  exportBtn.addEventListener('click', () => {
+    const data = allData();
+    const withContent = data.filter(d => {
+      const e = getEntry(d.id);
+      return e.done || (e.notes && e.notes.trim());
+    });
+
+    let md = `# Lumid INEX — Founder Knowledge Hub Notes\n\n`;
+    md += `_Exported ${new Date().toISOString().slice(0,10)}_\n\n`;
+
+    if (!withContent.length){
+      md += `No completed items or notes yet.\n`;
+    } else {
+      ['course','book'].forEach(type => {
+        const items = withContent.filter(d => d.type === type);
+        if (!items.length) return;
+        md += `## ${type === 'course' ? 'Courses' : 'Books'}\n\n`;
+        items.forEach(d => {
+          const e = getEntry(d.id);
+          md += `### ${d.name}${e.done ? ' — ✅ Done' : ''}\n`;
+          if (d.source) md += `Source: ${d.source}\n`;
+          md += `Link: ${d.url}\n`;
+          if (d.gaps && d.gaps.length) md += `Topics: ${d.gaps.map(g => TOPIC_LABELS[g] || g).join(', ')}\n`;
+          if (e.notes && e.notes.trim()) md += `\nNotes:\n${e.notes.trim()}\n`;
+          md += `\n`;
+        });
+      });
+    }
+
+    const blob = new Blob([md], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'lumid-knowledge-hub-notes.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    setStatus('Notes exported');
+  });
+
+  // ---------- theme ----------
+  function applyTheme(theme){
+    if (theme === 'bloom') hubEl.setAttribute('data-theme', 'bloom');
+    else hubEl.removeAttribute('data-theme');
+    themeSkyBtn.classList.toggle('active', theme !== 'bloom');
+    themeSkyBtn.setAttribute('aria-pressed', String(theme !== 'bloom'));
+    themeBloomBtn.classList.toggle('active', theme === 'bloom');
+    themeBloomBtn.setAttribute('aria-pressed', String(theme === 'bloom'));
+  }
+
+  async function setTheme(theme){
+    applyTheme(theme);
+    try{ await window.storage.set(THEME_KEY, theme, false); }
+    catch(err){ /* theme just won't persist across sessions — not critical */ }
+  }
+
+  themeSkyBtn.addEventListener('click', () => setTheme('sky'));
+  themeBloomBtn.addEventListener('click', () => setTheme('bloom'));
+
+  // ---------- reset ----------
+  resetBtn.addEventListener('click', () => { confirmRow.hidden = false; });
+  document.getElementById('confirm-no').addEventListener('click', () => { confirmRow.hidden = true; });
+  document.getElementById('confirm-yes').addEventListener('click', async () => {
+    progress = {};
+    openNotesId = null;
+    confirmRow.hidden = true;
+    try{ await window.storage.delete(PROGRESS_KEY, false); }catch(err){ /* nothing to delete yet */ }
+    render();
+    setStatus('Progress and notes cleared');
+  });
+
+  // ---------- init ----------
+  (async function init(){
+    try{
+      const r = await window.storage.get(THEME_KEY, false);
+      applyTheme(r && r.value ? r.value : 'sky');
+    }catch(err){ applyTheme('sky'); }
+
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">⏳</div>
+        <div class="empty-state-title">Loading your progress…</div>
+      </div>`;
+    await loadAll();
+    render();
+  })();
+})();
+</script>

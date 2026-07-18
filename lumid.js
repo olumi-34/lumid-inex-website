@@ -232,6 +232,10 @@ function submitForm() {
     document.getElementById('phone').focus();
     return;
   }
+  if (!document.getElementById('consent').checked) {
+  alert('Please agree to the privacy policy to continue.');
+  return;
+  }
 
   // Build a WhatsApp pre-fill message
   const lname   = document.getElementById('lname').value.trim();
