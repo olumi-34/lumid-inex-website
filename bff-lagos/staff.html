@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BFF-LAGOS — Our Staff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-primary:#111111;
+    --bg-secondary:#1B1B1B;
+    --card:#1F1E1C;
+    --gold:#C9A24B;
+    --gold-soft:#E4C97A;
+    --cream:#F3ECDD;
+    --text-white:#F5F3EE;
+    --text-gray:#9B9890;
+    --hair:rgba(201,162,75,0.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg-primary);color:var(--text-white);font-family:'Inter',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:0.01em;}
+  .eyebrow{text-transform:uppercase;letter-spacing:0.28em;font-size:11px;color:var(--gold);font-weight:500;}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 64px;}
+  a{color:inherit;text-decoration:none;}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(17,17,17,0.92);border-bottom:1px solid var(--hair);}
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;height:88px;padding-left:64px;padding-right:64px;}
+  .logo{font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:0.06em;color:var(--text-white);}
+  .logo span{color:var(--gold);}
+  .navlinks{display:flex;gap:40px;font-size:13px;letter-spacing:0.04em;color:var(--text-gray);}
+  .navlinks a.active{color:var(--gold-soft);}
+  .navlinks a:hover{color:var(--gold-soft);}
+  .navcta{display:flex;align-items:center;gap:16px;}
+  .btn-outline{border:1px solid var(--gold);color:var(--gold-soft);padding:12px 26px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;transition:all .25s ease;}
+  .btn-outline:hover{background:var(--gold);color:#111;}
+  .btn-fill{background:var(--gold);color:#141210;padding:13px 28px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;font-weight:500;transition:all .25s ease;}
+  .btn-fill:hover{background:var(--gold-soft);}
+
+  .page-hero{position:relative;height:56vh;min-height:440px;display:flex;align-items:flex-end;
+    background:linear-gradient(180deg, rgba(17,17,17,0.1) 0%, rgba(17,17,17,0.98) 100%), linear-gradient(135deg,#242017,#171512 60%);}
+  .page-hero-content{position:relative;z-index:2;padding:0 64px 60px;max-width:1280px;margin:0 auto;width:100%;}
+  .crumb{font-size:12px;color:var(--text-gray);letter-spacing:0.05em;margin-bottom:20px;}
+  .crumb span{color:var(--gold-soft);}
+  .page-hero h1{font-size:60px;line-height:1.08;max-width:700px;}
+
+  section{padding:120px 0;}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head .eyebrow{margin-bottom:18px;display:block;}
+  .section-head h2{font-size:42px;line-height:1.15;}
+  .section-head p{margin-top:18px;color:var(--text-gray);font-size:15px;line-height:1.7;max-width:520px;}
+  .dept-label{display:flex;align-items:center;gap:16px;margin-bottom:40px;}
+  .dept-label .eyebrow{margin-bottom:0;}
+  .dept-line{flex:1;height:1px;background:var(--hair);}
+
+  .ph-block{background:linear-gradient(150deg,#242220,#151412);border:1px solid var(--hair);border-radius:4px;
+    display:flex;align-items:center;justify-content:center;color:rgba(245,243,238,0.32);font-size:12.5px;letter-spacing:0.05em;text-align:center;padding:16px;}
+
+  /* SPOTLIGHT */
+  .spotlight{background:var(--bg-secondary);}
+  .spotlight-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;align-items:center;
+    background:var(--card);border:1px solid var(--hair);border-radius:8px;overflow:hidden;padding:0;}
+  .spotlight-img{height:520px;}
+  .spotlight-text{padding:60px 64px 60px 0;}
+  .spotlight-text .eyebrow{margin-bottom:16px;display:block;}
+  .spotlight-text h2{font-size:38px;margin-bottom:6px;}
+  .spotlight-role{font-size:13px;color:var(--gold-soft);letter-spacing:0.05em;margin-bottom:24px;}
+  .spotlight-text p{color:var(--text-gray);font-size:14.5px;line-height:1.85;margin-bottom:14px;}
+
+  /* FEATURE PAIR — Executive Chef / Manager */
+  .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  .feature-card{background:var(--card);border:1px solid var(--hair);border-radius:6px;overflow:hidden;transition:all .3s ease;}
+  .feature-card:hover{border-color:var(--gold);}
+  .feature-img{height:280px;position:relative;}
+  .feature-body{padding:26px 30px 30px;}
+  .feature-body h3{font-size:22px;margin-bottom:4px;}
+  .feature-role{font-size:12.5px;color:var(--gold-soft);letter-spacing:0.05em;margin-bottom:14px;display:block;}
+  .feature-body p{font-size:13.5px;color:var(--text-gray);line-height:1.7;}
+
+  /* STAFF GRID (departments) */
+  .staff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .staff-card{position:relative;border-radius:6px;overflow:hidden;border:1px solid var(--hair);cursor:pointer;}
+  .staff-img{height:260px;position:relative;}
+  .staff-overlay{
+    position:absolute;inset:0;background:linear-gradient(180deg, rgba(17,17,17,0) 40%, rgba(17,17,17,0.94) 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:20px;
+    opacity:0;transition:opacity .3s ease;
+  }
+  .staff-card:hover .staff-overlay{opacity:1;}
+  .staff-caption{padding:16px 18px;background:var(--card);}
+  .staff-caption h4{font-size:15.5px;margin-bottom:3px;}
+  .staff-caption .role{font-size:11.5px;color:var(--gold-soft);letter-spacing:0.04em;}
+  .staff-overlay h4{font-size:16px;color:var(--text-white);margin-bottom:4px;}
+  .staff-overlay .role{font-size:11.5px;color:var(--gold-soft);margin-bottom:8px;}
+  .staff-overlay p{font-size:12px;color:var(--text-gray);line-height:1.6;}
+
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+
+  /* CTA BAND */
+  .cta-band{background:linear-gradient(120deg,#1B1B1B,#141311);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:100px 0;text-align:center;}
+  .cta-band .eyebrow{display:block;margin-bottom:20px;}
+  .cta-band h2{font-size:44px;max-width:620px;margin:0 auto 32px;line-height:1.2;}
+  .cta-actions{display:flex;justify-content:center;gap:18px;}
+
+  footer{border-top:1px solid var(--hair);padding:80px 0 40px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.3fr;gap:40px;margin-bottom:70px;}
+  .foot-brand .logo{margin-bottom:18px;}
+  .foot-brand p{font-size:13px;color:var(--text-gray);line-height:1.7;max-width:220px;margin-bottom:24px;}
+  .foot-social{display:flex;gap:14px;}
+  .foot-social span{width:34px;height:34px;border:1px solid var(--hair);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-gray);}
+  .foot-col h4{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;font-weight:500;}
+  .foot-col a{display:block;font-size:14px;color:var(--text-gray);margin-bottom:14px;}
+  .foot-col a:hover{color:var(--gold-soft);}
+  .foot-bottom{border-top:1px solid var(--hair);padding-top:28px;display:flex;justify-content:space-between;font-size:12px;color:var(--text-gray);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">BFF<span>·</span>LAGOS</div>
+     <nav class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="staff.html">Our Staff</a>
+    <a href="menu.html">Menu & Order</a>
+    <a href="careers.html">Careers</a>
+    <a href="help.html">Help</a>
+    <a href="#" onclick="goTo('contact')">Contact</a>
+</nav>
+    <div class="navcta">
+      <a class="btn-outline" href="#">Reserve a table</a>
+      <a class="btn-fill" href="#">Order now</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-content">
+    <div class="crumb">Home / <span>Our Staff</span></div>
+    <h1>The hands and hearts<br>behind every dish.</h1>
+  </div>
+</section>
+
+<section class="spotlight">
+  <div class="wrap">
+    <div class="spotlight-grid">
+      <div class="spotlight-img ph-block">[ Staff Spotlight Wide Photo ]</div>
+      <div class="spotlight-text">
+        <span class="eyebrow">Staff spotlight</span>
+        <h2>[ Team Member Name ]</h2>
+        <div class="spotlight-role">[ Role Placeholder — e.g. Head Sommelier ]</div>
+        <p>[ Placeholder paragraph introducing this month's featured team member — their background and what they bring to the table. ]</p>
+        <p>[ Placeholder second line — a personal note or favourite dish. ]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="leadership">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Leadership</span>
+      <h2>Executive team</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-img ph-block">[ Executive Chef Portrait ]</div>
+        <div class="feature-body">
+          <h3>[ Executive Chef Name ]</h3>
+          <span class="feature-role">Executive Chef</span>
+          <p>[ Placeholder bio — culinary background, philosophy, and years of experience. ]</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-img ph-block">[ Restaurant Manager Portrait ]</div>
+        <div class="feature-body">
+          <h3>[ Restaurant Manager Name ]</h3>
+          <span class="feature-role">Restaurant Manager</span>
+          <p>[ Placeholder bio — hospitality background and role in daily operations. ]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sous">
+  <div class="wrap">
+    <div class="dept-label"><span class="eyebrow">Sous chefs</span><div class="dept-line"></div></div>
+    <div class="grid-3">
+      <div class="staff-card">
+        <div class="staff-img ph-block">[ Sous Chef Portrait 1 ]</div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-img ph-block">[ Sous Chef Portrait 2 ]</div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-img ph-block">[ Sous Chef Portrait 3 ]</div>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:12px;">
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Sous Chef</div></div>
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Sous Chef</div></div>
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Sous Chef</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="kitchen-team" style="background:var(--bg-secondary);">
+  <div class="wrap">
+    <div class="dept-label"><span class="eyebrow">Kitchen team</span><div class="dept-line"></div></div>
+    <div class="staff-grid">
+      <div class="staff-card"><div class="staff-img ph-block">[ Kitchen Team Portrait 1 ]</div></div>
+      <div class="staff-card"><div class="staff-img ph-block">[ Kitchen Team Portrait 2 ]</div></div>
+      <div class="staff-card"><div class="staff-img ph-block">[ Kitchen Team Portrait 3 ]</div></div>
+      <div class="staff-card"><div class="staff-img ph-block">[ Kitchen Team Portrait 4 ]</div></div>
+    </div>
+    <div class="staff-grid" style="margin-top:12px;">
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Line Cook</div></div>
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Line Cook</div></div>
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Pastry Cook</div></div>
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Grill Cook</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="front-desk">
+  <div class="wrap">
+    <div class="dept-label"><span class="eyebrow">Front desk</span><div class="dept-line"></div></div>
+    <div class="grid-2">
+      <div class="staff-card"><div class="staff-img ph-block">[ Front Desk Portrait 1 ]</div></div>
+      <div class="staff-card"><div class="staff-img ph-block">[ Front Desk Portrait 2 ]</div></div>
+    </div>
+    <div class="grid-2" style="margin-top:12px;">
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Host</div></div>
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Reservations Lead</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wait-staff" style="background:var(--bg-secondary);">
+  <div class="wrap">
+    <div class="dept-label"><span class="eyebrow">Wait staff</span><div class="dept-line"></div></div>
+    <div class="staff-grid">
+      <div class="staff-card"><div class="staff-img ph-block">[ Wait Staff Portrait 1 ]</div></div>
+      <div class="staff-card"><div class="staff-img ph-block">[ Wait Staff Portrait 2 ]</div></div>
+      <div class="staff-card"><div class="staff-img ph-block">[ Wait Staff Portrait 3 ]</div></div>
+      <div class="staff-card"><div class="staff-img ph-block">[ Wait Staff Portrait 4 ]</div></div>
+    </div>
+    <div class="staff-grid" style="margin-top:12px;">
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Server</div></div>
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Server</div></div>
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Server</div></div>
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Sommelier</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="customer-service">
+  <div class="wrap">
+    <div class="dept-label"><span class="eyebrow">Customer service</span><div class="dept-line"></div></div>
+    <div class="grid-2">
+      <div class="staff-card"><div class="staff-img ph-block">[ Customer Service Portrait 1 ]</div></div>
+      <div class="staff-card"><div class="staff-img ph-block">[ Customer Service Portrait 2 ]</div></div>
+    </div>
+    <div class="grid-2" style="margin-top:12px;">
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Guest Relations</div></div>
+      <div class="staff-caption"><h4>[ Name ]</h4><div class="role">Support Lead</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <span class="eyebrow">We're hiring</span>
+    <h2>Great teams make great tables.</h2>
+    <div class="cta-actions">
+      <a class="btn-fill" href="#">View open roles</a>
+      <a class="btn-outline" href="#">Learn about our culture</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">BFF<span>·</span>LAGOS</div>
+        <p>[ Placeholder one-line brand tagline reflecting warmth and craft. ]</p>
+        <div class="foot-social"><span>IG</span><span>TT</span><span>X</span><span>WA</span></div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="#">About</a><a href="#">Our Staff</a><a href="#">Careers</a></div>
+      <div class="foot-col"><h4>Order</h4><a href="#">Menu</a><a href="#">Delivery Zones</a><a href="#">Pickup Locations</a></div>
+      <div class="foot-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact</a><a href="#">FAQs</a></div>
+      <div class="foot-col"><h4>Newsletter</h4><p style="font-size:13px;color:var(--text-gray);margin-bottom:16px;">[ Placeholder short invite line ]</p></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BFF-LAGOS. All rights reserved.</span>
+      <span>Privacy Policy · Terms · Site Credits</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+<script src="js/navigation.js"></script>
+</html>

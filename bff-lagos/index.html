@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BFF-LAGOS — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-primary:#111111;
+    --bg-secondary:#1B1B1B;
+    --card:#1F1E1C;
+    --gold:#C9A24B;
+    --gold-soft:#E4C97A;
+    --cream:#F3ECDD;
+    --text-white:#F5F3EE;
+    --text-gray:#9B9890;
+    --hair:rgba(201,162,75,0.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg-primary);
+    color:var(--text-white);
+    font-family:'Inter',sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:0.01em;}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:0.28em;font-size:11px;color:var(--gold);
+    font-weight:500;
+  }
+  .wrap{max-width:1280px;margin:0 auto;padding:0 64px;}
+  a{color:inherit;text-decoration:none;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(17,17,17,0.82);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--hair);
+  }
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;height:88px;padding-left:64px;padding-right:64px;}
+  .logo{font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:0.06em;color:var(--text-white);}
+  .logo span{color:var(--gold);}
+  .navlinks{display:flex;gap:40px;font-size:13px;letter-spacing:0.04em;color:var(--text-gray);}
+  .navlinks a:hover{color:var(--gold-soft);}
+  .navcta{display:flex;align-items:center;gap:16px;}
+  .btn-outline{
+    border:1px solid var(--gold);color:var(--gold-soft);
+    padding:12px 26px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;
+    border-radius:2px;transition:all .25s ease;
+  }
+  .btn-outline:hover{background:var(--gold);color:#111;}
+  .btn-fill{
+    background:var(--gold);color:#141210;
+    padding:13px 28px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;
+    border-radius:2px;font-weight:500;transition:all .25s ease;
+  }
+  .btn-fill:hover{background:var(--gold-soft);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;height:92vh;min-height:720px;
+    display:flex;align-items:flex-end;
+    background:
+      linear-gradient(180deg, rgba(17,17,17,0.15) 0%, rgba(17,17,17,0.35) 55%, rgba(17,17,17,0.98) 100%),
+      linear-gradient(135deg,#2b2620,#181614 60%);
+    overflow:hidden;
+  }
+  .hero-ph{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    color:rgba(255,255,255,0.22);font-size:14px;letter-spacing:0.08em;
+    border:1px dashed rgba(255,255,255,0.12);
+  }
+  .hero-content{position:relative;z-index:2;padding:0 64px 90px;max-width:1280px;margin:0 auto;width:100%;}
+  .hero-content .eyebrow{margin-bottom:22px;display:block;}
+  .hero-content h1{font-size:76px;line-height:1.03;max-width:820px;color:var(--text-white);}
+  .hero-content h1 em{font-style:italic;color:var(--gold-soft);}
+  .hero-sub{margin-top:26px;font-size:16px;color:var(--text-gray);max-width:460px;line-height:1.6;font-weight:300;}
+  .hero-actions{margin-top:44px;display:flex;gap:18px;}
+  .scroll-cue{
+    position:absolute;bottom:36px;left:64px;z-index:2;
+    display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:0.2em;color:var(--text-gray);
+    text-transform:uppercase;
+  }
+  .scroll-line{width:1px;height:38px;background:linear-gradient(var(--gold),transparent);}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:130px 0;}
+  .section-head{max-width:640px;margin-bottom:70px;}
+  .section-head .eyebrow{margin-bottom:18px;display:block;}
+  .section-head h2{font-size:44px;line-height:1.15;color:var(--text-white);}
+  .section-head p{margin-top:20px;color:var(--text-gray);font-size:15px;line-height:1.7;max-width:520px;}
+  .divider{width:60px;height:1px;background:var(--gold);margin:24px 0;}
+
+  /* ---------- INTRO ---------- */
+  .intro{background:var(--bg-secondary);}
+  .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .intro-text .eyebrow{margin-bottom:18px;display:block;}
+  .intro-text h2{font-size:42px;line-height:1.2;margin-bottom:24px;}
+  .intro-text p{color:var(--text-gray);font-size:15px;line-height:1.8;margin-bottom:14px;}
+  .intro-images{position:relative;height:460px;}
+  .ph-block{
+    background:linear-gradient(150deg,#242220,#151412);
+    border:1px solid var(--hair);border-radius:4px;
+    display:flex;align-items:center;justify-content:center;
+    color:rgba(245,243,238,0.32);font-size:12.5px;letter-spacing:0.05em;text-align:center;
+    padding:16px;
+  }
+  .intro-images .ph-block:nth-child(1){position:absolute;top:0;left:0;width:65%;height:70%;}
+  .intro-images .ph-block:nth-child(2){position:absolute;bottom:0;right:0;width:52%;height:55%;border:1px solid var(--gold);}
+
+  /* ---------- CATEGORIES ---------- */
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+  .cat-card{
+    background:var(--card);border:1px solid var(--hair);border-radius:6px;
+    padding:36px 28px;text-align:center;transition:all .3s ease;cursor:pointer;
+  }
+  .cat-card:hover{border-color:var(--gold);transform:translateY(-6px);box-shadow:0 24px 48px rgba(0,0,0,0.4);}
+  .cat-icon{
+    width:56px;height:56px;border-radius:50%;margin:0 auto 22px;
+    background:rgba(201,162,75,0.1);border:1px solid var(--hair);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:22px;
+  }
+  .cat-card h3{font-size:19px;color:var(--text-white);margin-bottom:8px;}
+  .cat-card p{font-size:12.5px;color:var(--text-gray);letter-spacing:0.03em;}
+
+  /* ---------- FEATURED MEALS ---------- */
+  .featured{background:var(--bg-secondary);}
+  .meal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
+  .meal-card{
+    background:var(--card);border:1px solid var(--hair);border-radius:6px;overflow:hidden;
+    transition:all .3s ease;
+  }
+  .meal-card:hover{border-color:var(--gold);transform:translateY(-6px);}
+  .meal-img{height:220px;background:linear-gradient(160deg,#26231f,#161513);
+    display:flex;align-items:center;justify-content:center;color:rgba(245,243,238,0.28);
+    font-size:12px;letter-spacing:0.04em;text-align:center;padding:12px;position:relative;}
+  .meal-badge{
+    position:absolute;top:14px;left:14px;background:var(--gold);color:#141210;
+    font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 11px;border-radius:2px;font-weight:600;
+  }
+  .meal-body{padding:22px 24px 26px;}
+  .meal-body h3{font-size:19px;color:var(--text-white);margin-bottom:6px;}
+  .meal-body p{font-size:12.5px;color:var(--text-gray);margin-bottom:16px;line-height:1.5;}
+  .meal-foot{display:flex;justify-content:space-between;align-items:center;}
+  .price{color:var(--gold-soft);font-size:16px;font-family:'Cormorant Garamond',serif;}
+  .add-link{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-gray);border-bottom:1px solid var(--hair);padding-bottom:2px;}
+  .add-link:hover{color:var(--gold-soft);border-color:var(--gold);}
+
+  /* ---------- CHEF SPECIAL ---------- */
+  .special{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    background:var(--card);border:1px solid var(--hair);border-radius:8px;overflow:hidden;
+  }
+  .special-img{
+    background:linear-gradient(155deg,#292520,#141311);
+    display:flex;align-items:center;justify-content:center;color:rgba(245,243,238,0.3);
+    font-size:13px;min-height:480px;
+  }
+  .special-content{padding:70px 64px;display:flex;flex-direction:column;justify-content:center;}
+  .special-content .eyebrow{margin-bottom:18px;}
+  .special-content h2{font-size:38px;margin-bottom:20px;}
+  .special-content p{color:var(--text-gray);font-size:14.5px;line-height:1.8;margin-bottom:32px;}
+
+  /* ---------- DINING EXPERIENCE ---------- */
+  .dining{background:var(--bg-secondary);}
+  .dine-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:24px;height:520px;}
+  .dine-grid .ph-block:nth-child(1){grid-row:span 2;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .test-card{
+    background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:38px 34px;
+  }
+  .stars{color:var(--gold);font-size:13px;letter-spacing:3px;margin-bottom:20px;}
+  .test-card p{font-size:15px;line-height:1.8;color:#DAD7CE;font-family:'Cormorant Garamond',serif;font-style:italic;margin-bottom:26px;}
+  .test-who{display:flex;align-items:center;gap:14px;}
+  .avatar{width:40px;height:40px;border-radius:50%;background:rgba(201,162,75,0.14);border:1px solid var(--hair);}
+  .test-who .name{font-size:13px;color:var(--text-white);}
+  .test-who .loc{font-size:11.5px;color:var(--text-gray);}
+
+  /* ---------- ORDERING PROCESS ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;}
+  .step{position:relative;padding-top:26px;border-top:1px solid var(--hair);}
+  .step .num{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold);letter-spacing:0.1em;margin-bottom:18px;display:block;}
+  .step h3{font-size:22px;margin-bottom:12px;}
+  .step p{font-size:14px;color:var(--text-gray);line-height:1.7;}
+
+  /* ---------- RESERVATION CTA BAND ---------- */
+  .cta-band{
+    background:linear-gradient(120deg,#1B1B1B,#141311);
+    border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+    padding:100px 0;text-align:center;
+  }
+  .cta-band .eyebrow{display:block;margin-bottom:20px;}
+  .cta-band h2{font-size:48px;max-width:640px;margin:0 auto 32px;line-height:1.2;}
+  .cta-actions{display:flex;justify-content:center;gap:18px;}
+
+  /* ---------- LOCATION ---------- */
+  .loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--hair);border-radius:8px;overflow:hidden;}
+  .loc-map{background:linear-gradient(150deg,#221f1c,#141311);min-height:420px;display:flex;align-items:center;justify-content:center;color:rgba(245,243,238,0.3);font-size:13px;}
+  .loc-info{background:var(--card);padding:60px;display:flex;flex-direction:column;justify-content:center;}
+  .loc-row{display:flex;gap:16px;margin-bottom:22px;}
+  .loc-row .icon{color:var(--gold);font-size:15px;padding-top:2px;}
+  .loc-row .label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-gray);margin-bottom:4px;}
+  .loc-row .value{font-size:15px;color:var(--text-white);}
+
+  /* ---------- INSTAGRAM ---------- */
+  .insta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+  .insta-item{
+    aspect-ratio:1/1;background:linear-gradient(160deg,#242220,#161513);
+    display:flex;align-items:center;justify-content:center;color:rgba(245,243,238,0.25);
+    font-size:11.5px;text-align:center;padding:10px;transition:opacity .25s;
+  }
+  .insta-item:hover{opacity:0.7;}
+
+  /* ---------- NEWSLETTER ---------- */
+  .news{background:var(--bg-secondary);text-align:center;}
+  .news h2{font-size:38px;margin-bottom:16px;}
+  .news p{color:var(--text-gray);font-size:14.5px;margin-bottom:36px;}
+  .news-form{display:flex;justify-content:center;gap:0;max-width:460px;margin:0 auto;}
+  .news-form input{
+    flex:1;background:transparent;border:1px solid var(--hair);border-right:none;
+    padding:16px 20px;color:var(--text-white);font-size:14px;font-family:'Inter',sans-serif;
+    border-radius:2px 0 0 2px;
+  }
+  .news-form input::placeholder{color:var(--text-gray);}
+  .news-form button{
+    background:var(--gold);color:#141210;border:none;padding:16px 28px;
+    font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;
+    border-radius:0 2px 2px 0;cursor:pointer;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--hair);padding:80px 0 40px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.3fr;gap:40px;margin-bottom:70px;}
+  .foot-brand .logo{margin-bottom:18px;}
+  .foot-brand p{font-size:13px;color:var(--text-gray);line-height:1.7;max-width:220px;margin-bottom:24px;}
+  .foot-social{display:flex;gap:14px;}
+  .foot-social span{
+    width:34px;height:34px;border:1px solid var(--hair);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-gray);
+  }
+  .foot-col h4{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;font-weight:500;}
+  .foot-col a{display:block;font-size:14px;color:var(--text-gray);margin-bottom:14px;}
+  .foot-col a:hover{color:var(--gold-soft);}
+  .foot-bottom{
+    border-top:1px solid var(--hair);padding-top:28px;display:flex;justify-content:space-between;
+    font-size:12px;color:var(--text-gray);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">BFF<span>·</span>LAGOS</div>
+    <nav class="navlinks">
+    <a href="#" onclick="goTo('home')">Home</a>
+    <a href="#" onclick="goTo('about')">About</a>
+    <a href="#" onclick="goTo('staff')">Our Staff</a>
+    <a href="#" onclick="goTo('menu')">Menu & Order</a>
+    <a href="#" onclick="goTo('careers')">Careers</a>
+    <a href="#" onclick="goTo('help')">Help</a>
+    <a href="#" onclick="goTo('contact')">Contact</a>
+</nav>
+    <div class="navcta">
+      <a class="btn-outline" href="#">Reserve a table</a>
+      <a class="btn-fill" href="#">Order now</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-ph">[ Restaurant Entrance — Golden Hour ]</div>
+  <div class="hero-content">
+    <span class="eyebrow">Lagos · Est. Premium Dining</span>
+    <h1>Food made for<br><em>friends who feel</em><br>like family.</h1>
+    <p class="hero-sub">An intimate table, an open kitchen, and a menu built around the flavours Lagos grew up on — elevated.</p>
+    <div class="hero-actions">
+      <a class="btn-fill" href="#">Order now</a>
+      <a class="btn-outline" href="#">Reserve a table</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="scroll-line"></div>Scroll</div>
+</section>
+
+<section class="intro">
+  <div class="wrap intro-grid">
+    <div class="intro-text">
+      <span class="eyebrow">Our story</span>
+      <h2>A table built for<br>the people you love.</h2>
+      <p>[ Placeholder introductory paragraph — one to two sentences on the restaurant's philosophy of hospitality, gathering, and craft. ]</p>
+      <p>[ Placeholder secondary line — a note on the open-kitchen concept and the sourcing ethos. ]</p>
+      <div class="divider"></div>
+      <a class="btn-outline" href="#">See our story</a>
+    </div>
+    <div class="intro-images">
+      <div class="ph-block">[ Interior Wide Shot — Dining Hall ]</div>
+      <div class="ph-block">[ Chef Preparing Signature Meal ]</div>
+    </div>
+  </div>
+</section>
+
+<section class="categories">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What to expect</span>
+      <h2>Popular categories</h2>
+      <p>[ Placeholder line introducing the menu's main pillars. ]</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card"><div class="cat-icon">◈</div><h3>Burgers</h3><p>[ Category Icon Placeholder ]</p></div>
+      <div class="cat-card"><div class="cat-icon">◈</div><h3>Chicken</h3><p>[ Category Icon Placeholder ]</p></div>
+      <div class="cat-card"><div class="cat-icon">◈</div><h3>Desserts</h3><p>[ Category Icon Placeholder ]</p></div>
+      <div class="cat-card"><div class="cat-icon">◈</div><h3>Drinks</h3><p>[ Category Icon Placeholder ]</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="featured">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Guest favourites</span>
+      <h2>Featured meals</h2>
+      <p>[ Placeholder line on the most-ordered dishes this month. ]</p>
+    </div>
+    <div class="meal-grid">
+      <div class="meal-card">
+        <div class="meal-img"><span class="meal-badge">Popular</span>[ Premium Burger ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Short placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><a class="add-link" href="#">Add</a></div>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-img">[ Signature Meal ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Short placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><a class="add-link" href="#">Add</a></div>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-img"><span class="meal-badge">New</span>[ Dessert ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Short placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><a class="add-link" href="#">Add</a></div>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-img">[ Coffee Bar ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Short placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><a class="add-link" href="#">Add</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chefspecial">
+  <div class="wrap">
+    <div class="special">
+      <div class="special-img">[ Chef Plating Special Dish ]</div>
+      <div class="special-content">
+        <span class="eyebrow">Chef's special</span>
+        <h2>This week's signature plate</h2>
+        <p>[ Placeholder paragraph describing the rotating chef's special, its inspiration, and why it's limited-time. ]</p>
+        <div><a class="btn-fill" href="#">Reserve to taste it</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dining">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The experience</span>
+      <h2>Dining, the BFF way</h2>
+      <p>[ Placeholder line on ambience — indoor, outdoor, and family seating. ]</p>
+    </div>
+    <div class="dine-grid">
+      <div class="ph-block">[ Family Dining Experience ]</div>
+      <div class="ph-block">[ Outdoor Terrace Seating ]</div>
+      <div class="ph-block">[ Happy Guests ]</div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Word on the street</span>
+      <h2>What guests are saying</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>[ Placeholder testimonial quote — one to two sentences on the food and service. ]</p>
+        <div class="test-who"><div class="avatar"></div><div><div class="name">[ Guest Name ]</div><div class="loc">[ Lekki, Lagos ]</div></div></div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>[ Placeholder testimonial quote — one to two sentences on the food and service. ]</p>
+        <div class="test-who"><div class="avatar"></div><div><div class="name">[ Guest Name ]</div><div class="loc">[ Ikoyi, Lagos ]</div></div></div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>[ Placeholder testimonial quote — one to two sentences on the food and service. ]</p>
+        <div class="test-who"><div class="avatar"></div><div><div class="name">[ Guest Name ]</div><div class="loc">[ Victoria Island ]</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ordering">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Ordering, made simple</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="num">01</span><h3>Choose your meal</h3><p>[ Placeholder step description. ]</p></div>
+      <div class="step"><span class="num">02</span><h3>Customize &amp; checkout</h3><p>[ Placeholder step description. ]</p></div>
+      <div class="step"><span class="num">03</span><h3>Delivered or ready for pickup</h3><p>[ Placeholder step description. ]</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <span class="eyebrow">Reservations</span>
+    <h2>Some evenings are better spent at our table.</h2>
+    <div class="cta-actions">
+      <a class="btn-fill" href="#">Reserve a table</a>
+      <a class="btn-outline" href="#">View the menu</a>
+    </div>
+  </div>
+</section>
+
+<section class="location">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Find us</span>
+      <h2>Visit BFF-LAGOS</h2>
+    </div>
+    <div class="loc-grid">
+      <div class="loc-map">[ Google Maps Placeholder ]</div>
+      <div class="loc-info">
+        <div class="loc-row"><span class="icon">⚲</span><div><div class="label">Address</div><div class="value">[ Street Address Placeholder, Lagos ]</div></div></div>
+        <div class="loc-row"><span class="icon">☏</span><div><div class="label">Phone</div><div class="value">[ +234 000 000 0000 ]</div></div></div>
+        <div class="loc-row"><span class="icon">✉</span><div><div class="label">Email</div><div class="value">[ hello@bfflagos.com ]</div></div></div>
+        <div class="loc-row"><span class="icon">◷</span><div><div class="label">Hours</div><div class="value">[ Mon–Sun, 10:00 – 23:00 ]</div></div></div>
+        <div style="margin-top:12px;"><a class="btn-outline" href="#">Get directions</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="instagram">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">@bfflagos</span>
+      <h2>From our table to yours</h2>
+    </div>
+    <div class="insta-grid">
+      <div class="insta-item">[ UGC Image 1 ]</div>
+      <div class="insta-item">[ UGC Image 2 ]</div>
+      <div class="insta-item">[ UGC Image 3 ]</div>
+      <div class="insta-item">[ UGC Image 4 ]</div>
+    </div>
+  </div>
+</section>
+
+<section class="news">
+  <div class="wrap">
+    <h2>Stay close to the kitchen.</h2>
+    <p>[ Placeholder line inviting sign-up for offers and new menu drops. ]</p>
+    <div class="news-form">
+      <input type="text" placeholder="name@email.com">
+      <button>Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">BFF<span>·</span>LAGOS</div>
+        <p>[ Placeholder one-line brand tagline reflecting warmth and craft. ]</p>
+        <div class="foot-social">
+          <span>IG</span><span>TT</span><span>X</span><span>WA</span>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="#">About</a><a href="#">Our Staff</a><a href="#">Careers</a></div>
+      <div class="foot-col"><h4>Order</h4><a href="#">Menu</a><a href="#">Delivery Zones</a><a href="#">Pickup Locations</a></div>
+      <div class="foot-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact</a><a href="#">FAQs</a></div>
+      <div class="foot-col"><h4>Newsletter</h4><p style="font-size:13px;color:var(--text-gray);margin-bottom:16px;">[ Placeholder short invite line ]</p></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BFF-LAGOS. All rights reserved.</span>
+      <span>Privacy Policy · Terms · Site Credits</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+<script src="navigation.js"></script>
+</html>

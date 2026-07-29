@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BFF-LAGOS — Menu &amp; Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-primary:#111111;
+    --bg-secondary:#1B1B1B;
+    --card:#1F1E1C;
+    --gold:#C9A24B;
+    --gold-soft:#E4C97A;
+    --cream:#F3ECDD;
+    --text-white:#F5F3EE;
+    --text-gray:#9B9890;
+    --hair:rgba(201,162,75,0.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg-primary);color:var(--text-white);font-family:'Inter',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:0.01em;}
+  .eyebrow{text-transform:uppercase;letter-spacing:0.28em;font-size:11px;color:var(--gold);font-weight:500;}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 64px;}
+  a{color:inherit;text-decoration:none;}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(17,17,17,0.94);border-bottom:1px solid var(--hair);}
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;height:88px;padding-left:64px;padding-right:64px;}
+  .logo{font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:0.06em;color:var(--text-white);}
+  .logo span{color:var(--gold);}
+  .navlinks{display:flex;gap:40px;font-size:13px;letter-spacing:0.04em;color:var(--text-gray);}
+  .navlinks a.active{color:var(--gold-soft);}
+  .navlinks a:hover{color:var(--gold-soft);}
+  .navcta{display:flex;align-items:center;gap:20px;}
+  .cart-icon{position:relative;font-size:18px;color:var(--text-white);}
+  .cart-badge{position:absolute;top:-8px;right:-10px;background:var(--gold);color:#141210;font-size:10px;font-weight:600;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .btn-outline{border:1px solid var(--gold);color:var(--gold-soft);padding:12px 26px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;transition:all .25s ease;}
+  .btn-outline:hover{background:var(--gold);color:#111;}
+  .btn-fill{background:var(--gold);color:#141210;padding:13px 28px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;font-weight:500;transition:all .25s ease;}
+  .btn-fill:hover{background:var(--gold-soft);}
+  .btn-small{background:var(--gold);color:#141210;padding:9px 18px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;font-weight:500;border:none;cursor:pointer;}
+
+  /* HERO / SEARCH */
+  .menu-hero{position:relative;padding:70px 0 0;
+    background:linear-gradient(180deg, rgba(17,17,17,0.15) 0%, rgba(17,17,17,0.98) 100%), linear-gradient(135deg,#221f19,#171512 60%);}
+  .menu-hero-content{padding-bottom:50px;}
+  .crumb{font-size:12px;color:var(--text-gray);letter-spacing:0.05em;margin-bottom:18px;}
+  .crumb span{color:var(--gold-soft);}
+  .menu-hero h1{font-size:52px;line-height:1.1;max-width:640px;margin-bottom:36px;}
+  .search-row{display:flex;gap:14px;max-width:640px;margin-bottom:36px;}
+  .search-bar{flex:1;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--hair);
+    border-radius:2px;padding:15px 20px;}
+  .search-bar input{background:none;border:none;color:var(--text-white);font-size:14px;font-family:'Inter',sans-serif;flex:1;outline:none;}
+  .search-bar input::placeholder{color:var(--text-gray);}
+  .search-icon{color:var(--gold);}
+  .filter-btn{display:flex;align-items:center;gap:8px;border:1px solid var(--hair);color:var(--text-gray);padding:15px 22px;border-radius:2px;font-size:13px;}
+  .chip-row{display:flex;gap:12px;flex-wrap:wrap;padding-bottom:6px;}
+  .chip{border:1px solid var(--hair);color:var(--text-gray);padding:11px 22px;border-radius:20px;font-size:13px;letter-spacing:0.02em;cursor:pointer;transition:all .2s;}
+  .chip.active{background:var(--gold);color:#141210;border-color:var(--gold);font-weight:500;}
+  .chip:hover:not(.active){border-color:var(--gold);color:var(--gold-soft);}
+
+  /* STICKY SUBNAV */
+  .subnav{position:sticky;top:88px;z-index:55;background:rgba(17,17,17,0.96);border-bottom:1px solid var(--hair);backdrop-filter:blur(10px);}
+  .subnav-row{display:flex;gap:36px;height:56px;align-items:center;font-size:13px;color:var(--text-gray);overflow-x:auto;}
+  .subnav-row a.active{color:var(--gold-soft);border-bottom:2px solid var(--gold);padding-bottom:18px;}
+  .subnav-row a{white-space:nowrap;}
+
+  section{padding:90px 0;}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;}
+  .section-head .eyebrow{margin-bottom:14px;display:block;}
+  .section-head h2{font-size:34px;}
+  .view-all{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-soft);border-bottom:1px solid var(--hair);padding-bottom:3px;}
+
+  .ph-block{background:linear-gradient(150deg,#242220,#151412);border:1px solid var(--hair);border-radius:4px;
+    display:flex;align-items:center;justify-content:center;color:rgba(245,243,238,0.32);font-size:12px;letter-spacing:0.05em;text-align:center;padding:12px;}
+
+  /* OFFERS */
+  .offers{background:var(--bg-secondary);padding:60px 0;}
+  .offer-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .offer-card{position:relative;height:200px;border-radius:6px;overflow:hidden;border:1px solid var(--hair);
+    background:linear-gradient(150deg,#26221c,#161412);display:flex;align-items:flex-end;padding:26px;}
+  .offer-card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(17,17,17,0.9) 10%, rgba(17,17,17,0.1) 60%);}
+  .offer-tag{position:absolute;top:18px;left:18px;z-index:2;background:var(--gold);color:#141210;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:2px;font-weight:600;}
+  .offer-text{position:relative;z-index:2;}
+  .offer-text h3{font-size:20px;color:var(--text-white);}
+  .offer-text p{font-size:12.5px;color:var(--text-gray);margin-top:4px;}
+
+  /* MEAL GRID */
+  .meal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .meal-card{background:var(--card);border:1px solid var(--hair);border-radius:6px;overflow:hidden;transition:all .3s ease;position:relative;}
+  .meal-card:hover{border-color:var(--gold);transform:translateY(-5px);}
+  .meal-img{height:190px;position:relative;color:rgba(245,243,238,0.28);font-size:11.5px;text-align:center;padding:10px;}
+  .meal-badge{position:absolute;top:12px;left:12px;background:var(--gold);color:#141210;font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 10px;border-radius:2px;font-weight:600;z-index:2;}
+  .heart{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;background:rgba(17,17,17,0.6);
+    display:flex;align-items:center;justify-content:center;color:var(--text-gray);font-size:13px;z-index:2;}
+  .meal-body{padding:18px 20px 22px;}
+  .meal-body h3{font-size:17px;color:var(--text-white);margin-bottom:5px;}
+  .meal-body p{font-size:11.5px;color:var(--text-gray);margin-bottom:14px;line-height:1.5;}
+  .meal-foot{display:flex;justify-content:space-between;align-items:center;}
+  .price{color:var(--gold-soft);font-size:15px;font-family:'Cormorant Garamond',serif;}
+
+  /* COMBO */
+  .combo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .combo-card{background:var(--card);border:1px solid var(--hair);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;}
+  .combo-img{height:170px;color:rgba(245,243,238,0.28);font-size:12px;text-align:center;padding:10px;}
+  .combo-body{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column;}
+  .combo-body h3{font-size:18px;margin-bottom:8px;}
+  .combo-items{font-size:12px;color:var(--text-gray);line-height:1.7;margin-bottom:16px;flex:1;}
+  .combo-foot{display:flex;justify-content:space-between;align-items:center;}
+
+  /* DELIVERY / PICKUP */
+  .dp-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  .dp-card{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:44px 40px;}
+  .dp-card .eyebrow{margin-bottom:18px;display:block;}
+  .dp-card h3{font-size:24px;margin-bottom:16px;}
+  .dp-card p{font-size:14px;color:var(--text-gray);line-height:1.8;margin-bottom:22px;}
+  .dp-row{display:flex;justify-content:space-between;font-size:13px;color:var(--text-gray);padding:12px 0;border-top:1px solid var(--hair);}
+  .dp-row span:last-child{color:var(--text-white);}
+
+  /* CART BAR (sticky bottom demonstration) */
+  .cart-bar{
+    position:sticky;bottom:0;z-index:70;background:var(--card);border-top:1px solid var(--gold);
+    padding:20px 0;
+  }
+  .cart-bar-inner{display:flex;justify-content:space-between;align-items:center;}
+  .cart-bar-left{display:flex;align-items:center;gap:16px;}
+  .cart-count{width:32px;height:32px;border-radius:50%;background:var(--gold);color:#141210;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+  .cart-bar-left .label{font-size:14px;color:var(--text-white);}
+  .cart-bar-left .sub{font-size:12px;color:var(--text-gray);}
+
+  footer{border-top:1px solid var(--hair);padding:80px 0 40px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.3fr;gap:40px;margin-bottom:70px;}
+  .foot-brand .logo{margin-bottom:18px;}
+  .foot-brand p{font-size:13px;color:var(--text-gray);line-height:1.7;max-width:220px;margin-bottom:24px;}
+  .foot-social{display:flex;gap:14px;}
+  .foot-social span{width:34px;height:34px;border:1px solid var(--hair);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-gray);}
+  .foot-col h4{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;font-weight:500;}
+  .foot-col a{display:block;font-size:14px;color:var(--text-gray);margin-bottom:14px;}
+  .foot-col a:hover{color:var(--gold-soft);}
+  .foot-bottom{border-top:1px solid var(--hair);padding-top:28px;display:flex;justify-content:space-between;font-size:12px;color:var(--text-gray);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">BFF<span>·</span>LAGOS</div>
+   <nav class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="staff.html">Our Staff</a>
+    <a href="menu.html">Menu & Order</a>
+    <a href="careers.html">Careers</a>
+    <a href="help.html">Help</a>
+    <a href="#" onclick="goTo('contact')">Contact</a>
+</nav>
+    <div class="navcta">
+      <a class="btn-outline" href="#">Reserve a table</a>
+      <div class="cart-icon">▤<span class="cart-badge">3</span></div>
+    </div>
+  </nav>
+</header>
+
+<section class="menu-hero">
+  <div class="wrap menu-hero-content">
+    <div class="crumb">Home / <span>Menu &amp; Order</span></div>
+    <h1>Order the food<br>you already crave.</h1>
+    <div class="search-row">
+      <div class="search-bar">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search the menu — e.g. 'grilled chicken'">
+      </div>
+      <div class="filter-btn">⚙ Filter</div>
+    </div>
+    <div class="chip-row">
+      <div class="chip active">All</div>
+      <div class="chip">Burgers</div>
+      <div class="chip">Chicken</div>
+      <div class="chip">Fries</div>
+      <div class="chip">Desserts</div>
+      <div class="chip">Drinks</div>
+      <div class="chip">Combos</div>
+    </div>
+  </div>
+</section>
+
+<div class="subnav">
+  <div class="wrap subnav-row">
+    <a href="#" class="active">All</a>
+    <a href="#">Burgers</a>
+    <a href="#">Chicken</a>
+    <a href="#">Fries</a>
+    <a href="#">Desserts</a>
+    <a href="#">Drinks</a>
+    <a href="#">Combos</a>
+  </div>
+</div>
+
+<section class="offers">
+  <div class="wrap">
+    <div class="section-head"><span class="eyebrow" style="margin-bottom:0;">Special offers</span></div>
+    <div class="offer-row">
+      <div class="offer-card"><span class="offer-tag">-20%</span>
+        <div class="offer-text"><h3>[ Offer Title Placeholder ]</h3><p>[ Offer subtext placeholder ]</p></div>
+      </div>
+      <div class="offer-card"><span class="offer-tag">Bundle</span>
+        <div class="offer-text"><h3>[ Offer Title Placeholder ]</h3><p>[ Offer subtext placeholder ]</p></div>
+      </div>
+      <div class="offer-card"><span class="offer-tag">New</span>
+        <div class="offer-text"><h3>[ Offer Title Placeholder ]</h3><p>[ Offer subtext placeholder ]</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="recommended">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">Recommended for you</span><h2>Based on your last order</h2></div>
+      <a class="view-all" href="#">View all</a>
+    </div>
+    <div class="meal-grid">
+      <div class="meal-card">
+        <div class="meal-img ph-block"><span class="meal-badge">For you</span><span class="heart">♡</span>[ Burger Close-up ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-img ph-block"><span class="heart">♡</span>[ Chicken Item Close-up ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-img ph-block"><span class="heart">♡</span>[ Dessert Close-up ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-img ph-block"><span class="heart">♡</span>[ Drink Close-up ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="popular" style="background:var(--bg-secondary);">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">Guest favourites</span><h2>Popular items</h2></div>
+      <a class="view-all" href="#">View all</a>
+    </div>
+    <div class="meal-grid">
+      <div class="meal-card">
+        <div class="meal-img ph-block"><span class="meal-badge">Popular</span><span class="heart">♡</span>[ Burger Close-up ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-img ph-block"><span class="meal-badge">Popular</span><span class="heart">♡</span>[ Fries Close-up ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-img ph-block"><span class="heart">♡</span>[ Chicken Item Close-up ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-img ph-block"><span class="heart">♡</span>[ Dessert Close-up ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Placeholder description ]</p>
+          <div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="combos">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">Best value</span><h2>Combo meals</h2></div>
+      <a class="view-all" href="#">View all</a>
+    </div>
+    <div class="combo-row">
+      <div class="combo-card">
+        <div class="combo-img ph-block">[ Combo Meal Bundle Shot ]</div>
+        <div class="combo-body">
+          <h3>[ Combo Name ]</h3>
+          <div class="combo-items">[ Item 1 ]<br>[ Item 2 ]<br>[ Item 3 ]</div>
+          <div class="combo-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-img ph-block">[ Combo Meal Bundle Shot ]</div>
+        <div class="combo-body">
+          <h3>[ Combo Name ]</h3>
+          <div class="combo-items">[ Item 1 ]<br>[ Item 2 ]<br>[ Item 3 ]</div>
+          <div class="combo-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-img ph-block">[ Combo Meal Bundle Shot ]</div>
+        <div class="combo-body">
+          <h3>[ Combo Name ]</h3>
+          <div class="combo-items">[ Item 1 ]<br>[ Item 2 ]<br>[ Item 3 ]</div>
+          <div class="combo-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cat-burgers" style="background:var(--bg-secondary);">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">Category</span><h2>Burgers</h2></div></div>
+    <div class="meal-grid">
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Burger Close-up 1 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Burger Close-up 2 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Burger Close-up 3 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Burger Close-up 4 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cat-chicken">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">Category</span><h2>Chicken</h2></div></div>
+    <div class="meal-grid">
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Chicken Close-up 1 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Chicken Close-up 2 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Chicken Close-up 3 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cat-fries" style="background:var(--bg-secondary);">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">Category</span><h2>Fries</h2></div></div>
+    <div class="meal-grid">
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Fries Close-up 1 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Fries Close-up 2 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cat-desserts">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">Category</span><h2>Desserts</h2></div></div>
+    <div class="meal-grid">
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Dessert Close-up 1 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Dessert Close-up 2 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Dessert Close-up 3 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cat-drinks" style="background:var(--bg-secondary);">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">Category</span><h2>Drinks</h2></div></div>
+    <div class="meal-grid">
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Drink Close-up 1 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Drink Close-up 2 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+      <div class="meal-card"><div class="meal-img ph-block"><span class="heart">♡</span>[ Drink Close-up 3 ]</div>
+        <div class="meal-body"><h3>[ Meal Name ]</h3><p>[ Description ]</p><div class="meal-foot"><span class="price">₦[ 0,000 ]</span><button class="btn-small">Add</button></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="fulfillment">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">Getting your order</span><h2>Delivery &amp; pickup</h2></div></div>
+    <div class="dp-grid">
+      <div class="dp-card">
+        <span class="eyebrow">Delivery</span>
+        <h3>Straight to your door</h3>
+        <p>[ Placeholder paragraph on delivery service, zones covered, and expected timing. ]</p>
+        <div class="dp-row"><span>Coverage</span><span>[ Lekki · Ikoyi · VI · Yaba ]</span></div>
+        <div class="dp-row"><span>Estimated time</span><span>[ 35–50 mins ]</span></div>
+        <div class="dp-row"><span>Minimum order</span><span>₦[ 0,000 ]</span></div>
+      </div>
+      <div class="dp-card">
+        <span class="eyebrow">Pickup</span>
+        <h3>Ready when you arrive</h3>
+        <p>[ Placeholder paragraph on pickup process and designated pickup counter. ]</p>
+        <div class="dp-row"><span>Pickup locations</span><span>[ 2 Locations ]</span></div>
+        <div class="dp-row"><span>Estimated time</span><span>[ 15–20 mins ]</span></div>
+        <div class="dp-row"><span>Order ahead</span><span>[ Up to 24 hrs ]</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cart-bar">
+  <div class="wrap cart-bar-inner">
+    <div class="cart-bar-left">
+      <div class="cart-count">3</div>
+      <div><div class="label">3 items in cart</div><div class="sub">Subtotal: ₦[ 0,000 ]</div></div>
+    </div>
+    <a class="btn-fill" href="#">Checkout</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">BFF<span>·</span>LAGOS</div>
+        <p>[ Placeholder one-line brand tagline reflecting warmth and craft. ]</p>
+        <div class="foot-social"><span>IG</span><span>TT</span><span>X</span><span>WA</span></div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="#">About</a><a href="#">Our Staff</a><a href="#">Careers</a></div>
+      <div class="foot-col"><h4>Order</h4><a href="#">Menu</a><a href="#">Delivery Zones</a><a href="#">Pickup Locations</a></div>
+      <div class="foot-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact</a><a href="#">FAQs</a></div>
+      <div class="foot-col"><h4>Newsletter</h4><p style="font-size:13px;color:var(--text-gray);margin-bottom:16px;">[ Placeholder short invite line ]</p></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BFF-LAGOS. All rights reserved.</span>
+      <span>Privacy Policy · Terms · Site Credits</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

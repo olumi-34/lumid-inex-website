@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BFF-LAGOS — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-primary:#111111;
+    --bg-secondary:#1B1B1B;
+    --card:#1F1E1C;
+    --gold:#C9A24B;
+    --gold-soft:#E4C97A;
+    --cream:#F3ECDD;
+    --text-white:#F5F3EE;
+    --text-gray:#9B9890;
+    --hair:rgba(201,162,75,0.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg-primary);color:var(--text-white);font-family:'Inter',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:0.01em;}
+  .eyebrow{text-transform:uppercase;letter-spacing:0.28em;font-size:11px;color:var(--gold);font-weight:500;}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 64px;}
+  a{color:inherit;text-decoration:none;}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:50;background:rgba(17,17,17,0.92);border-bottom:1px solid var(--hair);}
+  nav.wrap{display:flex;align-items:center;justify-content:space-between;height:88px;padding-left:64px;padding-right:64px;}
+  .logo{font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:0.06em;color:var(--text-white);}
+  .logo span{color:var(--gold);}
+  .navlinks{display:flex;gap:40px;font-size:13px;letter-spacing:0.04em;color:var(--text-gray);}
+  .navlinks a.active{color:var(--gold-soft);}
+  .navlinks a:hover{color:var(--gold-soft);}
+  .navcta{display:flex;align-items:center;gap:16px;}
+  .btn-outline{border:1px solid var(--gold);color:var(--gold-soft);padding:12px 26px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;transition:all .25s ease;}
+  .btn-outline:hover{background:var(--gold);color:#111;}
+  .btn-fill{background:var(--gold);color:#141210;padding:13px 28px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;border-radius:2px;font-weight:500;transition:all .25s ease;}
+  .btn-fill:hover{background:var(--gold-soft);}
+
+  /* BREADCRUMB HERO (compact, not full-bleed) */
+  .page-hero{position:relative;height:56vh;min-height:440px;display:flex;align-items:flex-end;
+    background:linear-gradient(180deg, rgba(17,17,17,0.1) 0%, rgba(17,17,17,0.98) 100%), linear-gradient(135deg,#242017,#171512 60%);}
+  .page-hero-content{position:relative;z-index:2;padding:0 64px 60px;max-width:1280px;margin:0 auto;width:100%;}
+  .crumb{font-size:12px;color:var(--text-gray);letter-spacing:0.05em;margin-bottom:20px;}
+  .crumb span{color:var(--gold-soft);}
+  .page-hero h1{font-size:60px;line-height:1.08;max-width:700px;}
+
+  section{padding:120px 0;}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head .eyebrow{margin-bottom:18px;display:block;}
+  .section-head h2{font-size:42px;line-height:1.15;}
+  .section-head p{margin-top:18px;color:var(--text-gray);font-size:15px;line-height:1.7;max-width:520px;}
+  .divider{width:60px;height:1px;background:var(--gold);margin:24px 0;}
+
+  .ph-block{background:linear-gradient(150deg,#242220,#151412);border:1px solid var(--hair);border-radius:4px;
+    display:flex;align-items:center;justify-content:center;color:rgba(245,243,238,0.32);font-size:12.5px;letter-spacing:0.05em;text-align:center;padding:16px;}
+
+  /* STORY */
+  .story{background:var(--bg-secondary);}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .story-text .eyebrow{margin-bottom:18px;display:block;}
+  .story-text h2{font-size:40px;line-height:1.2;margin-bottom:22px;}
+  .story-text p{color:var(--text-gray);font-size:15px;line-height:1.85;margin-bottom:14px;}
+  .story-img{height:440px;}
+
+  /* MISSION / VISION */
+  .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  .mv-card{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:52px 48px;}
+  .mv-card .eyebrow{margin-bottom:20px;display:block;}
+  .mv-card h3{font-size:28px;margin-bottom:18px;}
+  .mv-card p{color:var(--text-gray);font-size:14.5px;line-height:1.85;}
+
+  /* CORE VALUES */
+  .values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .value-card{border-top:1px solid var(--hair);padding-top:26px;}
+  .value-num{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);letter-spacing:0.1em;margin-bottom:16px;display:block;}
+  .value-card h3{font-size:20px;margin-bottom:10px;}
+  .value-card p{font-size:13.5px;color:var(--text-gray);line-height:1.7;}
+
+  /* TIMELINE */
+  .timeline{background:var(--bg-secondary);}
+  .tl-track{position:relative;padding-top:10px;}
+  .tl-line{position:absolute;top:20px;left:0;right:0;height:1px;background:var(--hair);}
+  .tl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;position:relative;}
+  .tl-item{padding-top:40px;position:relative;}
+  .tl-dot{position:absolute;top:14px;left:0;width:11px;height:11px;border-radius:50%;background:var(--gold);border:3px solid var(--bg-secondary);}
+  .tl-year{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold-soft);margin-bottom:10px;}
+  .tl-item p{font-size:13px;color:var(--text-gray);line-height:1.6;}
+
+  /* FOUNDER */
+  .founder-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:80px;align-items:center;}
+  .founder-img{height:520px;}
+  .founder-text .eyebrow{margin-bottom:18px;display:block;}
+  .founder-text h2{font-size:38px;margin-bottom:8px;}
+  .founder-role{font-size:13px;color:var(--gold-soft);letter-spacing:0.06em;margin-bottom:26px;}
+  .founder-text p{color:var(--text-gray);font-size:15px;line-height:1.85;margin-bottom:16px;}
+  .signature{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;color:var(--gold-soft);margin-top:20px;}
+
+  /* KITCHEN PHILOSOPHY / SOURCING (alternating split) */
+  .split{background:var(--bg-secondary);}
+  .split-row{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:110px;}
+  .split-row:last-child{margin-bottom:0;}
+  .split-row.reverse .split-img{order:2;}
+  .split-row.reverse .split-text{order:1;}
+  .split-img{height:380px;}
+  .split-text .eyebrow{margin-bottom:16px;display:block;}
+  .split-text h3{font-size:32px;margin-bottom:18px;}
+  .split-text p{color:var(--text-gray);font-size:14.5px;line-height:1.85;}
+
+  /* COMMUNITY */
+  .community-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;}
+  .community-img{height:400px;}
+  .community-text .eyebrow{margin-bottom:18px;display:block;}
+  .community-text h2{font-size:36px;margin-bottom:20px;}
+  .community-text p{color:var(--text-gray);font-size:14.5px;line-height:1.85;margin-bottom:14px;}
+  .stat-row{display:flex;gap:44px;margin-top:30px;}
+  .stat .figure{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold-soft);}
+  .stat .label{font-size:11.5px;color:var(--text-gray);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;}
+
+  /* GALLERY */
+  .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:160px;gap:10px;}
+  .g1{grid-column:span 2;grid-row:span 2;}
+  .g4{grid-column:span 2;}
+
+  /* AWARDS */
+  .awards{background:var(--bg-secondary);text-align:center;}
+  .awards-strip{display:flex;justify-content:center;gap:70px;flex-wrap:wrap;margin-top:50px;}
+  .award{display:flex;flex-direction:column;align-items:center;gap:14px;color:var(--text-gray);}
+  .award-badge{width:64px;height:64px;border:1px solid var(--hair);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:22px;}
+  .award .name{font-size:12px;letter-spacing:0.05em;}
+
+  /* CTA BAND */
+  .cta-band{background:linear-gradient(120deg,#1B1B1B,#141311);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:100px 0;text-align:center;}
+  .cta-band .eyebrow{display:block;margin-bottom:20px;}
+  .cta-band h2{font-size:44px;max-width:620px;margin:0 auto 32px;line-height:1.2;}
+  .cta-actions{display:flex;justify-content:center;gap:18px;}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--hair);padding:80px 0 40px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.3fr;gap:40px;margin-bottom:70px;}
+  .foot-brand .logo{margin-bottom:18px;}
+  .foot-brand p{font-size:13px;color:var(--text-gray);line-height:1.7;max-width:220px;margin-bottom:24px;}
+  .foot-social{display:flex;gap:14px;}
+  .foot-social span{width:34px;height:34px;border:1px solid var(--hair);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-gray);}
+  .foot-col h4{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;font-weight:500;}
+  .foot-col a{display:block;font-size:14px;color:var(--text-gray);margin-bottom:14px;}
+  .foot-col a:hover{color:var(--gold-soft);}
+  .foot-bottom{border-top:1px solid var(--hair);padding-top:28px;display:flex;justify-content:space-between;font-size:12px;color:var(--text-gray);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">BFF<span>·</span>LAGOS</div>
+  <nav class="navlinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="staff.html">Our Staff</a>
+    <a href="menu.html">Menu & Order</a>
+    <a href="careers.html">Careers</a>
+    <a href="help.html">Help</a>
+   <a href="#" onclick="goTo('contact')">Contact</a>
+</nav>
+    <div class="navcta">
+      <a class="btn-outline" href="#">Reserve a table</a>
+      <a class="btn-fill" href="#">Order now</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-content">
+    <div class="crumb">Home / <span>About</span></div>
+    <h1>The story behind<br>every table we set.</h1>
+  </div>
+</section>
+
+<section class="story">
+  <div class="wrap story-grid">
+    <div class="story-img ph-block">[ Founder Walking Through Kitchen ]</div>
+    <div class="story-text">
+      <span class="eyebrow">Our story</span>
+      <h2>Started with one kitchen and a simple idea.</h2>
+      <p>[ Placeholder paragraph on the restaurant's origin — where it began and why. ]</p>
+      <p>[ Placeholder paragraph continuing the founding narrative and early days. ]</p>
+      <div class="divider"></div>
+    </div>
+  </div>
+</section>
+
+<section class="mission-vision">
+  <div class="wrap">
+    <div class="mv-grid">
+      <div class="mv-card">
+        <span class="eyebrow">Mission</span>
+        <h3>Why we cook</h3>
+        <p>[ Placeholder mission statement — two to three sentences on the purpose behind the food and hospitality. ]</p>
+      </div>
+      <div class="mv-card">
+        <span class="eyebrow">Vision</span>
+        <h3>Where we're headed</h3>
+        <p>[ Placeholder vision statement — two to three sentences on long-term ambition and impact. ]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="values">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What we stand for</span>
+      <h2>Core values</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card"><span class="value-num">01</span><h3>[ Value Name ]</h3><p>[ Placeholder description of value. ]</p></div>
+      <div class="value-card"><span class="value-num">02</span><h3>[ Value Name ]</h3><p>[ Placeholder description of value. ]</p></div>
+      <div class="value-card"><span class="value-num">03</span><h3>[ Value Name ]</h3><p>[ Placeholder description of value. ]</p></div>
+      <div class="value-card"><span class="value-num">04</span><h3>[ Value Name ]</h3><p>[ Placeholder description of value. ]</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="timeline">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our journey</span>
+      <h2>Milestones</h2>
+    </div>
+    <div class="tl-track">
+      <div class="tl-line"></div>
+      <div class="tl-grid">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">[ Year ]</div><p>[ Placeholder milestone description. ]</p></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">[ Year ]</div><p>[ Placeholder milestone description. ]</p></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">[ Year ]</div><p>[ Placeholder milestone description. ]</p></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">[ Year ]</div><p>[ Placeholder milestone description. ]</p></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">[ Year ]</div><p>[ Placeholder milestone description. ]</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="founder">
+  <div class="wrap founder-grid">
+    <div class="founder-img ph-block">[ Founder Portrait ]</div>
+    <div class="founder-text">
+      <span class="eyebrow">Founder story</span>
+      <h2>[ Founder Name ]</h2>
+      <div class="founder-role">[ Founder &amp; Executive Chef ]</div>
+      <p>[ Placeholder paragraph on the founder's background and motivation for starting BFF-LAGOS. ]</p>
+      <p>[ Placeholder paragraph on the founder's approach to food and hospitality. ]</p>
+      <div class="signature">[ Signature Placeholder ]</div>
+    </div>
+  </div>
+</section>
+
+<section class="split">
+  <div class="wrap">
+    <div class="split-row">
+      <div class="split-img ph-block">[ Kitchen Team at Work ]</div>
+      <div class="split-text">
+        <span class="eyebrow">Kitchen philosophy</span>
+        <h3>Every plate has a reason.</h3>
+        <p>[ Placeholder paragraph describing the kitchen's approach — technique, seasonality, and consistency. ]</p>
+      </div>
+    </div>
+    <div class="split-row reverse">
+      <div class="split-img ph-block">[ Ingredient Sourcing — Local Farm ]</div>
+      <div class="split-text">
+        <span class="eyebrow">Ingredient sourcing</span>
+        <h3>Local first, always fresh.</h3>
+        <p>[ Placeholder paragraph on sourcing relationships with local farms, markets, and suppliers. ]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="community">
+  <div class="wrap community-grid">
+    <div class="community-text">
+      <span class="eyebrow">Community impact</span>
+      <h2>Feeding more than our guests.</h2>
+      <p>[ Placeholder paragraph on community programs, local partnerships, or giving initiatives. ]</p>
+      <div class="stat-row">
+        <div class="stat"><div class="figure">[ 00 ]</div><div class="label">Local partners</div></div>
+        <div class="stat"><div class="figure">[ 00 ]</div><div class="label">Team members</div></div>
+        <div class="stat"><div class="figure">[ 00 ]</div><div class="label">Community events</div></div>
+      </div>
+    </div>
+    <div class="community-img ph-block">[ Community Event Photo ]</div>
+  </div>
+</section>
+
+<section class="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Behind the scenes</span>
+      <h2>Gallery</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="ph-block g1">[ Dining Interior ]</div>
+      <div class="ph-block">[ Chef Cooking ]</div>
+      <div class="ph-block">[ Outdoor Seating ]</div>
+      <div class="ph-block">[ Signature Meal ]</div>
+      <div class="ph-block g4">[ Family Dining ]</div>
+      <div class="ph-block">[ Dessert ]</div>
+    </div>
+  </div>
+</section>
+
+<section class="awards">
+  <div class="wrap">
+    <span class="eyebrow">Recognition</span>
+    <h2 style="font-size:36px;margin-top:16px;">Awards &amp; features</h2>
+    <div class="awards-strip">
+      <div class="award"><div class="award-badge">◆</div><div class="name">[ Award Placeholder ]</div></div>
+      <div class="award"><div class="award-badge">◆</div><div class="name">[ Award Placeholder ]</div></div>
+      <div class="award"><div class="award-badge">◆</div><div class="name">[ Award Placeholder ]</div></div>
+      <div class="award"><div class="award-badge">◆</div><div class="name">[ Award Placeholder ]</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <span class="eyebrow">Come see for yourself</span>
+    <h2>Every story is better shared over a meal.</h2>
+    <div class="cta-actions">
+      <a class="btn-fill" href="#">Reserve a table</a>
+      <a class="btn-outline" href="#">View the menu</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">BFF<span>·</span>LAGOS</div>
+        <p>[ Placeholder one-line brand tagline reflecting warmth and craft. ]</p>
+        <div class="foot-social"><span>IG</span><span>TT</span><span>X</span><span>WA</span></div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="#">About</a><a href="#">Our Staff</a><a href="#">Careers</a></div>
+      <div class="foot-col"><h4>Order</h4><a href="#">Menu</a><a href="#">Delivery Zones</a><a href="#">Pickup Locations</a></div>
+      <div class="foot-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact</a><a href="#">FAQs</a></div>
+      <div class="foot-col"><h4>Newsletter</h4><p style="font-size:13px;color:var(--text-gray);margin-bottom:16px;">[ Placeholder short invite line ]</p></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 BFF-LAGOS. All rights reserved.</span>
+      <span>Privacy Policy · Terms · Site Credits</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+<script src="js/navigation.js"></script>
+</html>
