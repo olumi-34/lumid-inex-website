@@ -24,3 +24,28 @@ function goTo(page) {
         console.error(`Page "${page}" does not exist.`);
     }
 }
+
+
+const menuToggle = document.getElementById("menuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+
+if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", () => {
+        menuToggle.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+    });
+}
+
+// Close menu after clicking a link
+
+document.querySelectorAll(".mobile-menu a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        menuToggle.classList.remove("active");
+
+        mobileMenu.classList.remove("active");
+
+    });
+
+});

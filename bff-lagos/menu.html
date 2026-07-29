@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BFF-LAGOS — Menu &amp; Order</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -138,28 +139,514 @@
   .foot-col a{display:block;font-size:14px;color:var(--text-gray);margin-bottom:14px;}
   .foot-col a:hover{color:var(--gold-soft);}
   .foot-bottom{border-top:1px solid var(--hair);padding-top:28px;display:flex;justify-content:space-between;font-size:12px;color:var(--text-gray);}
+
+/* ==========================================================
+   MOBILE NAVIGATION
+========================================================== */
+
+.menu-toggle{
+    display:none;
+    width:46px;
+    height:46px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    position:relative;
+    z-index:1200;
+}
+
+.menu-toggle span{
+    display:block;
+    width:28px;
+    height:2px;
+    margin:6px auto;
+    background:var(--cream);
+    border-radius:3px;
+    transition:.35s ease;
+}
+
+/* Hamburger Animation */
+
+.menu-toggle.active span:nth-child(1){
+    transform:translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2){
+    opacity:0;
+}
+
+.menu-toggle.active span:nth-child(3){
+    transform:translateY(-8px) rotate(-45deg);
+}
+
+/* ==========================================================
+   MOBILE MENU
+========================================================== */
+
+.mobile-menu{
+
+    position:fixed;
+
+    top:88px;
+
+    left:0;
+
+    width:100%;
+
+    height:calc(100vh - 88px);
+
+    background:rgba(17,17,17,.96);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    padding-top:40px;
+
+    transform:translateY(-120%);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.45s ease;
+
+    z-index:999;
+
+}
+
+.mobile-menu.active{
+
+    transform:translateY(0);
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.mobile-menu a{
+
+    width:85%;
+
+    padding:18px;
+
+    margin:8px 0;
+
+    text-align:center;
+
+    border:1px solid var(--hair);
+
+    border-radius:4px;
+
+    color:var(--cream);
+
+    font-size:14px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.12em;
+
+    transition:.3s;
+
+}
+
+.mobile-menu a:hover{
+
+    background:rgba(201,162,75,.12);
+
+    border-color:var(--gold);
+
+    color:var(--gold-soft);
+
+}
+
+/* Optional CTA */
+
+.mobile-menu .btn-fill{
+
+    width:85%;
+
+    text-align:center;
+
+    margin-top:20px;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:992px){
+
+    .wrap{
+        padding:0 24px;
+    }
+
+    nav.wrap{
+        height:76px;
+        padding-left:24px;
+        padding-right:24px;
+    }
+
+    .hero{
+        min-height:620px;
+        height:85vh;
+    }
+
+    .hero-content{
+        padding:0 24px 70px;
+    }
+
+    .hero-content h1{
+        font-size:46px;
+    }
+
+    .hero-sub{
+        font-size:15px;
+        max-width:100%;
+    }
+
+    /* Hide Desktop Navigation */
+
+    .navlinks{
+
+        display:none;
+
+    }
+
+    .navcta{
+
+        display:none;
+
+    }
+
+    /* Show Hamburger */
+
+    .menu-toggle{
+
+        display:block;
+
+    }
+
+}
+
+@media (min-width:993px){
+
+    .mobile-menu{
+
+        display:none;
+
+    }
+
+}
+
+/* ==========================================================
+   TABLETS & MOBILE
+========================================================== */
+
+@media (max-width:768px){
+
+    .wrap{
+        padding:0 20px;
+    }
+
+    nav.wrap{
+        height:72px;
+        padding:0 20px;
+    }
+
+    /* Hero */
+
+    .hero{
+        min-height:100vh;
+        height:auto;
+        align-items:flex-end;
+    }
+
+    .hero-content{
+        padding:0 20px 50px;
+    }
+
+    .hero-content h1{
+        font-size:42px;
+        line-height:1.1;
+    }
+
+    .hero-sub{
+        font-size:15px;
+        max-width:100%;
+    }
+
+    .hero-actions{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .hero-actions a{
+        width:100%;
+        text-align:center;
+    }
+
+    .scroll-cue{
+        display:none;
+    }
+
+    /* Sections */
+
+    section{
+        padding:70px 0;
+    }
+
+    .section-head{
+        margin-bottom:40px;
+    }
+
+    .section-head h2{
+        font-size:34px;
+    }
+
+    /* Intro */
+
+    .intro-grid{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+    .intro-images{
+        height:320px;
+    }
+
+    /* Categories */
+
+    .cat-grid{
+        grid-template-columns:1fr;
+    }
+
+    /* Meals */
+
+    .meal-grid{
+        grid-template-columns:1fr;
+    }
+
+    /* Chef Special */
+
+    .special{
+        grid-template-columns:1fr;
+    }
+
+    .special-img{
+        min-height:280px;
+    }
+
+    .special-content{
+        padding:40px 24px;
+    }
+
+    /* Dining */
+
+    .dine-grid{
+        grid-template-columns:1fr;
+        height:auto;
+    }
+
+    .dine-grid .ph-block{
+        min-height:220px;
+    }
+
+    /* Testimonials */
+
+    .test-grid{
+        grid-template-columns:1fr;
+    }
+
+    /* Steps */
+
+    .steps{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    /* CTA */
+
+    .cta-band h2{
+        font-size:34px;
+    }
+
+    .cta-actions{
+        flex-direction:column;
+    }
+
+    .cta-actions a{
+        width:100%;
+        text-align:center;
+    }
+
+    /* Location */
+
+    .loc-grid{
+        grid-template-columns:1fr;
+    }
+
+    .loc-map{
+        min-height:280px;
+    }
+
+    .loc-info{
+        padding:35px 24px;
+    }
+
+    /* Instagram */
+
+    .insta-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    /* Newsletter */
+
+    .news-form{
+        flex-direction:column;
+        gap:14px;
+    }
+
+    .news-form input{
+        border-right:1px solid var(--hair);
+        border-radius:4px;
+    }
+
+    .news-form button{
+        border-radius:4px;
+        width:100%;
+    }
+
+    /* Footer */
+
+    .foot-grid{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+    .foot-bottom{
+        flex-direction:column;
+        gap:12px;
+        text-align:center;
+    }
+
+}
+@media (min-width:769px) and (max-width:1024px){
+
+    .wrap{
+        padding:0 36px;
+    }
+
+    .hero-content h1{
+        font-size:56px;
+    }
+
+    .cat-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .meal-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .test-grid{
+        grid-template-columns:1fr;
+    }
+
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .intro-grid,
+    .special,
+    .loc-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
 </style>
 </head>
 <body>
 
 <header>
-  <nav class="wrap">
-    <div class="logo">BFF<span>·</span>LAGOS</div>
-   <nav class="navlinks">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="staff.html">Our Staff</a>
-    <a href="menu.html">Menu & Order</a>
-    <a href="careers.html">Careers</a>
-    <a href="help.html">Help</a>
-    <a href="#" onclick="goTo('contact')">Contact</a>
-</nav>
-    <div class="navcta">
-      <a class="btn-outline" href="#">Reserve a table</a>
-      <div class="cart-icon">▤<span class="cart-badge">3</span></div>
+<nav class="wrap">
+
+    <a href="index.html" class="logo">
+        BFF<span>-LAGOS</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+
+    <div class="navlinks">
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About</a>
+
+        <a href="staff.html">Staff</a>
+
+        <a href="menu.html">Menu</a>
+
+        <a href="careers.html">Careers</a>
+
+        <a href="help.html">Help</a>
+
+        <a href="#" onclick="goTo('contact')">Contact</a>
+
     </div>
-  </nav>
+
+    <div class="navcta">
+
+        <a href="#" class="btn-outline">Reservations</a>
+
+        <a href="#" class="btn-fill">Order Now</a>
+
+    </div>
+
+    <!-- Hamburger -->
+
+    <button class="menu-toggle" id="menuToggle">
+
+        <span></span>
+
+        <span></span>
+
+        <span></span>
+
+    </button>
+
+
 </header>
+<div class="mobile-menu" id="mobileMenu">
+
+    <a href="index.html">Home</a>
+
+    <a href="about.html">About</a>
+
+    <a href="staff.html">Staff</a>
+
+    <a href="menu.html">Menu</a>
+
+    <a href="careers.html">Careers</a>
+
+    <a href="help.html">Help</a>
+
+    <a href="contact.html">Contact</a>
+
+    <a href="#" class="btn-fill">
+        Order Now
+    </a>
+
+</div>
 
 <section class="menu-hero">
   <div class="wrap menu-hero-content">
@@ -441,6 +928,6 @@
     </div>
   </div>
 </footer>
-
+<script src="navigation.js"></script>
 </body>
 </html>
