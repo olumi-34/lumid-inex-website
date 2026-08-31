@@ -15,15 +15,15 @@
   --fl-ink-faint: #93ACBC;
   --fl-border: #D3E6F1;
   --fl-border-strong: #A9CBE0;
-  --fl-brass: #C2568C;       /* secondary accent — course tags, topic pills */
+  --fl-brass: #C2568C;
   --fl-brass-fill: #B84C82;
   --fl-brass-tint: #F8DEEA;
-  --fl-green-deep: #2E86AB;  /* primary accent — progress, done state, books */
+  --fl-green-deep: #2E86AB;
   --fl-green-tint: #DCEEF7;
   --fl-danger: #B3432E;
+  --tap: 44px; /* minimum touch target */
 }
 
-/* ---- "Bloom" theme: pink leads, sky blue rides along as the accent ---- */
 .hub[data-theme="bloom"]{
   --fl-paper: #FBEFF4;
   --fl-panel: #FFFFFF;
@@ -49,20 +49,23 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
   overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
 }
 
-/* ---- Shell: the whole widget reads as one bound ledger page ---- */
+/* ========================================================
+   MOBILE-FIRST BASE (< 480px). Larger breakpoints add on below.
+   ======================================================== */
+
 .hub{
   background:var(--fl-paper);border:1px solid var(--fl-border-strong);
-  border-radius:16px;padding:2rem 2rem 2.25rem;
+  border-radius:14px;padding:1.25rem 1rem 1.5rem;
   box-shadow:0 1px 2px color-mix(in srgb, var(--fl-ink) 4%, transparent), 0 12px 28px -18px color-mix(in srgb, var(--fl-ink) 25%, transparent);
   transition:background .2s ease, border-color .2s ease;
 }
 
-.hub-header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hub-header-top{display:flex;flex-direction:column;gap:12px}
 
-.theme-toggle{display:flex;gap:4px;background:var(--fl-panel);border:1px solid var(--fl-border-strong);border-radius:99px;padding:3px;flex-shrink:0}
+.theme-toggle{display:flex;gap:4px;background:var(--fl-panel);border:1px solid var(--fl-border-strong);border-radius:99px;padding:3px;align-self:flex-start}
 .theme-btn{
   display:flex;align-items:center;gap:5px;border:none;background:none;border-radius:99px;
-  padding:5px 12px;font-size:12px;font-family:inherit;color:var(--fl-ink-soft);cursor:pointer;transition:all .15s;
+  padding:8px 13px;min-height:var(--tap);font-size:12.5px;font-family:inherit;color:var(--fl-ink-soft);cursor:pointer;transition:all .15s;
 }
 .theme-btn:hover{color:var(--fl-ink)}
 .theme-btn:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
@@ -71,17 +74,17 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
 .theme-dot.sky{background:#2E86AB}
 .theme-dot.bloom{background:#C24875}
 
-.hub-header{margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--fl-border)}
+.hub-header{margin-bottom:1.25rem;padding-bottom:1.1rem;border-bottom:1px solid var(--fl-border)}
 .hub-eyebrow{
   font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.14em;
   text-transform:uppercase;color:var(--fl-brass);margin-bottom:8px;display:block;
 }
-.hub-title{font-family:var(--font-serif);font-size:29px;font-weight:600;color:var(--fl-ink);margin-bottom:6px;letter-spacing:-.01em}
+.hub-title{font-family:var(--font-serif);font-size:25px;font-weight:600;color:var(--fl-ink);margin-bottom:6px;letter-spacing:-.01em}
 .hub-sub{font-size:13.5px;color:var(--fl-ink-soft);line-height:1.55;max-width:56ch}
 
 .section-eyebrow{
   font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--fl-ink-faint);margin:1.5rem 0 .6rem;
+  text-transform:uppercase;color:var(--fl-ink-faint);margin:1.35rem 0 .6rem;
   display:flex;align-items:center;gap:8px;
 }
 .section-eyebrow::after{content:'';flex:1;height:1px;background:var(--fl-border)}
@@ -90,11 +93,11 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
 /* ---- Progress + topic breakdown ---- */
 .progress-card{
   background:var(--fl-panel);border:1px solid var(--fl-border);
-  border-radius:12px;padding:16px 18px;margin-bottom:.5rem;
+  border-radius:12px;padding:14px 14px;margin-bottom:.5rem;
   display:flex;flex-direction:column;gap:13px;
 }
 .progress-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.progress-title{font-size:12.5px;font-weight:600;color:var(--fl-ink);text-transform:uppercase;letter-spacing:.04em}
+.progress-title{font-size:12px;font-weight:600;color:var(--fl-ink);text-transform:uppercase;letter-spacing:.04em}
 .progress-count{font-family:var(--font-mono);font-size:12px;font-weight:500;color:var(--fl-ink-soft)}
 
 .progress-track{
@@ -104,51 +107,63 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
 .progress-fill{height:100%;border-radius:99px;background:var(--fl-green-deep);transition:width .4s ease;width:0%}
 .time-left{font-family:var(--font-mono);font-size:11px;color:var(--fl-ink-soft)}
 
-.progress-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:2px}
-.progress-status{font-size:11px;color:var(--fl-ink-faint)}
-.action-links{display:flex;gap:16px;flex-wrap:wrap}
-.text-btn{background:none;border:none;font-size:12px;color:var(--fl-ink-soft);cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-family:inherit;padding:2px 4px}
+.progress-actions{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding-top:2px}
+.progress-status{font-size:11px;color:var(--fl-ink-faint);min-height:14px}
+.action-links{display:flex;gap:8px;flex-wrap:wrap;width:100%}
+.text-btn{
+  background:none;border:1px solid transparent;font-size:12.5px;color:var(--fl-ink-soft);cursor:pointer;
+  text-decoration:underline;text-underline-offset:2px;font-family:inherit;
+  padding:9px 4px;min-height:var(--tap);display:inline-flex;align-items:center;
+}
 .text-btn:hover{color:var(--fl-ink)}
 .text-btn:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px;border-radius:4px}
-.confirm-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--fl-danger);flex-wrap:wrap}
+.confirm-row{display:flex;flex-direction:column;align-items:flex-start;gap:8px;font-size:12.5px;color:var(--fl-danger);background:color-mix(in srgb, var(--fl-danger) 8%, transparent);border-radius:8px;padding:10px 12px}
+.confirm-actions{display:flex;gap:6px}
 
-.topic-breakdown{display:flex;flex-direction:column;gap:8px;padding-top:6px;border-top:1px solid var(--fl-border)}
-.topic-row{display:grid;grid-template-columns:120px 1fr auto;align-items:center;gap:10px}
+.topic-breakdown{display:flex;flex-direction:column;gap:10px;padding-top:6px;border-top:1px solid var(--fl-border)}
+.topic-row{display:flex;flex-direction:column;gap:4px}
+.topic-row-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .topic-name{font-size:11.5px;color:var(--fl-ink-soft)}
 .topic-track{height:6px;border-radius:99px;background:var(--fl-border);overflow:hidden}
 .topic-fill{height:100%;border-radius:99px;background:var(--fl-brass-fill);transition:width .4s ease}
-.topic-meta{font-family:var(--font-mono);font-size:10.5px;color:var(--fl-ink-faint);white-space:nowrap;text-align:right}
+.topic-meta{font-family:var(--font-mono);font-size:10.5px;color:var(--fl-ink-faint);white-space:nowrap}
 
 /* ---- Controls ---- */
-.controls{display:flex;flex-direction:column;gap:12px;margin-bottom:.75rem}
-.search-row{position:relative;max-width:340px}
+.controls{display:flex;flex-direction:column;gap:10px;margin-bottom:.75rem}
+.search-row{position:relative}
 .search-input{
-  width:100%;padding:9px 12px 9px 34px;border-radius:9px;
+  width:100%;padding:11px 12px 11px 36px;min-height:var(--tap);border-radius:9px;
   border:1px solid var(--fl-border-strong);background:var(--fl-panel);
-  color:var(--fl-ink);font-size:13px;font-family:inherit;
+  color:var(--fl-ink);font-size:16px;font-family:inherit; /* 16px avoids iOS auto-zoom */
   transition:border-color .15s,background .15s;
 }
 .search-input::placeholder{color:var(--fl-ink-faint)}
 .search-input:focus{outline:none;border-color:var(--fl-brass);background:var(--fl-panel-hover)}
-.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--fl-ink-faint);pointer-events:none}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--fl-ink-faint);pointer-events:none}
 
-.filter-group{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-.filter-group-label{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fl-ink-faint);margin-right:2px}
+.filter-group{
+  display:flex;align-items:center;gap:7px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  padding-bottom:2px;
+}
+.filter-group::-webkit-scrollbar{display:none}
+.filter-group-label{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--fl-ink-faint);flex-shrink:0}
 .filter-btn{
-  padding:5px 13px;border-radius:99px;border:1px solid var(--fl-border-strong);
+  flex-shrink:0;padding:9px 14px;min-height:var(--tap);border-radius:99px;border:1px solid var(--fl-border-strong);
   background:var(--fl-panel);font-size:12.5px;color:var(--fl-ink-soft);cursor:pointer;
-  transition:all .15s;font-family:inherit;
+  transition:all .15s;font-family:inherit;white-space:nowrap;
 }
 .filter-btn:hover{border-color:var(--fl-brass);color:var(--fl-ink)}
 .filter-btn:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
 .filter-btn.active{background:var(--fl-ink);color:var(--fl-paper);border-color:var(--fl-ink)}
-.count{font-family:var(--font-mono);font-size:11.5px;color:var(--fl-ink-faint)}
+.count{font-family:var(--font-mono);font-size:11.5px;color:var(--fl-ink-faint);flex-shrink:0}
+.topic-filters-row{display:flex;flex-direction:column;gap:6px}
 
-.sort-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:space-between}
+.sort-row{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .sort-select{
-  padding:6px 10px;border-radius:8px;border:1px solid var(--fl-border-strong);
+  width:100%;padding:10px 12px;min-height:var(--tap);border-radius:8px;border:1px solid var(--fl-border-strong);
   background:var(--fl-panel);color:var(--fl-ink);
-  font-size:12.5px;font-family:inherit;cursor:pointer;
+  font-size:16px;font-family:inherit;cursor:pointer;
 }
 .sort-select:focus{outline:none;border-color:var(--fl-brass)}
 
@@ -156,7 +171,7 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
 .add-resource{margin-bottom:.5rem}
 .add-resource-toggle{
   display:flex;align-items:center;gap:6px;background:none;border:1px dashed var(--fl-border-strong);
-  border-radius:10px;padding:9px 14px;font-size:13px;color:var(--fl-brass);
+  border-radius:10px;padding:11px 14px;min-height:var(--tap);font-size:13.5px;color:var(--fl-brass);
   cursor:pointer;font-family:inherit;width:100%;justify-content:center;transition:border-color .15s,background .15s;
 }
 .add-resource-toggle:hover{background:var(--fl-panel);border-color:var(--fl-brass)}
@@ -164,49 +179,50 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
 
 .add-resource-panel{
   margin-top:8px;background:var(--fl-panel);border:1px solid var(--fl-border);
-  border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:11px;
+  border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:11px;
 }
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field-row{display:grid;grid-template-columns:1fr;gap:10px}
 .field{display:flex;flex-direction:column;gap:4px}
 .field label{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--fl-ink-faint);text-transform:uppercase;letter-spacing:.06em}
 .field input, .field select{
-  padding:8px 10px;border-radius:8px;border:1px solid var(--fl-border-strong);
-  background:var(--fl-panel-hover);color:var(--fl-ink);font-size:13px;font-family:inherit;
+  padding:10px 10px;min-height:var(--tap);border-radius:8px;border:1px solid var(--fl-border-strong);
+  background:var(--fl-panel-hover);color:var(--fl-ink);font-size:16px;font-family:inherit;
 }
 .field input:focus, .field select:focus{outline:none;border-color:var(--fl-brass)}
 .topic-checks{display:flex;flex-wrap:wrap;gap:6px}
 .topic-check-label{
-  display:flex;align-items:center;gap:5px;font-size:12px;color:var(--fl-ink-soft);
-  border:1px solid var(--fl-border-strong);border-radius:99px;padding:4px 10px;cursor:pointer;
+  display:flex;align-items:center;gap:5px;font-size:12.5px;color:var(--fl-ink-soft);
+  border:1px solid var(--fl-border-strong);border-radius:99px;padding:8px 12px;min-height:38px;cursor:pointer;
 }
-.topic-check-label input{accent-color:var(--fl-brass-fill);cursor:pointer}
-.add-resource-actions{display:flex;gap:10px;justify-content:flex-end}
+.topic-check-label input{accent-color:var(--fl-brass-fill);cursor:pointer;width:16px;height:16px}
+.add-resource-actions{display:flex;flex-direction:column-reverse;gap:8px}
 .btn-primary{
   background:var(--fl-brass-fill);color:#FBFBF6;border:none;border-radius:8px;
-  padding:9px 18px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;
+  padding:11px 18px;min-height:var(--tap);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;width:100%;
 }
-.btn-primary:hover{background:#755a1c}
+.btn-primary:hover{background:color-mix(in srgb, var(--fl-brass-fill) 82%, black)}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed}
 .btn-primary:focus-visible{outline:2px solid var(--fl-ink);outline-offset:2px}
-.form-error{font-size:12px;color:var(--fl-danger)}
+.form-error{font-size:12.5px;color:var(--fl-danger)}
 
 /* ---- Toast ---- */
 .toast{
-  display:flex;align-items:center;gap:10px;background:var(--fl-panel);
-  border:1px solid var(--fl-border);border-radius:10px;padding:9px 14px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--fl-panel);
+  border:1px solid var(--fl-border);border-radius:10px;padding:9px 8px 9px 14px;
   font-size:12.5px;color:var(--fl-ink-soft);margin-bottom:.75rem;
 }
+.toast span{word-break:break-word}
 
 /* ---- Cards ---- */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.cards{display:grid;grid-template-columns:1fr;gap:12px}
 .card{
   background:var(--fl-panel);border:1px solid var(--fl-border);
-  border-radius:12px;padding:1rem 1rem 1.1rem;display:flex;flex-direction:column;gap:8px;
+  border-radius:12px;padding:1rem;display:flex;flex-direction:column;gap:9px;
   transition:border-color .15s,background .15s,transform .15s,box-shadow .15s;position:relative;
 }
-.card:hover{border-color:var(--fl-border-strong);background:var(--fl-panel-hover);transform:translateY(-1px);box-shadow:0 6px 16px -10px color-mix(in srgb, var(--fl-ink) 35%, transparent)}
+.card:hover{border-color:var(--fl-border-strong);background:var(--fl-panel-hover)}
 .card.is-done{background:var(--fl-green-tint)}
 
-/* Signature: a small rotated "logged" stamp on completed entries, like a librarian's date stamp */
 .card.is-done::after{
   content:'✓ LOGGED';
   position:absolute;top:10px;right:12px;
@@ -215,54 +231,58 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
   padding:2px 8px;transform:rotate(-6deg);opacity:.85;pointer-events:none;
 }
 
-.card-top{display:flex;align-items:center;gap:8px}
+.card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .card-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .icon-course{background:var(--fl-brass-tint)}
 .icon-book{background:var(--fl-green-tint)}
 .card-type{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}
 .type-course{color:var(--fl-brass)}
 .type-book{color:var(--fl-green-deep)}
-.card-top-right{margin-left:auto;display:flex;align-items:center;gap:10px}
-.done-toggle{display:flex;align-items:center;gap:5px;cursor:pointer;font-size:11px;color:var(--fl-ink-faint);user-select:none}
-.done-toggle input{width:14px;height:14px;accent-color:var(--fl-green-deep);cursor:pointer}
-.remove-btn{background:none;border:none;cursor:pointer;font-size:13px;color:var(--fl-ink-faint);padding:0;line-height:1}
+.card-top-right{margin-left:auto;display:flex;align-items:center;gap:6px}
+.done-toggle{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--fl-ink-faint);user-select:none;min-height:var(--tap);padding:4px 2px}
+.done-toggle input{width:18px;height:18px;accent-color:var(--fl-green-deep);cursor:pointer}
+.remove-btn{
+  background:none;border:none;cursor:pointer;font-size:15px;color:var(--fl-ink-faint);
+  width:var(--tap);height:var(--tap);display:flex;align-items:center;justify-content:center;
+}
 .remove-btn:hover{color:var(--fl-danger)}
 .remove-btn:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
 
-.card-name-link{font-family:var(--font-serif);font-size:16px;font-weight:600;color:var(--fl-ink);line-height:1.3;text-decoration:none}
+.card-name-link{font-family:var(--font-serif);font-size:16.5px;font-weight:600;color:var(--fl-ink);line-height:1.3;text-decoration:none}
 .card-name-link:hover{text-decoration:underline;text-underline-offset:3px}
 .card-name-link:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
 .card-external{font-size:11px;color:var(--fl-ink-faint);margin-left:4px;font-family:var(--font-sans)}
-.card-source{font-size:12px;color:var(--fl-ink-soft);font-style:italic}
-.card-hours-row{display:flex;align-items:center;gap:6px}
-.card-hours{font-family:var(--font-mono);font-size:11px;color:var(--fl-ink-faint)}
+.card-source{font-size:12.5px;color:var(--fl-ink-soft);font-style:italic}
+.card-hours-row{display:flex;align-items:center;gap:2px}
+.card-hours{font-family:var(--font-mono);font-size:11.5px;color:var(--fl-ink-faint)}
 .edit-hours-btn{
-  background:none;border:none;cursor:pointer;font-size:11px;padding:0;line-height:1;
-  opacity:.45;transition:opacity .15s;
+  background:none;border:none;cursor:pointer;font-size:12px;
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  opacity:.55;transition:opacity .15s;
 }
 .edit-hours-btn:hover{opacity:1}
 .edit-hours-btn:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px;opacity:1}
-.hours-edit-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.hours-edit-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .hours-input{
-  width:70px;padding:4px 8px;border-radius:6px;border:1px solid var(--fl-border-strong);
-  background:var(--fl-panel-hover);color:var(--fl-ink);font-size:12px;font-family:var(--font-mono);
+  width:84px;padding:8px 10px;min-height:var(--tap);border-radius:6px;border:1px solid var(--fl-border-strong);
+  background:var(--fl-panel-hover);color:var(--fl-ink);font-size:16px;font-family:var(--font-mono);
 }
 .hours-input:focus{outline:none;border-color:var(--fl-brass)}
 .card-gap{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
-.gap-pill{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--fl-brass-tint);color:var(--fl-brass);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
-.custom-pill{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--fl-green-tint);color:var(--fl-green-deep);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.gap-pill{font-size:10.5px;padding:3px 9px;border-radius:99px;background:var(--fl-brass-tint);color:var(--fl-brass);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.custom-pill{font-size:10.5px;padding:3px 9px;border-radius:99px;background:var(--fl-green-tint);color:var(--fl-green-deep);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
 
 .notes-toggle{
-  align-self:flex-start;background:none;border:none;font-size:12px;color:var(--fl-brass);
-  cursor:pointer;padding:2px 0;font-family:inherit;display:flex;align-items:center;gap:4px;
+  align-self:flex-start;background:none;border:none;font-size:13px;color:var(--fl-brass);
+  cursor:pointer;padding:9px 2px;min-height:40px;font-family:inherit;display:flex;align-items:center;gap:5px;
 }
 .notes-toggle:hover{color:var(--fl-brass-fill)}
 .notes-toggle:focus-visible{outline:2px solid var(--fl-brass);outline-offset:2px}
 .notes-panel{display:flex;flex-direction:column;gap:6px}
 .notes-textarea{
-  width:100%;min-height:70px;resize:vertical;padding:9px 10px;border-radius:8px;
+  width:100%;min-height:80px;resize:vertical;padding:10px;border-radius:8px;
   border:1px solid var(--fl-border-strong);background:var(--fl-panel-hover);
-  color:var(--fl-ink);font-size:12.5px;font-family:inherit;line-height:1.45;
+  color:var(--fl-ink);font-size:16px;font-family:inherit;line-height:1.45;
 }
 .notes-textarea:focus{outline:none;border-color:var(--fl-brass)}
 .notes-meta{font-family:var(--font-mono);font-size:10px;color:var(--fl-ink-faint);min-height:13px}
@@ -270,17 +290,41 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
 .empty-state{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:2.5rem 1rem;color:var(--fl-ink-faint);text-align:center}
 .empty-state-icon{font-size:28px}
 .empty-state-title{font-family:var(--font-serif);font-size:15px;font-weight:600;color:var(--fl-ink-soft)}
-.empty-state-sub{font-size:13px}
+.empty-state-sub{font-size:13px;max-width:32ch}
 
 @media (prefers-reduced-motion: reduce){
   .card{transition:none} .card:hover{transform:none}
   .progress-fill,.topic-fill{transition:none}
 }
-@media (max-width:480px){
-  .hub{padding:1.5rem 1.25rem}
-  .search-row{max-width:100%}
-  .field-row{grid-template-columns:1fr}
-  .topic-row{grid-template-columns:90px 1fr auto}
+
+/* ========================================================
+   ≥ 480px — small tablets / large phones landscape
+   ======================================================== */
+@media (min-width:480px){
+  .hub{padding:1.75rem 1.5rem 2rem}
+  .field-row{grid-template-columns:1fr 1fr}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .add-resource-actions{flex-direction:row;justify-content:flex-end}
+  .btn-primary{width:auto}
+  .action-links{width:auto}
+  .progress-actions{flex-direction:row;align-items:center;justify-content:space-between;width:100%}
+}
+
+/* ========================================================
+   ≥ 700px — tablets / small laptop
+   ======================================================== */
+@media (min-width:700px){
+  .hub{padding:2rem 2rem 2.25rem}
+  .hub-header-top{flex-direction:row;align-items:flex-start;justify-content:space-between}
+  .theme-toggle{align-self:auto}
+  .hub-title{font-size:29px}
+  .search-row{max-width:340px}
+  .filter-group{overflow-x:visible;flex-wrap:wrap}
+  .topic-row{display:grid;grid-template-columns:120px 1fr auto;align-items:center;gap:10px}
+  .topic-row-top{display:contents}
+  .sort-row{flex-direction:row;align-items:center;justify-content:space-between}
+  .sort-select{width:auto}
+  .cards{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
 }
 </style>
 
@@ -326,8 +370,10 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
     </div>
     <div class="confirm-row" id="confirm-row" hidden>
       <span>Clear all progress and notes? This can't be undone.</span>
-      <button class="text-btn" id="confirm-yes" type="button">Yes, clear it</button>
-      <button class="text-btn" id="confirm-no" type="button">Cancel</button>
+      <div class="confirm-actions">
+        <button class="text-btn" id="confirm-yes" type="button">Yes, clear it</button>
+        <button class="text-btn" id="confirm-no" type="button">Cancel</button>
+      </div>
     </div>
   </div>
 
@@ -347,14 +393,16 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
       <button class="filter-btn" data-type="book" aria-pressed="false">Books</button>
     </div>
 
-    <div class="filter-group" id="topic-filters" role="group" aria-label="Filter by topic (select any number)">
-      <span class="filter-group-label">Topic</span>
-      <button class="filter-btn" data-topic="communication" aria-pressed="false">Communication</button>
-      <button class="filter-btn" data-topic="pricing" aria-pressed="false">Pricing</button>
-      <button class="filter-btn" data-topic="legal" aria-pressed="false">Legal &amp; contracts</button>
-      <button class="filter-btn" data-topic="marketing" aria-pressed="false">Marketing</button>
-      <button class="filter-btn" data-topic="team" aria-pressed="false">Team &amp; leadership</button>
-      <button class="filter-btn" id="hide-done-btn" aria-pressed="false">Hide completed</button>
+    <div class="topic-filters-row">
+      <div class="filter-group" id="topic-filters" role="group" aria-label="Filter by topic (select any number)">
+        <span class="filter-group-label">Topic</span>
+        <button class="filter-btn" data-topic="communication" aria-pressed="false">Communication</button>
+        <button class="filter-btn" data-topic="pricing" aria-pressed="false">Pricing</button>
+        <button class="filter-btn" data-topic="legal" aria-pressed="false">Legal &amp; contracts</button>
+        <button class="filter-btn" data-topic="marketing" aria-pressed="false">Marketing</button>
+        <button class="filter-btn" data-topic="team" aria-pressed="false">Team &amp; leadership</button>
+        <button class="filter-btn" id="hide-done-btn" aria-pressed="false">Hide completed</button>
+      </div>
       <span class="count" id="count" aria-live="polite">24 resources</span>
     </div>
 
@@ -394,12 +442,12 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
         </div>
         <div class="field">
           <label for="af-hours">Est. hours</label>
-          <input id="af-hours" type="number" min="0" step="0.5" placeholder="e.g. 6" />
+          <input id="af-hours" type="number" inputmode="decimal" min="0" step="0.5" placeholder="e.g. 6" />
         </div>
       </div>
       <div class="field">
         <label for="af-url">Link *</label>
-        <input id="af-url" type="text" placeholder="https://…" />
+        <input id="af-url" type="url" inputmode="url" placeholder="https://…" />
       </div>
       <div class="field">
         <label>Topics</label>
@@ -461,11 +509,11 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
   const CUSTOM_KEY = 'hub-custom-resources';
 
   const state = { type:'all', topics:new Set(), query:'', hideDone:false, sort:'default' };
-  let progress = {};        // { [id]: {done, notes} }
-  let customResources = []; // user-added items, same shape as BASE_DATA plus custom:true
+  let progress = {};
+  let customResources = [];
   let openNotesId = null;
   let editingHoursId = null;
-  let lastRemoved = null;   // {item, timeoutId} for undo
+  let lastRemoved = null;
   let undoTimer = null;
 
   const grid = document.getElementById('grid');
@@ -495,9 +543,6 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
   function allData(){ return BASE_DATA.concat(customResources); }
   function getEntry(id){ return progress[id] || { done:false, notes:'' }; }
 
-  // Custom resources store their own hours directly on the object.
-  // Built-in resources are read-only in code, so an edited estimate is
-  // stored as an override inside the progress record for that id.
   function effectiveHours(d){
     if (d.custom) return d.hours || 0;
     const entry = getEntry(d.id);
@@ -516,7 +561,6 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
     }
   }
 
-  // ---------- storage ----------
   async function loadAll(){
     try{
       const r = await window.storage.get(PROGRESS_KEY, false);
@@ -544,12 +588,11 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
   let statusTimer;
   function setStatus(msg, isError){
     progressStatus.textContent = msg;
-    progressStatus.style.color = isError ? 'var(--text-warning,#a15c00)' : '';
+    progressStatus.style.color = isError ? 'var(--fl-danger)' : '';
     clearTimeout(statusTimer);
     statusTimer = setTimeout(() => { progressStatus.textContent = '\u00A0'; }, 2500);
   }
 
-  // ---------- computed stats ----------
   function computeTopicStats(data){
     const stats = {};
     TOPICS.forEach(t => { stats[t] = { done:0, total:0, hoursTotal:0, hoursRemaining:0 }; });
@@ -587,14 +630,15 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
       const pct = s.total ? Math.round((s.done/s.total)*100) : 0;
       return `
         <div class="topic-row">
-          <span class="topic-name">${TOPIC_LABELS[t]}</span>
+          <div class="topic-row-top">
+            <span class="topic-name">${TOPIC_LABELS[t]}</span>
+            <span class="topic-meta">${s.done}/${s.total} · ~${Math.round(s.hoursRemaining)}h left</span>
+          </div>
           <div class="topic-track"><div class="topic-fill" style="width:${pct}%"></div></div>
-          <span class="topic-meta">${s.done}/${s.total} · ~${Math.round(s.hoursRemaining)}h left</span>
         </div>`;
     }).join('');
   }
 
-  // ---------- filter / sort ----------
   function getFiltered(data){
     const q = state.query.trim().toLowerCase();
     return data.filter(item => {
@@ -625,13 +669,58 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
           return pctFor(a) - pctFor(b);
         });
         break;
-      default: break; // keep insertion order
+      default: break;
     }
     return arr;
   }
 
-  // ---------- render ----------
+  function captureFocus(){
+    const active = document.activeElement;
+    if (!active || !grid.contains(active)) return null;
+    const card = active.closest('.card');
+    if (!card) return null;
+    const roleMap = [
+      ['notes-textarea','notes-textarea'],
+      ['hours-input','hours-input'],
+      ['done-checkbox','done-checkbox'],
+      ['notes-toggle','notes-toggle'],
+      ['edit-hours-btn','edit-hours-btn'],
+      ['remove-btn','remove-btn'],
+    ];
+    const match = roleMap.find(([cls]) => active.classList.contains(cls));
+    if (!match) return null;
+    const info = { id: card.dataset.id, role: match[1] };
+    if (typeof active.selectionStart === 'number'){
+      info.selectionStart = active.selectionStart;
+      info.selectionEnd = active.selectionEnd;
+    }
+    return info;
+  }
+
+  const FOCUS_ROLE_SELECTOR = {
+    'notes-textarea': '.notes-textarea',
+    'hours-input': '.hours-input',
+    'done-checkbox': '.done-checkbox',
+    'notes-toggle': '.notes-toggle',
+    'edit-hours-btn': '.edit-hours-btn',
+    'remove-btn': '.remove-btn',
+  };
+
+  function restoreFocus(info){
+    if (!info) return;
+    const card = grid.querySelector(`.card[data-id="${CSS.escape(info.id)}"]`);
+    if (!card) return; // card no longer visible (filtered out or removed) — nothing to restore
+    const selector = FOCUS_ROLE_SELECTOR[info.role];
+    const el = selector && card.querySelector(selector);
+    if (!el) return; // e.g. edit-hours-btn was replaced by the hours-input row; caller handles that case explicitly
+    el.focus({ preventScroll: true });
+    if (info.selectionStart != null && typeof el.setSelectionRange === 'function'){
+      try{ el.setSelectionRange(info.selectionStart, info.selectionEnd); }catch(err){ /* not a text-selectable input */ }
+    }
+  }
+
   function render(){
+    const focusInfo = captureFocus();
     const data = allData();
     updateProgressBar(data);
     updateTopicBreakdown(data);
@@ -673,7 +762,7 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
         <div class="card-source">${escapeHtml(d.source || '')}</div>
         ${editingHoursId === d.id ? `
           <div class="hours-edit-row">
-            <input type="number" min="0" step="0.5" class="hours-input" value="${effectiveHours(d)}" aria-label="Estimated hours for ${escapeHtml(d.name)}" />
+            <input type="number" inputmode="decimal" min="0" step="0.5" class="hours-input" value="${effectiveHours(d)}" aria-label="Estimated hours for ${escapeHtml(d.name)}" />
             <button type="button" class="text-btn hours-save-btn">Save</button>
             <button type="button" class="text-btn hours-cancel-btn">Cancel</button>
           </div>
@@ -696,9 +785,10 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
         </div>
       </div>`;
     }).join('');
+
+    restoreFocus(focusInfo);
   }
 
-  // ---------- filter/sort/search events ----------
   document.getElementById('type-filters').addEventListener('click', (e) => {
     const btn = e.target.closest('.filter-btn');
     if (!btn) return;
@@ -741,7 +831,6 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
     searchDebounce = setTimeout(() => { state.query = value; render(); }, 120);
   });
 
-  // ---------- card interactions ----------
   let notesDebounce;
   grid.addEventListener('change', (e) => {
     const checkbox = e.target.closest('.done-checkbox');
@@ -826,12 +915,12 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
     }, 500);
   });
 
-  // ---------- add-a-resource ----------
   addToggle.addEventListener('click', () => {
     const willOpen = addPanel.hidden;
     addPanel.hidden = !willOpen;
     addToggle.setAttribute('aria-expanded', String(willOpen));
     addToggle.textContent = willOpen ? '− Close' : '+ Add a resource you found';
+    if (willOpen) document.getElementById('af-name').focus();
   });
 
   document.getElementById('af-cancel').addEventListener('click', () => {
@@ -852,6 +941,8 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
   }
 
   document.getElementById('af-submit').addEventListener('click', async () => {
+    const submitBtn = document.getElementById('af-submit');
+    if (submitBtn.disabled) return; // guard against double-tap firing this twice on mobile
     const name = document.getElementById('af-name').value.trim();
     const url = document.getElementById('af-url').value.trim();
     const source = document.getElementById('af-source').value.trim();
@@ -881,12 +972,19 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
       custom: true,
     });
 
-    await saveCustom();
-    clearAddForm();
-    addPanel.hidden = true;
-    addToggle.setAttribute('aria-expanded', 'false');
-    addToggle.textContent = '+ Add a resource you found';
-    render();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Adding…';
+    try{
+      await saveCustom();
+      clearAddForm();
+      addPanel.hidden = true;
+      addToggle.setAttribute('aria-expanded', 'false');
+      addToggle.textContent = '+ Add a resource you found';
+      render();
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Add to hub';
+    }
   });
 
   function removeCustomResource(id){
@@ -921,7 +1019,6 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
     undoTimer = setTimeout(() => { toastWrap.innerHTML = ''; lastRemoved = null; }, 6000);
   }
 
-  // ---------- export notes ----------
   exportBtn.addEventListener('click', () => {
     const data = allData();
     const withContent = data.filter(d => {
@@ -963,7 +1060,6 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
     setStatus('Notes exported');
   });
 
-  // ---------- theme ----------
   function applyTheme(theme){
     if (theme === 'bloom') hubEl.setAttribute('data-theme', 'bloom');
     else hubEl.removeAttribute('data-theme');
@@ -982,7 +1078,6 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
   themeSkyBtn.addEventListener('click', () => setTheme('sky'));
   themeBloomBtn.addEventListener('click', () => setTheme('bloom'));
 
-  // ---------- reset ----------
   resetBtn.addEventListener('click', () => { confirmRow.hidden = false; });
   document.getElementById('confirm-no').addEventListener('click', () => { confirmRow.hidden = true; });
   document.getElementById('confirm-yes').addEventListener('click', async () => {
@@ -994,7 +1089,6 @@ body{font-family:var(--font-sans, var(--font-sans-fallback));color:var(--fl-ink)
     setStatus('Progress and notes cleared');
   });
 
-  // ---------- init ----------
   (async function init(){
     try{
       const r = await window.storage.get(THEME_KEY, false);
