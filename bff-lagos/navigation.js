@@ -23,18 +23,19 @@ function goTo(page) {
     } else {
         console.error(`Page "${page}" does not exist.`);
     }
-}
+};
 
 
 const menuToggle = document.getElementById("menuToggle");
 const mobileMenu = document.getElementById("mobileMenu");
 
-if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener("click", () => {
-        menuToggle.classList.toggle("active");
-        mobileMenu.classList.toggle("active");
-    });
-}
+menuToggle.addEventListener("click", () => {
+
+    menuToggle.classList.toggle("active");
+
+    mobileMenu.classList.toggle("active");
+
+});
 
 // Close menu after clicking a link
 
