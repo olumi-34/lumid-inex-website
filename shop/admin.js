@@ -316,27 +316,58 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// —— UPDATED PHOTO UPLOAD AND RESET LIFECYCLE ——
+
 async function handleProjectPhotoUpload(input) {
   const files = Array.from(input.files || []);
   if (!files.length) return;
   const statusEl  = document.getElementById('proj-photo-status');
-  const previewEl = document.getElementById('proj-photo-preview');
   statusEl.style.display = 'block';
   statusEl.textContent   = `Uploading ${files.length} photo(s)…`;
 
   for (const file of files) {
     const fileName = `projects/${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
     const { error } = await supabaseClient.storage.from('product-images').upload(fileName, file);
-    if (error) { statusEl.textContent = 'Upload error: ' + error.message; continue; }
+    if (error) { 
+      statusEl.textContent = 'Upload error: ' + error.message; 
+      continue; 
+    }
     const { data: urlData } = supabaseClient.storage.from('product-images').getPublicUrl(fileName);
     projectPhotosUrls.push(urlData.publicUrl);
   }
 
   statusEl.style.display = 'none';
-  previewEl.innerHTML = projectPhotosUrls.map(url =>
-    `<img src="${url}" style="width:60px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--warm-grey)"/>`
-  ).join('');
+  renderProjectPhotosPreview();
+  input.value = ''; // Clears file input buffer
 }
+
+function renderProjectPhotosPreview() {
+  const previewEl = document.getElementById('proj-photo-preview');
+  if (!previewEl) return;
+  
+  previewEl.innerHTML = projectPhotosUrls.map((url, index) => `
+    <div style="position:relative; display:inline-block;">
+      <img src="${url}" style="width:60px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--warm-grey)"/>
+      <button type="button" onclick="removeProjectPhotoByIndex(${index})" style="position:absolute;top:-4px;right:-4px;background:#ff4d4d;color:white;border:none;border-radius:50%;width:16px;height:16px;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">×</button>
+    </div>
+  `).join('');
+}
+
+function removeProjectPhotoByIndex(index) {
+  projectPhotosUrls.splice(index, 1);
+  renderProjectPhotosPreview();
+}
+
+function resetProjectForm() {
+  document.getElementById('projectForm').reset();
+  document.getElementById('proj-id').value = generateProjectId();
+  editingProjectId  = null;
+  projectPhotosUrls = []; // Clears state memory completely
+  document.getElementById('proj-photo-preview').innerHTML = '';
+  document.getElementById('proj-submit-btn').textContent   = 'Create Project';
+  document.getElementById('proj-cancel-btn').style.display = 'none';
+}
+
 
 async function handleProjectSubmit(e) {
   e.preventDefault();
@@ -386,15 +417,7 @@ async function handleProjectSubmit(e) {
   loadProjectsList();
 }
 
-function resetProjectForm() {
-  document.getElementById('projectForm').reset();
-  document.getElementById('proj-id').value = generateProjectId();
-  editingProjectId  = null;
-  projectPhotosUrls = [];
-  document.getElementById('proj-photo-preview').innerHTML = '';
-  document.getElementById('proj-submit-btn').textContent   = 'Create Project';
-  document.getElementById('proj-cancel-btn').style.display = 'none';
-}
+
 
 function cancelProjectEdit() { resetProjectForm(); }
 
@@ -454,10 +477,9 @@ async function editProjectById(id) {
     ? JSON.stringify(data.milestones, null, 2)
     : '';
 
+  // Connects existing photos safely to the new delete-enabled preview layout
   projectPhotosUrls = data.photos || [];
-  document.getElementById('proj-photo-preview').innerHTML = projectPhotosUrls.map(url =>
-    `<img src="${url}" style="width:60px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--warm-grey)"/>`
-  ).join('');
+  renderProjectPhotosPreview();
 
   document.getElementById('proj-submit-btn').textContent   = 'Save Changes';
   document.getElementById('proj-cancel-btn').style.display = 'inline-block';

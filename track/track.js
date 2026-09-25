@@ -1,20 +1,23 @@
-// ── LUMID TRACK — track.js ──────────────────────────────────
+// —— LUMID TRACK — track.js ——
 // Requires: supabase-config.js loaded before this file.
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
-  return new Date(dateStr).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' });
+  return new Date(dateStr).toLocaleDateString('en-NG', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
 }
 
 async function lookupProject(e) {
   if (e) e.preventDefault();
-
   const idInput = document.getElementById('trackIdInput');
   const btn = document.getElementById('trackLookupBtn');
   const msgEl = document.getElementById('trackMsg');
   const resultEl = document.getElementById('trackResult');
-
   const projectId = idInput.value.trim().toUpperCase();
+
   if (!projectId) return;
 
   msgEl.style.display = 'none';
@@ -35,15 +38,19 @@ async function lookupProject(e) {
   if (error || !data) {
     msgEl.textContent = "We couldn't find a project with that ID. Double-check it and try again, or message us on WhatsApp for help.";
     msgEl.className = 'track-msg error';
+    msgEl.style.display = 'block';
     return;
   }
 
   renderProject(data);
+  // Make the results section visible smoothly
+  resultEl.classList.add('visible'); 
 }
 
 function renderProject(p) {
   document.getElementById('trackProjectId').textContent = p.project_id;
   document.getElementById('trackClientName').textContent = p.client_name;
+  
   document.getElementById('trackProjectMeta').innerHTML = [
     p.project_type,
     p.location,
@@ -70,18 +77,18 @@ function renderProject(p) {
     notesEl.style.display = 'none';
   }
 
-  // Milestones
+  // —— 1. RENDERING MILESTONES ——
   const milestonesCard = document.getElementById('trackMilestonesCard');
   const milestonesList = document.getElementById('trackMilestonesList');
-  if (p.milestones && Array.isArray(p.milestones) && p.milestones.length) {
+  
+  if (p.milestones && Array.isArray(p.milestones) && p.milestones.length > 0) {
     milestonesList.innerHTML = p.milestones.map(m => `
-      <div class="milestone-row">
-        <div class="milestone-dot ${m.status || 'pending'}"></div>
-        <div class="milestone-info">
-          <div class="milestone-name">${m.name}</div>
-          ${m.date ? `<div class="milestone-date">${formatDate(m.date)}</div>` : ''}
+      <div class="milestone-item ${m.completed ? 'completed' : ''}">
+        <span class="milestone-status">${m.completed ? '✓' : '○'}</span>
+        <div class="milestone-text">
+          <strong>${m.title}</strong>
+          ${m.date ? `<small>\${formatDate(m.date)}</small>` : ''}
         </div>
-        <span class="milestone-status-label ${m.status || 'pending'}">${(m.status || 'pending').replace('_',' ')}</span>
       </div>
     `).join('');
     milestonesCard.style.display = 'block';
@@ -89,26 +96,32 @@ function renderProject(p) {
     milestonesCard.style.display = 'none';
   }
 
-  // Photos
+  // —— 2. RENDERING PROGRESS PHOTOS ——
   const photosCard = document.getElementById('trackPhotosCard');
   const photosGrid = document.getElementById('trackPhotosGrid');
-  if (p.photos && p.photos.length) {
-    photosGrid.innerHTML = p.photos.map(url => `<img src="${url}" alt="Project progress photo" onclick="window.open('${url}', '_blank')"/>`).join('');
+  
+  // Assumes photos are stored in your DB column as an array of file paths or public URLs
+  if (p.photos && Array.isArray(p.photos) && p.photos.length > 0) {
+    photosGrid.innerHTML = p.photos.map(photoPath => {
+      let imageUrl = photoPath;
+
+      // If the admin panel saves paths like 'folder/image.jpg' instead of full URLs, 
+      // convert them to Supabase public storage links:
+      if (!photoPath.startsWith('http://') && !photoPath.startsWith('https://')) {
+        const { data } = supabaseClient.storage
+          .from('project_photos') // ⚠️ CHANGE THIS to your exact Supabase bucket name
+          .getPublicUrl(photoPath);
+        imageUrl = data.publicUrl;
+      }
+
+      return `
+        <div class="track-photo-item">
+          <img src="${imageUrl}" alt="Project Progress Photo" loading="lazy" />
+        </div>
+      `;
+    }).join('');
     photosCard.style.display = 'block';
   } else {
     photosCard.style.display = 'none';
   }
-
-  document.getElementById('trackResult').classList.add('visible');
-  document.getElementById('trackResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
-// ── AUTO-LOOKUP FROM URL (?id=LMD-2025-0001) ────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const params = new URLSearchParams(window.location.search);
-  const idParam = params.get('id');
-  if (idParam) {
-    document.getElementById('trackIdInput').value = idParam;
-    lookupProject();
-  }
-});
